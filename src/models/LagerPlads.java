@@ -1,42 +1,57 @@
 package models;
 
 public class LagerPlads {
-    boolean erLovlig = true;
     private Fad fad = null;
 
-    // TODO - Finde ud af, hvilken associationstype dette er med Lager (om det er dobbeltrettet, antal)
-    // TODO - Find ud af, hvilken type objekter i dette associeringshierarki, der skal gemmes i Storage.
+    /**
+     * Laver en LagerPlads.
+     */
+    public LagerPlads() {
+    }
 
+    /**
+     * @return {@code Fad} fadet der er på denne plads.
+     * <p></p>
+     * {@code null} hvis pladsen er tom.
+     */
     public Fad getFad() {
         return fad;
     }
 
+    /**
+     * Placerer et Fad på denne plads, hvis der er plads.
+     * <p>
+     * Kaster en Exception hvis der er optaget.
+     * @param fad Fadet der skal sætte på pladsen.
+     * @return {@code Fad} Fadet, der er blevet sat på plads.
+     */
     public Fad setFad(Fad fad) {
+        if (!this.isEmpty()) {
+            throw new IllegalArgumentException("Denne plads er optaget.");
+        }
         this.fad = fad;
         return fad;
     }
 
+    /**
+     * @return {@code Fad} hvis der er et Fad på denne plads.
+     * <p></p>
+     * {@code null} hvis pladsen er tom.
+     */
     public Fad removeFad() {
-        Fad removedFad = fad;
-        fad = null;
-        return removedFad;
-    }
-
-
-    public boolean isEmpty() {
-        // Returns true hvis der ikke er et fad på denne plads.
-            return fad == null;
-    }
-
-    public boolean isThere() {
-        return erLovlig;
+        if (!this.isEmpty()) {
+            Fad removedFad = fad;
+            fad = null;
+            return removedFad;
+        }
+        return null;
     }
 
     /**
-     * Sætter
-     * @param erLovlig
+     * @return {@code true} hvis denne plads er tom.
      */
-    public void setIsThere(boolean erLovlig) {
-        this.erLovlig = erLovlig;
+    public boolean isEmpty() {
+            return fad != null;
     }
+
 }
