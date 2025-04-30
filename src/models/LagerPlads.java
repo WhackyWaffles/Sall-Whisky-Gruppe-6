@@ -38,10 +38,10 @@ public class LagerPlads {
      * <p></p>
      * {@code null} hvis pladsen er tom.
      */
-    public Fad removeFad() {
+    public Fad removeFad(Fad fad) {
         if (!this.isEmpty()) {
-            Fad removedFad = fad;
-            fad = null;
+            Fad removedFad = this.fad;
+            this.fad = null;
             return removedFad;
         }
         return null;
@@ -51,7 +51,7 @@ public class LagerPlads {
      * @return {@code true} hvis denne plads er tom.
      */
     public boolean isEmpty() {
-            return fad != null;
+            return this.fad == null;
     }
 
 }
