@@ -1,6 +1,11 @@
 package controller;
 
+import models.Destillering;
+import models.Korn;
+import models.Malt;
 import storage.Storage;
+
+import java.util.List;
 
 public class Controller {
     private Storage storage;
@@ -17,7 +22,27 @@ public class Controller {
         return controller;
     }
 
-    public static Controller getTestController() {
-        return new Controller();
+    public void opretKorn(Korn korn) {
+        storage.addKorn(korn);
+    }
+
+    public List getAllKornSorter() {
+        return storage.getAllKornSorter();
+    }
+
+    public void opretMalt(Malt malt) {
+        storage.addMalt(malt);
+    }
+
+    public List getAllKornMalts() {
+        return storage.getAllMalts();
+    }
+
+    public void opretDestillering(Destillering destillering) {
+        storage.addDestillering(destillering);
+    }
+
+    public List getAllDestilleringer() {
+        return storage.getAllDestilleringer();
     }
 }
