@@ -15,6 +15,8 @@ public class Controller {
         storage = new Storage();
     }
 
+
+
     public static Controller getController() {
         if (controller == null) {
             controller = new Controller();
@@ -22,7 +24,7 @@ public class Controller {
         return controller;
     }
 
-    public void opretKorn(Korn korn) {
+    public void tilføjKorn(Korn korn) {
         storage.addKorn(korn);
     }
 
@@ -34,7 +36,7 @@ public class Controller {
         storage.addMalt(malt);
     }
 
-    public List getAllKornMalts() {
+    public List getAllMalts() {
         return storage.getAllMalts();
     }
 
