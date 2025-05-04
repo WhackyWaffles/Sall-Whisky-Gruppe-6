@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 public class Destillering {
     private String batchNr;
-    private int alkoholProcent;
+    private String alkoholProcent;
+    private int evtAntalGange;
+    private int tempLiter;
     private ArrayList<Malt> malts;
 
-    public Destillering(String batchNr, int alkoholProcent) {
+    public Destillering(String batchNr, String alkoholProcent) {
         this.batchNr = batchNr;
         this.alkoholProcent = alkoholProcent;
     }
@@ -16,7 +18,7 @@ public class Destillering {
         return batchNr;
     }
 
-    public int getAlkoholProcent() {
+    public String getAlkoholProcent() {
         return alkoholProcent;
     }
 }
