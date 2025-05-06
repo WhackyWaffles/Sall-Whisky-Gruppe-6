@@ -14,4 +14,5 @@ public enum FadType {
         return navn;
     }
 
+
 }
