@@ -30,4 +30,8 @@ public class Malt {
     public String getGaer() {
         return gaer;
     }
+
+    public void addKorn() {
+
+    }
 }

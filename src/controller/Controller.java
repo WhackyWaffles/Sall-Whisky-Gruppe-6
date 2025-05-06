@@ -24,7 +24,7 @@ public class Controller {
         return controller;
     }
 
-    public void tilføjKorn(Korn korn) {
+    public void opretKorn(Korn korn) {
         storage.addKorn(korn);
     }
 
