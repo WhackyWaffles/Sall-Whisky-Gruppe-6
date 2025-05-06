@@ -1,6 +1,6 @@
 package models;
 
-public enum Charring {
+public enum Ristning {
     PILSNER,
     PALE,
     VIENNAMALT;
