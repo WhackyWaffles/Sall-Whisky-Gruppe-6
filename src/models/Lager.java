@@ -8,6 +8,8 @@ public class Lager {
 
     // TODO - Find ud af, hvilke associationstyper der er mellem LagerKlasserne (dobbeltrettet, multiplicitet osv.)
     // TODO - Find ud af, hvilken klasse i dette associeringshierarki, der gemmes i Storage (tror bare det er Lager)
+    // TODO - Lav reoler til ArrayList
+    // TODO - Lave removeFad metode
 
     /**
      * Laver et nyt Lager.
