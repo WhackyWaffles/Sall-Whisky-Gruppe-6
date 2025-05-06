@@ -1,10 +1,9 @@
 package controller;
 
-import models.Destillering;
-import models.Korn;
-import models.Malt;
+import models.*;
 import storage.Storage;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class Controller {
@@ -47,4 +46,10 @@ public class Controller {
     public List getAllDestilleringer() {
         return storage.getAllDestilleringer();
     }
+
+    public void tilføjDestillering(Destillering destillering, Fad fad, double liter, LocalDate dato) {
+        Påfyldning påfyldning = new Påfyldning(destillering, fad, liter, dato);
+        fad.tilføjPåfyldning(påfyldning);
+    }
+
 }
