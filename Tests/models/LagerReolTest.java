@@ -35,9 +35,10 @@ class LagerReolTest {
     void isEmpty() {
         // Arrange
         LagerPlads lagerPlads = new LagerPlads();
-        Påfyldning nm101 = new Påfyldning("NM102",35,32, LocalDate.of(2024,12,06));
-        Fad fad = new Fad("35",FadType.EX_OLOROSO,FadMateriale.EGETRÆ,32,1,"NM102");
-        lagerPlads.setFad(fad);
+        Destillering nm101 = new Destillering("NM101", "51%");
+        Fad fad1 = new Fad("35", "Oloroso", "Egetræ", 35, Charring.HEAVY_CHAR, FillNummer.SECOND_FILL);
+        Påfyldning påfyldning = new Påfyldning(nm101, fad1,32, LocalDate.of(2024,12,06));
+        lagerPlads.setFad(fad1);
         // Act
         // Assert
         assertFalse(lagerPlads.isEmpty());
