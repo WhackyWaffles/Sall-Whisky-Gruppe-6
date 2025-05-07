@@ -18,8 +18,8 @@ class ControllerTest {
         Korn korn1 = new Korn("Mosegaard", "Viborg", "Moonshine");
         Korn korn2 = new Korn("Stadsgaard", "Brabrand", "Belagria");
         Controller controller = new Controller();
-        controller.tilføjKorn(korn1);
-        controller.tilføjKorn(korn2);
+        controller.opretKorn(korn1);
+        controller.opretKorn(korn2);
         // Act
         List<Korn> result = controller.getAllKornSorter();
         // Assert

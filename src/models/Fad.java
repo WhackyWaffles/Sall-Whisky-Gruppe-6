@@ -4,22 +4,25 @@ import java.util.ArrayList;
 
 public class Fad {
     private String nr;
-    private FadType fadtype;
-    private FadMateriale fadMateriale;;
+    private String fadtype;
+    private String fadMateriale;
     private double kapacitet;
-    private LagerPlads lagerPlads;
-    private ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
-    // TODO - Finde ud af, hvordan et fads historie gemmes
+    private Charring charring;
+    private FillNummer fillNummer;
+    private ArrayList<Påfyldning> påfyldninger;
 
 
-    public Fad(String nr, FadType fadtype, FadMateriale fadMateriale, double kapacitet, LagerPlads lagerPlads, ArrayList<Påfyldning> påfyldninger) {
+    public Fad(String nr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer) {
         this.nr = nr;
         this.fadtype = fadtype;
         this.fadMateriale = fadMateriale;
         this.kapacitet = kapacitet;
-        this.lagerPlads = lagerPlads;
-        this.påfyldninger = påfyldninger;
+        this.charring = charring;
+        this.fillNummer = fillNummer;
+        this.påfyldninger = new ArrayList<>(); // Initialiseres uden for constructor
     }
+
+    // TODO - Finde ud af, hvordan et fads historie gemmes
 
     public void tilføjPåfyldning(Påfyldning påfyldning) {
         if (getVolumenLedig() >= påfyldning.getVolumenLiter()) {
@@ -29,20 +32,37 @@ public class Fad {
         }
     }
 
-    public int getVolumenLedig() {
-        int totalFyldt = påfyldninger.stream().mapToInt(Påfyldning::getVolumenLiter).sum();
+    public double getVolumenLedig() {
+        double totalFyldt = påfyldninger.stream().mapToDouble(Påfyldning::getVolumenLiter).sum();
         return kapacitet - totalFyldt;
     }
+
 
     public String getNr() {
         return nr;
     }
 
-    public FadType getFadtype() {
+    public String getFadtype() {
         return fadtype;
     }
 
-    public FadMateriale getFadMateriale() {
+    public String getFadMateriale() {
         return fadMateriale;
+    }
+
+    public double getKapacitet() {
+        return kapacitet;
+    }
+
+    public Charring getCharring() {
+        return charring;
+    }
+
+    public FillNummer getFillNummer() {
+        return fillNummer;
+    }
+
+    public ArrayList<Påfyldning> getPåfyldninger() {
+        return påfyldninger;
     }
 }
