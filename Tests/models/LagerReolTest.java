@@ -2,6 +2,8 @@ package models;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LagerReolTest {
@@ -33,7 +35,8 @@ class LagerReolTest {
     void isEmpty() {
         // Arrange
         LagerPlads lagerPlads = new LagerPlads();
-        Fad fad = new Fad(35, FadType.EX_OLOROSO, FadMateriale.EGETRÆ, new Whisky(), lagerPlads);
+        Påfyldning nm101 = new Påfyldning("NM102",35,32, LocalDate.of(2024,12,06));
+        Fad fad = new Fad("35",FadType.EX_OLOROSO,FadMateriale.EGETRÆ,32,1,"NM102");
         lagerPlads.setFad(fad);
         // Act
         // Assert
