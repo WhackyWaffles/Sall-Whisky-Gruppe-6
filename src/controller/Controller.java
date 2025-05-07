@@ -47,9 +47,10 @@ public class Controller {
         return storage.getAllDestilleringer();
     }
 
-    public void tilføjDestillering(Destillering destillering, Fad fad, double liter, LocalDate dato) {
+    public void tilføjPåfyldning(Destillering destillering, Fad fad, double liter, LocalDate dato) {
         Påfyldning påfyldning = new Påfyldning(destillering, fad, liter, dato);
         fad.tilføjPåfyldning(påfyldning);
+        storage.addPåfyldning(påfyldning);
     }
 
 }

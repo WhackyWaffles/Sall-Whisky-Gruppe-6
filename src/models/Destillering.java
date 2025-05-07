@@ -7,11 +7,13 @@ public class Destillering {
     private String alkoholProcent;
     private int evtAntalGange;
     private int tempLiter;
+    private Ristning ristning;
     private ArrayList<Malt> malts;
 
-    public Destillering(String batchNr, String alkoholProcent) {
+    public Destillering(String batchNr, String alkoholProcent, Ristning ristning) {
         this.batchNr = batchNr;
         this.alkoholProcent = alkoholProcent;
+        this.ristning = ristning;
     }
 
     public String getBatchNr() {
@@ -21,4 +23,6 @@ public class Destillering {
     public String getAlkoholProcent() {
         return alkoholProcent;
     }
+
+    public Ristning getMalt() { return ristning;}
 }

@@ -10,7 +10,7 @@ class DestilleringTest {
     @Test
     void getBatchNr() {
         // Arrange
-        Destillering destillering = new Destillering("NM100","72");
+        Destillering destillering = new Destillering("NM100","72", Ristning.VIENNAMALT);
         // Act
         // Assert
         assertEquals("NM100","NM100");
@@ -19,7 +19,7 @@ class DestilleringTest {
     @Test
     void getAlkoholProcent() {
         // Arrange
-        Destillering destillering = new Destillering("NM101","65");
+        Destillering destillering = new Destillering("NM101","65", Ristning.PALE);
         // Act
         // Assert
         assertEquals("65","65");
