@@ -28,4 +28,39 @@ public class Fad {
             this.påfyldninger = new ArrayList<>();
     }
 
+    /**
+     * Constructor af et tomt Fad.
+     */
+    public Fad(int størrelse, FadType fadtype, FadMateriale fadMateriale, LagerPlads lagerPlads) {
+        this.størrelse = størrelse;
+        this.fadtype = fadtype;
+        this.fadMateriale = fadMateriale;
+        this.lagerPlads = lagerPlads;
+    }
+
+    public void tilføjPåfyldning(Påfyldning påfyldning) {
+        if (getVolumenLedig() >= påfyldning.getVolumenLiter()) {
+            påfyldninger.add(påfyldning);
+        } else {
+            throw new IllegalArgumentException("Ikke nok plads i fadet!");
+        }
+    }
+
+    public int getVolumenLedig() {
+        int totalFyldt = påfyldninger.stream().mapToInt(Påfyldning::getVolumenLiter).sum();
+        return kapacitet - totalFyldt;
+    }
+
+    public String getNr() {
+        return nr;
+    }
+
+    public FadType getFadtype() {
+        return fadtype;
+    }
+
+    public FadMateriale getFadMateriale() {
+        return fadMateriale;
+    }
+
 }
