@@ -12,7 +12,7 @@ class LagerPladsTest {
     void getFad() {
         // Arrange
         LagerPlads lagerPlads = new LagerPlads();
-        Fad fad = new Fad("test", "test", "test", 100.0, null);
+        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         lagerPlads.setFad(fad);
         // Act
         // Assert
@@ -24,7 +24,7 @@ class LagerPladsTest {
     void setFad() {
         // Arrange
         LagerPlads lagerPlads = new LagerPlads();
-        Fad fad = new Fad("test", "test", "test", 100.0, null);
+        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         lagerPlads.setFad(fad);
         // Act
         // Assert
@@ -35,7 +35,7 @@ class LagerPladsTest {
     void removeFad() {
         // Arrange
         LagerPlads lagerPlads = new LagerPlads();
-        Fad fad = new Fad("test", "test", "test", 100.0, null);
+        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         lagerPlads.setFad(fad);
         // Act
         Fad expected = lagerPlads.removeFad(fad);
@@ -48,7 +48,7 @@ class LagerPladsTest {
     void isNotEmpty() {
         // Arrange
         LagerPlads lagerPlads = new LagerPlads();
-        Fad fad = new Fad("test", "test", "test", 100.0, null);
+        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         lagerPlads.setFad(fad);
         // Act
         // Assert

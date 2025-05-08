@@ -65,7 +65,7 @@ public class OpretFadPane extends GridPane {
         btnOpretFad.setOnAction(event -> this.opretAction());
 
         Button btnAnnuller = new Button("Annuller");
-        this.add(btnAnnuller, 3, 18);
+        this.add(btnAnnuller, 2, 18);
         btnAnnuller.setOnAction(event -> this.aflystAction());
 
     }

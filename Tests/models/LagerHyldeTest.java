@@ -12,7 +12,7 @@ class LagerHyldeTest {
     void setFad() {
         // Arrange
         LagerHylde lagerHylde = new LagerHylde(2);
-        Fad fad = new Fad("test", "test", "test", 100.0, null);
+        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         // Act
         lagerHylde.setFad(fad, 1);
         // Assert
@@ -23,7 +23,7 @@ class LagerHyldeTest {
     void findFad() {
         // Arrange
         LagerHylde lagerHylde = new LagerHylde(2);
-        Fad fad = new Fad("test", "test", "test", 100.0, null);
+        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         lagerHylde.setFad(fad, 1);
         // Act
         int actual = lagerHylde.findFad(fad);
@@ -45,7 +45,7 @@ class LagerHyldeTest {
     void isNotEmpty() {
         // Arrange
         LagerHylde lagerHylde = new LagerHylde(2);
-        Fad fad = new Fad("test", "test", "test", 100.0, null);
+        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         lagerHylde.setFad(fad, 1);
         // Act
         // Assert

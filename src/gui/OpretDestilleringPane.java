@@ -37,15 +37,15 @@ public class OpretDestilleringPane extends GridPane {
         this.add(lblBatchNr, 0,1);
         this.add(this.txtBatchNr, 1,1);
 
-        Label lblAlkoholProcent = new Label("Alkohol procent");
+        Label lblAlkoholProcent = new Label("Alkohol %");
         this.add(lblAlkoholProcent, 0,2);
         this.add(this.txtAlkoholProcent, 1,2);
 
-        Label lblAntalLiter = new Label("Antal liter");
+        Label lblAntalLiter = new Label("Antal ");
         this.add(lblAntalLiter, 0,3);
         this.add(this.txtAntalLiter, 1,3);
 
-        Label lblDato = new Label("Dato for Destillering");
+        Label lblDato = new Label("Dato ");
         this.add(lblDato, 0, 4);  //
         datePicker.setValue(LocalDate.now()); // default to today
         this.add(datePicker, 1, 4);
@@ -59,11 +59,11 @@ public class OpretDestilleringPane extends GridPane {
 
         //Button til Opret og Annullér
         Button btnOpretDestl = new Button("Opret");
-        this.add(btnOpretDestl,0,7);
+        this.add(btnOpretDestl,0,15);
         btnOpretDestl.setOnAction(event -> this.opretAction());
 
         Button btnAnnuller = new Button("Annullér");
-        this.add(btnAnnuller,1,7);
+        this.add(btnAnnuller,1,15);
         btnAnnuller.setOnAction(event -> this.annullerAction());
     }
 
