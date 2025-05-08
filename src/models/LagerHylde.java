@@ -14,7 +14,6 @@ public class LagerHylde {
         for (int index = 0; index < pladser.length; index++) {
             pladser[index] = new LagerPlads();
         }
-
     }
 
     /**
@@ -49,5 +48,21 @@ public class LagerHylde {
             }
         }
         return true;
+    }
+
+    public Fad setFad(Fad fad, int plads) {
+        if (plads > pladser.length) {
+            throw new IllegalArgumentException("Denne plads findes ikke.");
+        }
+        for (int i = 0; i < pladser.length; i++) {
+            if (i == plads) {
+                return pladser[i].setFad(fad);
+            }
+        }
+        return null;
+    }
+
+    public int getAntalPladser() {
+        return pladser.length;
     }
 }

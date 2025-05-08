@@ -11,18 +11,35 @@ public class Fad {
     private FillNummer fillNummer;
     private ArrayList<Påfyldning> påfyldninger;
 
-
-    public Fad(String nr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer) {
+    /**
+     * Constructor af et fyldt Fad.
+     * @param nr Fadets unikke nummer.
+     * @param fadtype Hvilken slags drik, der før har været i Fadet, eks. Ex-Oloroso
+     * @param fadMateriale Hvilken slags træ, Fadet er lavet af.
+     * @param kapacitet Hvor mange Liter, der kan være i Fadet.
+     * @param påfyldninger Hvilke påfyldninger, der er hældt i Fadet, dvs. Fadets indhold
+     */
+    public Fad(String nr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer, ArrayList<Påfyldning> påfyldninger) {
         this.nr = nr;
         this.fadtype = fadtype;
         this.fadMateriale = fadMateriale;
         this.kapacitet = kapacitet;
         this.charring = charring;
         this.fillNummer = fillNummer;
-        this.påfyldninger = new ArrayList<>(); // Initialiseres uden for constructor
+        if (påfyldninger != null) {
+            this.påfyldninger  = new ArrayList<>(påfyldninger);
+        } else
+            this.påfyldninger = new ArrayList<>();
     }
 
-    // TODO - Finde ud af, hvordan et fads historie gemmes
+    /**
+     * Constructor af et tomt Fad.
+     */
+    public Fad(double kapacitet, String fadtype, String fadMateriale) {
+        this.kapacitet = kapacitet;
+        this.fadtype = fadtype;
+        this.fadMateriale = fadMateriale;
+    }
 
     public void tilføjPåfyldning(Påfyldning påfyldning) {
         if (getVolumenLedig() >= påfyldning.getVolumenLiter()) {
@@ -36,7 +53,6 @@ public class Fad {
         double totalFyldt = påfyldninger.stream().mapToDouble(Påfyldning::getVolumenLiter).sum();
         return kapacitet - totalFyldt;
     }
-
 
     public String getNr() {
         return nr;

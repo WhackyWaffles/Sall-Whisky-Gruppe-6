@@ -2,14 +2,33 @@ package models;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class LagerReolTest {
 
+    // TODO - Gennemgå alle Lagerklasser for at se, om alle RELEVANTE(!) metoder er dækket
+
+    @Test
+    void setFad() {
+        // Arrange
+        LagerReol lagerReol = new LagerReol(4, 2);
+        Fad fad = new Fad("test", "test", "test", 100.0, null);
+        // Act
+        lagerReol.setFad(fad, 2, 1);
+        // Assert
+        assertEquals(fad, lagerReol.getHylder()[2].getPladser()[1].getFad());
+    }
+
     @Test
     void findFad() {
+        // Arrange
+        LagerReol lagerReol = new LagerReol(4,2);
+        Fad fad = new Fad("test", "test", "test", 100.0, null);
+        lagerReol.setFad(fad, 2, 1);
+        // Act
+        int[] expected = new int[]{2,1};
+        // Assert
+        assertArrayEquals(expected, lagerReol.findFad(fad));
     }
 
     @Test
@@ -17,34 +36,39 @@ class LagerReolTest {
         // Arrange
         LagerReol lagerReol = new LagerReol(4,2);
         // Act
+        int actual = lagerReol.getAntalHylder();
         // Assert
-        assertEquals(4,4);
+        assertEquals(4, actual);
     }
 
     @Test
     void setAntalHylder() {
         // Arrange
-        LagerReol lagerReol1 = new LagerReol(4,2);
+        LagerReol lagerReol = new LagerReol(4,2);
         // Act
-        lagerReol1.setAntalHylder(3);
+        lagerReol.setAntalHylder(3);
+        int actual = lagerReol.getAntalHylder();
         // Assert
-        assertEquals(3,3);
+        assertEquals(3, actual);
+    }
+
+    @Test
+    void isNotEmpty() {
+        // Arrange
+        LagerReol lagerReol = new LagerReol(4, 2);
+        Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, null);
+        lagerReol.setFad(fad, 2, 1);
+        // Act
+        // Assert
+        assertFalse(lagerReol.isEmpty());
     }
 
     @Test
     void isEmpty() {
         // Arrange
-        LagerPlads lagerPlads = new LagerPlads();
-        Destillering nm101 = new Destillering("NM101", "51%");
-        Fad fad1 = new Fad("35", "Oloroso", "Egetræ", 35, Charring.HEAVY_CHAR, FillNummer.SECOND_FILL);
-        Påfyldning påfyldning = new Påfyldning(nm101, fad1,32, LocalDate.of(2024,12,06));
-        lagerPlads.setFad(fad1);
+        LagerReol lagerReol = new LagerReol(4, 2);
         // Act
         // Assert
-        assertFalse(lagerPlads.isEmpty());
-    }
-
-    @Test
-    void getHylder() {
+        assertTrue(lagerReol.isEmpty());
     }
 }
