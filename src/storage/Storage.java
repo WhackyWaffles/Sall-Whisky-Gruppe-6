@@ -11,13 +11,13 @@ import java.util.List;
 public class Storage {
     private List<Korn> kornSorter;
     private List<Malt> malts;
-    private List<Destillat> destilleringer;
+    private List<Destillat> destillater;
     private List<Påfyldning> påfyldninger;
 
     public Storage() {
         kornSorter = new ArrayList<>();
         malts = new ArrayList<>();
-        destilleringer = new ArrayList<>();
+        destillater = new ArrayList<>();
         påfyldninger = new ArrayList<>();
     }
 
@@ -56,16 +56,16 @@ public class Storage {
     /**
      * Returnerer en liste med alle gemte destilleringer
      */
-    public List<Destillat> getAllDestilleringer() {
-        return new ArrayList<>(destilleringer);
+    public List<Destillat> getAlleDestillater() {
+        return new ArrayList<>(destillater);
     }
 
     /**
      * Gemmer destillering
      */
-    public void addDestillering(Destillat destillering) {
-        if (!destilleringer.contains(destillering)) {
-            destilleringer.add(destillering);
+    public void addDestillat(Destillat destillat) {
+        if (!destillater.contains(destillat)) {
+            destillater.add(destillat);
         }
     }
 

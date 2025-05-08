@@ -42,7 +42,7 @@ public class Controller {
     }
 
     public List getAllDestillater() {
-        return storage.getAllDestillater();
+        return storage.getAlleDestillater();
     }
 
     public void tilføjPåfyldning(Destillat destillat, Fad fad, double liter, LocalDate dato) {

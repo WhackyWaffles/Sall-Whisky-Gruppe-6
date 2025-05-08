@@ -17,13 +17,9 @@ public class OpretDestilleringPane extends GridPane {
 
     private TextField txtBatchNr = new TextField();
     private TextField txtAlkoholProcent = new TextField();
-    private TextField txtAntalDestl = new TextField();
-    private LocalDate destilleringDato; // skal måske bruges i anden iteration
     private TextField txtAntalLiter = new TextField();
     private ComboBox<Ristning> comboMalt = new ComboBox<>();
     private DatePicker datePicker = new DatePicker();
-    private Button btnOpretDestl;
-    private Button btnAflyst;
 
     public OpretDestilleringPane() {
 
@@ -36,8 +32,6 @@ public class OpretDestilleringPane extends GridPane {
         this.txtAlkoholProcent = new TextField();
         this.txtAntalLiter = new TextField();
         this.datePicker.setValue(LocalDate.now());
-        this.txtRistning = new TextField();
-
 
         //Label og textfield
         Label lblBatchNr = new Label("Batch Nummer");
@@ -72,14 +66,12 @@ public class OpretDestilleringPane extends GridPane {
         Button btnAnnuller = new Button("Annullér");
         this.add(btnAnnuller,1,7);
         btnAnnuller.setOnAction(event -> this.annullerAction());
-
-
     }
-    private void opretAction() {
 
+    private void opretAction() {
         String batchNr = txtBatchNr.getText();
         String alkoholProcentStr = txtAlkoholProcent.getText();
-        Double antalDestLiter = Double.parseDouble(txtAntalLiter.getText());
+        double antalDestLiter = Double.parseDouble(txtAntalLiter.getText());
         LocalDate valgtDato = datePicker.getValue();
         Ristning selectedMalt = comboMalt.getValue();
 
@@ -88,44 +80,25 @@ public class OpretDestilleringPane extends GridPane {
             System.out.println("Udfyld venligst alle felter.");
             return;
         }
+
         try {
             double alkoholProcent = Double.parseDouble(alkoholProcentStr);
-            double antalLiter = antalDestLiter;
-
-            clearFields();
-        } catch (NumberFormatException e) {
-            System.out.println("Fejl:Indtast korrekt talformat i procent, antal og liter felterne.");
-        }
+            double antalLiter = Double.parseDouble(txtAntalLiter.getText());
 
             // Gemmer al data i storage
-            Controller.getController().opretDestillat(new Destillat(batchNr, alkoholProcentStr
-            , antalLiter, valgtDato, selectedMalt));
+            Controller.getController().opretDestillat(new Destillat(batchNr, alkoholProcent, antalLiter, valgtDato, selectedMalt));
 
-            // Udskriver data
-            System.out.println("Opretter destillering:");
-            System.out.println("Batch: " + batchNr);
-            System.out.println("Alkohol %: " + alkoholProcent);
-            System.out.println("Antal liter: " + antalLiter);
-            System.out.println("Dato: " + valgtDato);
-            System.out.println("Malt: " + selectedMalt);
-
-            clearFields();
         } catch (NumberFormatException e) {
             System.out.println("Fejl:Indtast korrekt talformat i procent, antal og liter felterne.");
         }
 
-    private void clearFields() {
-        txtBatchNr.clear();
-        txtAlkoholProcent.clear();
-        txtAntalDestl.clear();
-        datePicker.setValue(LocalDate.now());
-        txtAntalLt.clear();
-        comboMalt.getSelectionModel().clearSelection();
-    }
-    private void annullerAction() {
-
-        clearFields();
-        System.out.println("Handling annulleret. Felter nulstillet.");
+        // Udskriver data
+        System.out.println("Opretter destillering:");
+        System.out.println("Batch: " + batchNr);
+        System.out.println("Alkohol %: " + alkoholProcentStr);
+        System.out.println("Antal liter: " + antalDestLiter);
+        System.out.println("Dato: " + valgtDato);
+        System.out.println("Malt: " + selectedMalt);
     }
 
     private void clearFields() {
@@ -136,9 +109,8 @@ public class OpretDestilleringPane extends GridPane {
         comboMalt.getSelectionModel().clearSelection();
     }
 
-
-
-
-
-
+    private void annullerAction() {
+        clearFields();
+        System.out.println("Handling annulleret. Felter nulstillet.");
+    }
 }

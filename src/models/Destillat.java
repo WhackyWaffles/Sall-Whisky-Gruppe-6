@@ -7,14 +7,14 @@ import java.util.ArrayList;
 
 public class Destillat {
     private String batchNr;
-    private String alkoholProcent;
+    private double alkoholProcent;
     private int evtAntalGange; // skal ikke bruges til whisky-produktion
     private double destillatLiter;
     private LocalDate destilleringDato;
     private Ristning ristning; // bruges istedet for malt
     private ArrayList<Malt> malts;
 
-    public Destillat(String batchNr, String alkoholProcent, double destillatLiter, LocalDate destilleringDato, Ristning ristning) {
+    public Destillat(String batchNr, double alkoholProcent, double destillatLiter, LocalDate destilleringDato, Ristning ristning) {
         this.batchNr = batchNr;
         this.alkoholProcent = alkoholProcent;
         this.destillatLiter = destillatLiter;
@@ -26,7 +26,7 @@ public class Destillat {
         return batchNr;
     }
 
-    public String getAlkoholProcent() {
+    public double getAlkoholProcent() {
         return alkoholProcent;
     }
 
