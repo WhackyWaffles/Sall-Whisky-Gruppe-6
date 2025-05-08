@@ -4,7 +4,7 @@ public class LagerPlads {
     private Fad fad = null;
 
     /**
-     * Laver en LagerPlads.
+     * Laver en tom LagerPlads.
      */
     public LagerPlads() {
     }

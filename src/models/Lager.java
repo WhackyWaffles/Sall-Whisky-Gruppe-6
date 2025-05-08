@@ -7,8 +7,6 @@ public class Lager {
 
 
     // TODO - Find ud af, hvilke associationstyper der er mellem LagerKlasserne (dobbeltrettet, multiplicitet osv.)
-    // TODO - Find ud af, hvilken klasse i dette associeringshierarki, der gemmes i Storage (tror bare det er Lager)
-    // TODO - Lav reoler til ArrayList
     // TODO - Lave removeFad metode
 
     /**
@@ -93,6 +91,14 @@ public class Lager {
     }
 
     /**
+     * @return {@code LagerReol[]} med de LagerReoler, Lageret har.
+     */
+    public LagerReol[] getReoler() {
+        return reoler;
+    }
+
+
+    /**
      * @return Det maksimale antal Pladser på dette Lager.
      */
     public int getPladserIAlt() {
@@ -148,5 +154,17 @@ public class Lager {
         koords[1] = -1; // HyldeNr på Reolen.
         koords[2] = -1; // ReolNr i Lageret.
         return koords;
+    }
+
+    public Fad setFad(Fad fad, int reol, int hylde, int plads) {
+        if (hylde > reoler.length) {
+            throw new IllegalArgumentException("Denne reol findes ikke.");
+        }
+        for (int i = 0; i < reoler.length; i++) {
+            if (i == reol) {
+                return reoler[i].setFad(fad, hylde, plads);
+            }
+        }
+        return null;
     }
 }
