@@ -20,11 +20,10 @@ public class OpretDestilleringPane extends GridPane {
     private TextField txtAntalDestl = new TextField();
     private LocalDate destilleringDato; // skal måske bruges i anden iteration
     private TextField txtAntalLiter = new TextField();
-    private TextField txtRistning = new TextField();
-    private Button btnOpretDestl;
-    private Button btnAflyst;
     private ComboBox<Ristning> comboMalt = new ComboBox<>();
     private DatePicker datePicker = new DatePicker();
+    private Button btnOpretDestl;
+    private Button btnAflyst;
 
     public OpretDestilleringPane() {
 
@@ -37,7 +36,6 @@ public class OpretDestilleringPane extends GridPane {
         this.txtAlkoholProcent = new TextField();
         this.txtAntalLiter = new TextField();
         this.datePicker.setValue(LocalDate.now());
-        this.txtAntalLiter = new TextField();
         this.txtRistning = new TextField();
 
 
@@ -65,10 +63,6 @@ public class OpretDestilleringPane extends GridPane {
         comboMalt.getItems().addAll(Ristning.PILSNER,Ristning.PALE,Ristning.VIENNAMALT);
         comboMalt.setPromptText("Vælg Malt Type");
         this.add(comboMalt, 1, 5);
-
-        Label lblAntalLt = new Label("Malt");
-        this.add(lblAntalLt, 0,4);
-        this.add(this.txtRistning, 1,4);
 
         //Button til Opret og Annullér
         Button btnOpretDestl = new Button("Opret");
