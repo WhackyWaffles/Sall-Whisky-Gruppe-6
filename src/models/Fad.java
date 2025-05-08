@@ -35,7 +35,7 @@ public class Fad {
     }
 
     public void tilføjPåfyldning(Påfyldning påfyldning) {
-        if (getVolumenLedig() >= påfyldning.getVolumenLiter()) {
+        if (getVolumenLedig() >= påfyldning.getPåfyldningLiter()) {
             påfyldninger.add(påfyldning);
         } else {
             throw new IllegalArgumentException("Ikke nok plads i fadet!");
@@ -43,7 +43,7 @@ public class Fad {
     }
 
     public double getVolumenLedig() {
-        double totalFyldt = påfyldninger.stream().mapToDouble(Påfyldning::getVolumenLiter).sum();
+        double totalFyldt = påfyldninger.stream().mapToDouble(Påfyldning::getPåfyldningLiter).sum();
         return kapacitet - totalFyldt;
     }
 

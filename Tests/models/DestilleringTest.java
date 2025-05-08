@@ -2,6 +2,8 @@ package models;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class DestilleringTest {
@@ -10,7 +12,7 @@ class DestilleringTest {
     @Test
     void getBatchNr() {
         // Arrange
-        Destillering destillering = new Destillering("NM100","72");
+        Destillat destillering = new Destillat("NM100","72", LocalDate.of(2025, 01,01),35, Ristning.VIENNAMALT);
         // Act
         // Assert
         assertEquals("NM100","NM100");
@@ -19,7 +21,7 @@ class DestilleringTest {
     @Test
     void getAlkoholProcent() {
         // Arrange
-        Destillering destillering = new Destillering("NM101","65");
+        Destillat destillering = new Destillat("NM101","65", LocalDate.of(2025,01,02),25, Ristning.PALE);
         // Act
         // Assert
         assertEquals("65","65");
