@@ -12,7 +12,7 @@ class LagerReolTest {
     void setFad() {
         // Arrange
         LagerReol lagerReol = new LagerReol(4, 2);
-        Fad fad = new Fad("test", "test", "test", 100.0, null);
+        Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         // Act
         lagerReol.setFad(fad, 2, 1);
         // Assert
@@ -23,7 +23,7 @@ class LagerReolTest {
     void findFad() {
         // Arrange
         LagerReol lagerReol = new LagerReol(4,2);
-        Fad fad = new Fad("test", "test", "test", 100.0, null);
+        Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         lagerReol.setFad(fad, 2, 1);
         // Act
         int[] expected = new int[]{2,1};
@@ -56,7 +56,7 @@ class LagerReolTest {
     void isNotEmpty() {
         // Arrange
         LagerReol lagerReol = new LagerReol(4, 2);
-        Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, null);
+        Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         lagerReol.setFad(fad, 2, 1);
         // Act
         // Assert

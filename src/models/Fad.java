@@ -3,25 +3,29 @@ package models;
 import java.util.ArrayList;
 
 public class Fad {
-    private String fadNr;
+    private String nr;
     private String fadtype;
     private String fadMateriale;
     private double kapacitet;
+    private Charring charring;
+    private FillNummer fillNummer;
     private ArrayList<Påfyldning> påfyldninger;
 
     /**
      * Constructor af et fyldt Fad.
-     * @param fadNr Fadets unikke nummer.
+     * @param nr Fadets unikke nummer.
      * @param fadtype Hvilken slags drik, der før har været i Fadet, eks. Ex-Oloroso
      * @param fadMateriale Hvilken slags træ, Fadet er lavet af.
      * @param kapacitet Hvor mange Liter, der kan være i Fadet.
      * @param påfyldninger Hvilke påfyldninger, der er hældt i Fadet, dvs. Fadets indhold
      */
-    public Fad(String fadNr, String fadtype, String fadMateriale, double kapacitet, ArrayList<Påfyldning> påfyldninger) {
-        this.fadNr = fadNr;
+    public Fad(String nr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer, ArrayList<Påfyldning> påfyldninger) {
+        this.nr = nr;
         this.fadtype = fadtype;
         this.fadMateriale = fadMateriale;
         this.kapacitet = kapacitet;
+        this.charring = charring;
+        this.fillNummer = fillNummer;
         if (påfyldninger != null) {
             this.påfyldninger  = new ArrayList<>(påfyldninger);
         } else
@@ -31,11 +35,10 @@ public class Fad {
     /**
      * Constructor af et tomt Fad.
      */
-    public Fad(int størrelse, FadType fadtype, FadMateriale fadMateriale, LagerPlads lagerPlads) {
-        this.størrelse = størrelse;
+    public Fad(double kapacitet, String fadtype, String fadMateriale) {
+        this.kapacitet = kapacitet;
         this.fadtype = fadtype;
         this.fadMateriale = fadMateriale;
-        this.lagerPlads = lagerPlads;
     }
 
     public void tilføjPåfyldning(Påfyldning påfyldning) {
@@ -46,8 +49,8 @@ public class Fad {
         }
     }
 
-    public int getVolumenLedig() {
-        int totalFyldt = påfyldninger.stream().mapToInt(Påfyldning::getVolumenLiter).sum();
+    public double getVolumenLedig() {
+        double totalFyldt = påfyldninger.stream().mapToDouble(Påfyldning::getVolumenLiter).sum();
         return kapacitet - totalFyldt;
     }
 
@@ -55,12 +58,27 @@ public class Fad {
         return nr;
     }
 
-    public FadType getFadtype() {
+    public String getFadtype() {
         return fadtype;
     }
 
-    public FadMateriale getFadMateriale() {
+    public String getFadMateriale() {
         return fadMateriale;
     }
 
+    public double getKapacitet() {
+        return kapacitet;
+    }
+
+    public Charring getCharring() {
+        return charring;
+    }
+
+    public FillNummer getFillNummer() {
+        return fillNummer;
+    }
+
+    public ArrayList<Påfyldning> getPåfyldninger() {
+        return påfyldninger;
+    }
 }
