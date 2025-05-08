@@ -13,11 +13,13 @@ public class Fad {
 
     /**
      * Constructor af et fyldt Fad.
-     * @param nr Fadets unikke nummer.
-     * @param fadtype Hvilken slags drik, der før har været i Fadet, eks. Ex-Oloroso
-     * @param fadMateriale Hvilken slags træ, Fadet er lavet af.
-     * @param kapacitet Hvor mange Liter, der kan være i Fadet.
-     * @param påfyldninger Hvilke påfyldninger, der er hældt i Fadet, dvs. Fadets indhold
+     * @param nr {@code String} Fadets unikke ID.
+     * @param fadtype {@code String} Hvilken slags drik, der før har været i Fadet, eks. Ex-Oloroso
+     * @param fadMateriale {@code String} Hvilken slags træ, Fadet er lavet af.
+     * @param kapacitet {@code double} Hvor mange Liter, der kan være i Fadet.
+     * @param charring {@code Charring} Hvilken behandling Fadet har.
+     * @param fillNummer {@code FillNummer} Hvor mange gange fadet har været brugt.
+     * @param påfyldninger {@code ArrayList<Påfyldning>} Hvilke påfyldninger, der er hældt i Fadet, dvs. Fadets indhold. Hvis {@code null} oprettes et tomt fad.
      */
     public Fad(String nr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer, ArrayList<Påfyldning> påfyldninger) {
         this.nr = nr;
@@ -30,15 +32,6 @@ public class Fad {
             this.påfyldninger  = new ArrayList<>(påfyldninger);
         } else
             this.påfyldninger = new ArrayList<>();
-    }
-
-    /**
-     * Constructor af et tomt Fad.
-     */
-    public Fad(double kapacitet, String fadtype, String fadMateriale) {
-        this.kapacitet = kapacitet;
-        this.fadtype = fadtype;
-        this.fadMateriale = fadMateriale;
     }
 
     public void tilføjPåfyldning(Påfyldning påfyldning) {
