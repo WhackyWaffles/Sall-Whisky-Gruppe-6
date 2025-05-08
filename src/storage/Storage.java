@@ -1,6 +1,6 @@
 package storage;
 
-import models.Destillering;
+import models.Destillat;
 import models.Korn;
 import models.Malt;
 import models.Påfyldning;
@@ -11,7 +11,7 @@ import java.util.List;
 public class Storage {
     private List<Korn> kornSorter;
     private List<Malt> malts;
-    private List<Destillering> destilleringer;
+    private List<Destillat> destilleringer;
     private List<Påfyldning> påfyldninger;
 
     public Storage() {
@@ -56,14 +56,14 @@ public class Storage {
     /**
      * Returnerer en liste med alle gemte destilleringer
      */
-    public List<Destillering> getAllDestilleringer() {
+    public List<Destillat> getAllDestilleringer() {
         return new ArrayList<>(destilleringer);
     }
 
     /**
      * Gemmer destillering
      */
-    public void addDestillering(Destillering destillering) {
+    public void addDestillering(Destillat destillering) {
         if (!destilleringer.contains(destillering)) {
             destilleringer.add(destillering);
         }

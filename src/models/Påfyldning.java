@@ -3,37 +3,37 @@ package models;
 import java.time.LocalDate;
 
 public class Påfyldning {
-    private String navn;
-    private Destillering destillering;
+    private String idNr;
+    private Destillat destillat;
     private Fad fad;
-    private double volumenLiter;
+    private double påfyldningLiter;
     private LocalDate dato;
 
-    public Påfyldning(Destillering destillering, Fad fad, double volumenLiter, LocalDate dato) {
+    public Påfyldning(Destillat destillat, Fad fad, double volumenLiter, LocalDate dato) {
         if (fad.getVolumenLedig() < volumenLiter) {
             throw new IllegalArgumentException("Ikke nok plads i fadet!");
         }
-        this.navn = navn;
-        this.destillering = destillering;
+        this.idNr = idNr;
+        this.destillat = destillat;
         this.fad = fad;
-        this.volumenLiter = volumenLiter;
+        this.påfyldningLiter = volumenLiter;
         this.dato = dato;
     }
 
-    public String getNavn() {
-        return navn;
+    public String getIdNr() {
+        return idNr;
     }
 
-    public Destillering getDestillering() {
-        return destillering;
+    public Destillat getDestillat() {
+        return destillat;
     }
 
     public Fad getFad() {
         return fad;
     }
 
-    public double getVolumenLiter() {
-        return volumenLiter;
+    public double getPåfyldningLiter() {
+        return påfyldningLiter;
     }
 
     public LocalDate getDato() {

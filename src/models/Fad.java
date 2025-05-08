@@ -3,7 +3,7 @@ package models;
 import java.util.ArrayList;
 
 public class Fad {
-    private String nr;
+    private String fadNr;
     private String fadtype;
     private String fadMateriale;
     private double kapacitet;
@@ -12,8 +12,8 @@ public class Fad {
     private ArrayList<Påfyldning> påfyldninger;
 
 
-    public Fad(String nr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer) {
-        this.nr = nr;
+    public Fad(String fadNr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer) {
+        this.fadNr = fadNr;
         this.fadtype = fadtype;
         this.fadMateriale = fadMateriale;
         this.kapacitet = kapacitet;
@@ -25,7 +25,7 @@ public class Fad {
     // TODO - Finde ud af, hvordan et fads historie gemmes
 
     public void tilføjPåfyldning(Påfyldning påfyldning) {
-        if (getVolumenLedig() >= påfyldning.getVolumenLiter()) {
+        if (getVolumenLedig() >= påfyldning.getPåfyldningLiter()) {
             påfyldninger.add(påfyldning);
         } else {
             throw new IllegalArgumentException("Ikke nok plads i fadet!");
@@ -33,13 +33,13 @@ public class Fad {
     }
 
     public double getVolumenLedig() {
-        double totalFyldt = påfyldninger.stream().mapToDouble(Påfyldning::getVolumenLiter).sum();
+        double totalFyldt = påfyldninger.stream().mapToDouble(Påfyldning::getPåfyldningLiter).sum();
         return kapacitet - totalFyldt;
     }
 
 
-    public String getNr() {
-        return nr;
+    public String getFadNr() {
+        return fadNr;
     }
 
     public String getFadtype() {

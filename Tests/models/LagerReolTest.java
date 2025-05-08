@@ -35,7 +35,7 @@ class LagerReolTest {
     void isEmpty() {
         // Arrange
         LagerPlads lagerPlads = new LagerPlads();
-        Destillering nm101 = new Destillering("NM101", "51%", Ristning.PILSNER);
+        Destillat nm101 = new Destillat("NM101", "51%", LocalDate.of(2025,02,02),27, Ristning.PILSNER);
         Fad fad1 = new Fad("35", "Oloroso", "Egetræ", 35, Charring.HEAVY_CHAR, FillNummer.SECOND_FILL);
         Påfyldning påfyldning = new Påfyldning(nm101, fad1,32, LocalDate.of(2024,12,06));
         lagerPlads.setFad(fad1);
