@@ -23,8 +23,6 @@ public class OpretDestilleringPane extends GridPane {
     private TextField txtRistning = new TextField();
     private Button btnOpretDestl;
     private Button btnAflyst;
-    private ComboBox<String> comboMalt = new ComboBox<>();
-    private TextField txtAntalLiter = new TextField();
     private ComboBox<Ristning> comboMalt = new ComboBox<>();
     private DatePicker datePicker = new DatePicker();
 
@@ -100,6 +98,10 @@ public class OpretDestilleringPane extends GridPane {
             double alkoholProcent = Double.parseDouble(alkoholProcentStr);
             double antalLiter = antalDestLiter;
 
+            clearFields();
+        } catch (NumberFormatException e) {
+            System.out.println("Fejl:Indtast korrekt talformat i procent, antal og liter felterne.");
+        }
 
             // Gemmer al data i storage
             Controller.getController().opretDestillat(new Destillat(batchNr, alkoholProcentStr
@@ -118,6 +120,13 @@ public class OpretDestilleringPane extends GridPane {
             System.out.println("Fejl:Indtast korrekt talformat i procent, antal og liter felterne.");
         }
 
+    private void clearFields() {
+        txtBatchNr.clear();
+        txtAlkoholProcent.clear();
+        txtAntalDestl.clear();
+        datePicker.setValue(LocalDate.now());
+        txtAntalLt.clear();
+        comboMalt.getSelectionModel().clearSelection();
     }
     private void annullerAction() {
 
