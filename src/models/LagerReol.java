@@ -52,7 +52,6 @@ public class LagerReol {
      * Hvis de ikke er tomme, kaldes en IllegalArgumentException.
      * Kopierer derefter indholdet af {@code hylder} over til
      * {@code temp}, der har den nye størrelse. Til sidst gøres {@code temp} til {@code hylder}.
-     * @param antalHylder
      */
     public void setAntalHylder(int antalHylder) {
         if (antalHylder < hylder.length) {

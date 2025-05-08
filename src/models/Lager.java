@@ -6,7 +6,6 @@ public class Lager {
     private LagerReol[] reoler;
 
 
-    // TODO - Find ud af, hvilke associationstyper der er mellem LagerKlasserne (dobbeltrettet, multiplicitet osv.)
     // TODO - Lave removeFad metode
 
     /**
@@ -43,16 +42,24 @@ public class Lager {
     /**
      * Fylder den valgte {@code LagerPlads} med det valgte {@code Fad}.
      * <p>
-     * Kaster en exception hvis der er optaget.
+     * Kaster en exception hvis der er optaget, eller hvis den valgte plads ikke findes.
      *
+     * @param fad   Fad
      * @param reol  int
      * @param hylde int
      * @param plads int
-     * @param fad   Fad
      * @return Det {@code Fad} der er blevet sat på den valgte plads.
      */
-    public Fad setLagerPlads(int reol, int hylde, int plads, Fad fad) {
-        return reoler[reol].getHylder()[hylde].getPladser()[plads].setFad(fad);
+    public Fad setFad(Fad fad, int reol, int hylde, int plads) {
+        if (reol > reoler.length) {
+            throw new IllegalArgumentException("Denne reol findes ikke.");
+        }
+        for (int i = 0; i < reoler.length; i++) {
+            if (i == reol) {
+                return reoler[i].setFad(fad, hylde, plads);
+            }
+        }
+        return null;
     }
 
     /**
@@ -156,15 +163,4 @@ public class Lager {
         return koords;
     }
 
-    public Fad setFad(Fad fad, int reol, int hylde, int plads) {
-        if (hylde > reoler.length) {
-            throw new IllegalArgumentException("Denne reol findes ikke.");
-        }
-        for (int i = 0; i < reoler.length; i++) {
-            if (i == reol) {
-                return reoler[i].setFad(fad, hylde, plads);
-            }
-        }
-        return null;
-    }
 }
