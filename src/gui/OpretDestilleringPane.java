@@ -10,7 +10,6 @@ import javafx.scene.layout.GridPane;
 import models.Destillat;
 import models.Ristning;
 
-
 import java.time.LocalDate;
 
 public class OpretDestilleringPane extends GridPane {
