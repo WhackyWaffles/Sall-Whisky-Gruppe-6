@@ -11,11 +11,8 @@ public class OpretDestilleringPane extends GridPane {
 
     private TextField txtBatchNr = new TextField();
     private TextField txtAlkoholProcent = new TextField();
-    private LocalDate date  ;
     private TextField txtAntalLt = new TextField();
     private TextField txtAntalDestl = new TextField();
-    private Button btnOpretDestl;
-    private Button btnAflyst;
     private ComboBox<String> comboMalt = new ComboBox<>();
     private DatePicker datePicker = new DatePicker();
 
