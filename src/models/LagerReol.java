@@ -89,4 +89,16 @@ public class LagerReol {
     public LagerHylde[] getHylder() {
         return hylder;
     }
+
+    public Fad setFad(Fad fad, int hylde, int plads) {
+        if (hylde > hylder.length) {
+            throw new IllegalArgumentException("Denne hylde findes ikke.");
+        }
+        for (int i = 0; i < hylder.length; i++) {
+            if (i == hylde) {
+                return hylder[i].setFad(fad, plads);
+            }
+        }
+        return null;
+    }
 }

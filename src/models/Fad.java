@@ -3,7 +3,7 @@ package models;
 import java.util.ArrayList;
 
 public class Fad {
-    private String fadNr;
+    private String nr;
     private String fadtype;
     private String fadMateriale;
     private double kapacitet;
@@ -11,18 +11,28 @@ public class Fad {
     private FillNummer fillNummer;
     private ArrayList<Påfyldning> påfyldninger;
 
-
-    public Fad(String fadNr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer) {
-        this.fadNr = fadNr;
+    /**
+     * Constructor af et fyldt Fad.
+     * @param nr {@code String} Fadets unikke ID.
+     * @param fadtype {@code String} Hvilken slags drik, der før har været i Fadet, eks. Ex-Oloroso
+     * @param fadMateriale {@code String} Hvilken slags træ, Fadet er lavet af.
+     * @param kapacitet {@code double} Hvor mange Liter, der kan være i Fadet.
+     * @param charring {@code Charring} Hvilken behandling Fadet har.
+     * @param fillNummer {@code FillNummer} Hvor mange gange fadet har været brugt.
+     * @param påfyldninger {@code ArrayList<Påfyldning>} Hvilke påfyldninger, der er hældt i Fadet, dvs. Fadets indhold. Hvis {@code null} oprettes et tomt fad.
+     */
+    public Fad(String nr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer, ArrayList<Påfyldning> påfyldninger) {
+        this.nr = nr;
         this.fadtype = fadtype;
         this.fadMateriale = fadMateriale;
         this.kapacitet = kapacitet;
         this.charring = charring;
         this.fillNummer = fillNummer;
-        this.påfyldninger = new ArrayList<>(); // Initialiseres uden for constructor
+        if (påfyldninger != null) {
+            this.påfyldninger  = new ArrayList<>(påfyldninger);
+        } else
+            this.påfyldninger = new ArrayList<>();
     }
-
-    // TODO - Finde ud af, hvordan et fads historie gemmes
 
     public void tilføjPåfyldning(Påfyldning påfyldning) {
         if (getVolumenLedig() >= påfyldning.getPåfyldningLiter()) {
@@ -37,9 +47,8 @@ public class Fad {
         return kapacitet - totalFyldt;
     }
 
-
-    public String getFadNr() {
-        return fadNr;
+    public String getNr() {
+        return nr;
     }
 
     public String getFadtype() {
