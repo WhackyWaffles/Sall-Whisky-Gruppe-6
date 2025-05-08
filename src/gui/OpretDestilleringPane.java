@@ -3,8 +3,13 @@ package gui;
 import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import models.Destillat;
 import models.Ristning;
+
 
 import java.time.LocalDate;
 
@@ -15,13 +20,10 @@ public class OpretDestilleringPane extends GridPane {
     private TextField txtAntalDestl = new TextField();
     private LocalDate destilleringDato; // skal måske bruges i anden iteration
     private TextField txtAntalLiter = new TextField();
-    private TextField txtRistning = new TextField();
-    private Button btnOpretDestl;
-    private Button btnAflyst;
-    private ComboBox<String> comboMalt = new ComboBox<>();
-    private TextField txtAntalLiter = new TextField();
     private ComboBox<Ristning> comboMalt = new ComboBox<>();
     private DatePicker datePicker = new DatePicker();
+    private Button btnOpretDestl;
+    private Button btnAflyst;
 
     public OpretDestilleringPane() {
 
@@ -32,10 +34,9 @@ public class OpretDestilleringPane extends GridPane {
 
         this.txtBatchNr = new TextField();
         this.txtAlkoholProcent = new TextField();
-        this.txtAntalDestl = new TextField();
+        this.txtAntalLiter = new TextField();
         this.datePicker.setValue(LocalDate.now());
-        this.txtAntalLt = new TextField();
-        this.txtRistning = new TextField(),
+        this.txtRistning = new TextField();
 
 
         //Label og textfield
@@ -47,9 +48,9 @@ public class OpretDestilleringPane extends GridPane {
         this.add(lblAlkoholProcent, 0,2);
         this.add(this.txtAlkoholProcent, 1,2);
 
-        Label lblAntalDest = new Label("Antal ");
-        this.add(lblAntalDest, 0,3);
-        this.add(this.txtAntalDestl, 1,3);
+        Label lblAntalLiter = new Label("Antal ");
+        this.add(lblAntalLiter, 0,3);
+        this.add(this.txtAntalLiter, 1,3);
 
         Label lblDato = new Label("Dato ");
         this.add(lblDato, 0, 4);  //
@@ -59,15 +60,11 @@ public class OpretDestilleringPane extends GridPane {
         // ComboBox for Malt
         Label lblmalt = new Label("Malt Type");
         this.add(lblmalt, 0,5);
-        comboMalt.getItems().addAll(Ristning.PILSNER, Ristning.PALE, Ristning.VIENNAMALT);
+        comboMalt.getItems().addAll(Ristning.PILSNER,Ristning.PALE,Ristning.VIENNAMALT);
         comboMalt.setPromptText("Vælg Malt Type");
         this.add(comboMalt, 1, 5);
 
-        Label lblAntalLt = new Label("Malt");
-        this.add(lblAntalLt, 0,4);
-        this.add(this.txtRistning, 1,4);
-
-        //Button til Opret og Aflyst
+        //Button til Opret og Annullér
         Button btnOpretDestl = new Button("Opret");
         this.add(btnOpretDestl,0,15);
         btnOpretDestl.setOnAction(event -> this.opretAction());
@@ -95,6 +92,10 @@ public class OpretDestilleringPane extends GridPane {
             double alkoholProcent = Double.parseDouble(alkoholProcentStr);
             double antalLiter = antalDestLiter;
 
+            clearFields();
+        } catch (NumberFormatException e) {
+            System.out.println("Fejl:Indtast korrekt talformat i procent, antal og liter felterne.");
+        }
 
             // Gemmer al data i storage
             Controller.getController().opretDestillat(new Destillat(batchNr, alkoholProcentStr
@@ -113,12 +114,18 @@ public class OpretDestilleringPane extends GridPane {
             System.out.println("Fejl:Indtast korrekt talformat i procent, antal og liter felterne.");
         }
 
+    private void clearFields() {
+        txtBatchNr.clear();
+        txtAlkoholProcent.clear();
+        txtAntalDestl.clear();
+        datePicker.setValue(LocalDate.now());
+        txtAntalLt.clear();
+        comboMalt.getSelectionModel().clearSelection();
     }
     private void annullerAction() {
 
         clearFields();
         System.out.println("Handling annulleret. Felter nulstillet.");
-
     }
 
     private void clearFields() {
@@ -126,7 +133,6 @@ public class OpretDestilleringPane extends GridPane {
         txtAlkoholProcent.clear();
         txtAntalLiter.clear();
         datePicker.setValue(LocalDate.now());
-        txtAntalLt.clear();
         comboMalt.getSelectionModel().clearSelection();
     }
 
