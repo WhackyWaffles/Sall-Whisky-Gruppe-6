@@ -3,13 +3,15 @@ package models;
 import java.util.ArrayList;
 
 public class Malt {
-    private ArrayList<Korn> kornsorter;
+    private ArrayList<Korn> kornsorter = new ArrayList<>();
     private Ristning ristning;
     private boolean erRoeget;
     private String gaer;
 
     public Malt(ArrayList<Korn> kornsorter, Ristning ristning, boolean erRoeget, String gaer) {
-        this.kornsorter = kornsorter;
+        if (kornsorter != null) {
+            this.kornsorter = kornsorter;
+        }
         this.ristning = ristning;
         this.erRoeget = erRoeget;
         this.gaer = gaer;
@@ -31,7 +33,7 @@ public class Malt {
         return gaer;
     }
 
-    public void addKorn() {
-
+    public void addKorn(Korn korn) {
+        this.kornsorter.add(korn);
     }
 }
