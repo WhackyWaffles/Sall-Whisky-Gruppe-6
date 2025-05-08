@@ -12,7 +12,7 @@ class KornTest {
         Korn korn = new Korn("Stadsgaard", "Brabrand", "Belgravia");
         // Act
         // Assert
-        assertEquals("Stadsgaard", "Stadsgaard");
+        assertEquals("Stadsgaard", korn.getMark());
     }
 
     @Test
@@ -21,7 +21,7 @@ class KornTest {
         Korn korn = new Korn("Mosegaard", "Brabrand", "Shuffle");
         // Act
         // Assert
-        assertEquals("Brabrand", "Brabrand");
+        assertEquals("Brabrand", korn.getLokation());
     }
 
     @Test
@@ -30,6 +30,6 @@ class KornTest {
         Korn korn = new Korn("Stadsgaard", "Brabrand", "Moonshine");
         // Act
         // Assert
-        assertEquals("Moonshine", "Moonshine");
+        assertEquals("Moonshine", korn.getKornSort());
     }
 }
