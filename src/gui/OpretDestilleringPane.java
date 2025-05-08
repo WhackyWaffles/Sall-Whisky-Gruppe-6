@@ -35,15 +35,15 @@ public class OpretDestilleringPane extends GridPane {
         this.add(lblBatchNr, 0,1);
         this.add(this.txtBatchNr, 1,1);
 
-        Label lblAlkoholProcent = new Label("Alkohol procent ");
+        Label lblAlkoholProcent = new Label("Alkohol %");
         this.add(lblAlkoholProcent, 0,2);
         this.add(this.txtAlkoholProcent, 1,2);
 
-        Label lblAntalDest = new Label("Antal af Destillering ");
+        Label lblAntalDest = new Label("Antal ");
         this.add(lblAntalDest, 0,3);
         this.add(this.txtAntalDestl, 1,3);
 
-        Label lblDato = new Label("Dato for Destillering");
+        Label lblDato = new Label("Dato ");
         this.add(lblDato, 0, 4);  //
         datePicker.setValue(LocalDate.now()); // default to today
         this.add(datePicker, 1, 4);
@@ -62,11 +62,11 @@ public class OpretDestilleringPane extends GridPane {
 
         //Button til Opret og Aflyst
         Button btnOpretDestl = new Button("Opret");
-        this.add(btnOpretDestl,0,15);
+        this.add(btnOpretDestl,0,18);
         btnOpretDestl.setOnAction(event -> this.opretAction());
 
-        Button btnAflyst = new Button("Aflyst");
-        this.add(btnAflyst,1,15);
+        Button btnAflyst = new Button("Annuller");
+        this.add(btnAflyst,2,18);
         btnAflyst.setOnAction(event -> this.aflystAction());
 
 
@@ -120,10 +120,6 @@ public class OpretDestilleringPane extends GridPane {
         txtAntalLt.clear();
         comboMalt.getSelectionModel().clearSelection();
     }
-
-
-
-
 
 
 }
