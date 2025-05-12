@@ -33,7 +33,7 @@ public class OpretDestilleringPane extends GridPane {
         this.datePicker.setValue(LocalDate.now());
 
         //Label og textfield
-        Label lblBatchNr = new Label("Batch Nummer");
+        Label lblBatchNr = new Label("Spirit batch");
         this.add(lblBatchNr, 0,1);
         this.add(this.txtBatchNr, 1,1);
 
@@ -41,7 +41,7 @@ public class OpretDestilleringPane extends GridPane {
         this.add(lblAlkoholProcent, 0,2);
         this.add(this.txtAlkoholProcent, 1,2);
 
-        Label lblAntalLiter = new Label("Antal ");
+        Label lblAntalLiter = new Label("Antal liter");
         this.add(lblAntalLiter, 0,3);
         this.add(this.txtAntalLiter, 1,3);
 
@@ -85,14 +85,14 @@ public class OpretDestilleringPane extends GridPane {
             double antalLiter = Double.parseDouble(txtAntalLiter.getText());
 
             // Gemmer al data i storage
-            Controller.getController().opretDestillat(new Destillat(batchNr, alkoholProcent, antalLiter, valgtDato, selectedMalt));
+            Controller.getController().opretDestillat(batchNr, alkoholProcent, antalLiter, valgtDato, selectedMalt);
 
         } catch (NumberFormatException e) {
             System.out.println("Fejl:Indtast korrekt talformat i procent, antal og liter felterne.");
         }
 
         // Udskriver data
-        System.out.println("Opretter destillering:");
+        System.out.println("Opretter destillat:");
         System.out.println("Batch: " + batchNr);
         System.out.println("Alkohol %: " + alkoholProcentStr);
         System.out.println("Antal liter: " + antalDestLiter);

@@ -35,4 +35,13 @@ public class Destillat {
     public LocalDate getDestilleringDato() {return destilleringDato;}
 
     public Ristning getRistning() {return ristning;}
+
+    @Override
+    public String toString() {
+        return "Destillat " +
+                batchNr + ',' +
+                alkoholProcent + ',' +
+                destilleringDato + ',' +
+                ristning;
+    }
 }

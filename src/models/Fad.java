@@ -74,4 +74,14 @@ public class Fad {
     public ArrayList<Påfyldning> getPåfyldninger() {
         return påfyldninger;
     }
+
+    @Override
+    public String toString() {
+        return "Fad " +
+                 nr + ',' +
+                " " + fadtype + ',' +
+                " " + kapacitet + ',' +
+                " " + charring + ',' +
+                " " + fillNummer;
+    }
 }

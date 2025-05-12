@@ -1,19 +1,19 @@
 package gui;
 
+import controller.Controller;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import models.Destillat;
+import models.Fad;
 
 import java.time.LocalDate;
 
 public class OpretPåfyldningPane extends GridPane {
 
-    private TextField txtNavn = new TextField();
-    private TextField txtDestillering = new TextField();
-    private TextField txtFad = new TextField();
+    private TextField txtIdNr = new TextField();
+    private ListView<Destillat> lvDestillater = new ListView<>();
+    private ListView<Fad> lvFade = new ListView<>();
     private TextField txtLiter = new TextField();
     private DatePicker datePicker = new DatePicker();
 
@@ -26,75 +26,83 @@ public class OpretPåfyldningPane extends GridPane {
 
 
         //Label og textfield
-        Label lblNavn = new Label("Navn ");
-        this.add(lblNavn, 0, 1);
-        this.add(this.txtNavn, 1, 1);
+        Label lblIdNr = new Label("IdNr");
+        this.add(lblIdNr, 0, 1);
+        this.add(this.txtIdNr, 1, 1);
 
-        Label lblDestillering = new Label("Destillering");
-        this.add(lblDestillering, 0, 2);
-        this.add(this.txtDestillering, 1, 2);
+        Label lblDestillat = new Label("Spirit batch");
+        this.add(lblDestillat, 0, 2);
+        this.add(this.lvDestillater, 1, 2);
 
-        Label lblFad = new Label("Fad ");
+        Label lblFad = new Label("Fad");
         this.add(lblFad, 0, 3);
-        this.add(this.txtFad, 1, 3);
+        this.add(this.lvFade, 1, 3);
 
-        Label lblLiter = new Label("Liter ");
+        Label lblLiter = new Label("Liter");
         this.add(lblLiter, 0, 4);
         this.add(this.txtLiter, 1, 4);
 
-        Label lblDato = new Label("Dato ");
+        Label lblDato = new Label("Dato");
         this.add(lblDato, 0, 5);  //
         datePicker.setValue(LocalDate.now()); // default to today
         this.add(datePicker, 1, 5);
 
+        // Fyld ListView med fade fra Controller
+        lvFade.getItems().addAll(Controller.getController().getAlleFade());
+        lvFade.setPrefHeight(200); // Sætter en passende højde
+
+        // Fyld ListView med fade fra Controller
+        lvDestillater.getItems().addAll(Controller.getController().getAllDestillater());
+        lvDestillater.setPrefHeight(200); // Sætter en passende højde
+
         //Button til Opret og Annuller
         Button btnOpretPåfyld = new Button("Opret");
-        this.add(btnOpretPåfyld, 0, 18);
+        this.add(btnOpretPåfyld, 0, 7);
         btnOpretPåfyld.setOnAction(event -> this.opretPåfyldAction());
 
-        Button btnAnnuller = new Button("Annuller");
-        this.add(btnAnnuller, 2, 18);
+        Button btnAnnuller = new Button("Annullér");
+        this.add(btnAnnuller, 1, 7);
         btnAnnuller.setOnAction(event -> this.aflystPåfyldAction());
-
     }
 
     private void opretPåfyldAction() {
-        String navn = txtNavn.getText();
-        String destillering = txtDestillering.getText();
-        String fad = txtFad.getText();
-        String liter = txtLiter.getText();
+        String idNr = txtIdNr.getText();
+        Destillat destillat = lvDestillater.getSelectionModel().getSelectedItem();
+        Fad fad = lvFade.getSelectionModel().getSelectedItem();
+        String påfyldningLiter = txtLiter.getText();
         LocalDate valgtDato = datePicker.getValue();
 
-        if (navn.isEmpty() || destillering.isEmpty() || fad.isEmpty() ||
-                liter.isEmpty()) {
+        if (idNr.isEmpty() || destillat == null || fad == null ||
+                påfyldningLiter.isEmpty()) {
             System.out.println("Udfyld venligst alle felter.");
             return;
         }
         try {
-            if (!liter.matches("\\d+\\.\\d+")) {
+            if (!påfyldningLiter.matches("\\d+\\.\\d+")) {
                 System.out.println("Fejl: 'Liter' skal være et decimaltal (f.eks. 12.5).");
                 return;
             }
-            double påfyldningliter = Double.parseDouble(liter);
-            if (påfyldningliter <= 0) {
+            double påfyldningLiterStr = Double.parseDouble(påfyldningLiter);
+            if (påfyldningLiterStr <= 0) {
                 System.out.println("Fejl: Liter skal være større end 0.");
                 return;
             }
 
+            // Gemmer al data i storage
+            Controller.getController().tilføjPåfyldning(idNr, destillat, fad, påfyldningLiterStr, valgtDato);
 
-            //Gemmer alle dataoen
+            // Udskriv data
             System.out.println("Opretter påfyldning:");
-            System.out.println("Navn: " + navn);
-            System.out.println("Destillering: " + destillering);
-            System.out.println("fad: " + fad);
-            System.out.println("Antal liter: " + liter);
+            System.out.println("IDnr: " + idNr);
+            System.out.println("Destillat: " + destillat.getBatchNr());
+            System.out.println("Fad: " + fad.getNr());
+            System.out.println("Antal liter: " + påfyldningLiter);
             System.out.println("Dato: " + valgtDato);
 
             clearFields();
         } catch (NumberFormatException e) {
             System.out.println("Fejl: 'Liter' skal være et korrekt decimaltal.");
         }
-
     }
 
     private void aflystPåfyldAction() {
@@ -103,12 +111,9 @@ public class OpretPåfyldningPane extends GridPane {
     }
 
     private void clearFields() {
-        txtNavn.clear();
-        txtDestillering.clear();
-        txtFad.clear();
+        txtIdNr.clear();
         txtLiter.clear();
         datePicker.setValue(LocalDate.now());
-
     }
 }
 
