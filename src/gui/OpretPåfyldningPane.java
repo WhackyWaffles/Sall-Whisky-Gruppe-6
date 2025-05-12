@@ -4,6 +4,7 @@ import controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import models.Destillat;
 import models.Fad;
 
@@ -23,6 +24,8 @@ public class OpretPåfyldningPane extends GridPane {
         this.setHgap(20);
         this.setVgap(10);
         this.setGridLinesVisible(false);
+
+        this.setMinSize(700,400);
 
 
         //Label og textfield
@@ -56,13 +59,19 @@ public class OpretPåfyldningPane extends GridPane {
         lvDestillater.setPrefHeight(200); // Sætter en passende højde
 
         //Button til Opret og Annuller
+
         Button btnOpretPåfyld = new Button("Opret");
-        this.add(btnOpretPåfyld, 0, 7);
         btnOpretPåfyld.setOnAction(event -> this.opretPåfyldAction());
 
         Button btnAnnuller = new Button("Annullér");
-        this.add(btnAnnuller, 1, 7);
         btnAnnuller.setOnAction(event -> this.aflystPåfyldAction());
+
+        Button btnOpdater = new Button("Opdatér");
+        btnOpdater.setOnAction(event -> this.updaterLister());
+
+        HBox buttonBox = new HBox(30);
+        this.add(buttonBox,0,7,2,1);
+        buttonBox.getChildren().addAll(btnOpretPåfyld, btnAnnuller, btnOpdater);
     }
 
     private void opretPåfyldAction() {
@@ -114,6 +123,12 @@ public class OpretPåfyldningPane extends GridPane {
         txtIdNr.clear();
         txtLiter.clear();
         datePicker.setValue(LocalDate.now());
+    }
+
+    private void updaterLister(){
+        lvFade.getItems().setAll(Controller.getController().getAlleFade());
+        lvDestillater.getItems().setAll(Controller.getController().getAllDestillater());
+        System.out.println(("Listerne er opdateret"));
     }
 }
 
