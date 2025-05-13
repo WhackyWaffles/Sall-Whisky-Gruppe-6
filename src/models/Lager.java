@@ -10,10 +10,11 @@ public class Lager {
 
     /**
      * Laver et nyt Lager.
-     * @param navn Lagerets navn.
-     * @param lokation Lagerets Lokation (som adresse).
-     * @param antalReoler Antal Reoler på lageret.
-     * @param antalHylder Antal Hylder per Reol.
+     *
+     * @param navn                 Lagerets navn.
+     * @param lokation             Lagerets Lokation (som adresse).
+     * @param antalReoler          Antal Reoler på lageret.
+     * @param antalHylder          Antal Hylder per Reol.
      * @param antalPladserPerHylde Antal Pladser på hver Hylde.
      */
     public Lager(String navn, String lokation, int antalReoler, int antalHylder, int antalPladserPerHylde) {
@@ -21,7 +22,7 @@ public class Lager {
         this.lokation = lokation;
         // opretter Array af Reoler.
         this.reoler = new LagerReol[antalReoler];
-        // fylder Arrayet.
+        // fylder Array
         for (int index = 0; index < reoler.length; index++) {
             reoler[index] = new LagerReol(antalHylder, antalPladserPerHylde);
         }
@@ -35,7 +36,7 @@ public class Lager {
      * <p></p>
      * {@code null} hvis pladsen er tom.
      */
-    public Fad getLagerPlads(int reol, int hylde, int plads) {
+    public Fad getFad(int reol, int hylde, int plads) {
         return reoler[reol].getHylder()[hylde].getPladser()[plads].getFad();
     }
 
@@ -54,13 +55,9 @@ public class Lager {
         if (reol > reoler.length) {
             throw new IllegalArgumentException("Denne reol findes ikke.");
         }
-        for (int i = 0; i < reoler.length; i++) {
-            if (i == reol) {
-                return reoler[i].setFad(fad, hylde, plads);
-            }
-        }
-        return null;
+        return reoler[reol].setFad(fad, hylde, plads);
     }
+
 
     /**
      * @return Lagerets navn.
@@ -157,10 +154,11 @@ public class Lager {
                 return koords;
             }
         }
-        koords[0] = -1; // PladsNr på Hylden
-        koords[1] = -1; // HyldeNr på Reolen.
-        koords[2] = -1; // ReolNr i Lageret.
+        koords[0] = -1; // PladsNummer
+        koords[1] = -1; // HyldeNummer
+        koords[2] = -1; // ReolNummer
         return koords;
     }
+
 
 }

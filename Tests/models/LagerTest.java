@@ -38,8 +38,12 @@ class LagerTest {
     }
 
     // TODO -
-    //  findfad, hvor fad ikke findes
-    //  SetFad out of bounds
-    //  SetFad på occupied plads
+    //  Test: findFad, hvor fad ikke kan findes
+    //  Test: setFad -> OoB + catch exception
+    //      (skal også laves for reol, hylde og plads)
+    //  Test: setFad på occupied plads + catch exception
+    //      (skal også laves for reol, hylde og plads)
+    //  Test: removeFad når jeg har lavet metoden i LagerKlasserne.
+    //      (skal også laves for reol og hylde)
 
 }

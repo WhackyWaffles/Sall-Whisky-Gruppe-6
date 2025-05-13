@@ -10,7 +10,7 @@ public class LagerHylde {
     public LagerHylde(int antalPladser) {
         // opretter Array af Pladser.
         this.pladser = new LagerPlads[antalPladser];
-        // fylder Arrayet.
+        // fylder Array med pladser
         for (int index = 0; index < pladser.length; index++) {
             pladser[index] = new LagerPlads();
         }
@@ -51,15 +51,10 @@ public class LagerHylde {
     }
 
     public Fad setFad(Fad fad, int plads) {
-        if (plads > pladser.length) {
+        if (plads >= pladser.length || plads < 0) {
             throw new IllegalArgumentException("Denne plads findes ikke.");
         }
-        for (int i = 0; i < pladser.length; i++) {
-            if (i == plads) {
-                return pladser[i].setFad(fad);
-            }
-        }
-        return null;
+        return pladser[plads].setFad(fad);
     }
 
     public int getAntalPladser() {

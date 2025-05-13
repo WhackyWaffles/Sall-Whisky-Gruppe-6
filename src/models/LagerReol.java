@@ -30,13 +30,13 @@ public class LagerReol {
         int[] koords = new int[2];
         for (int i = 0; i < hylder.length; i++) {
             if (hylder[i].findFad(fad) != -1) {
-                koords[1] = i; // koords[1] = hyldenummeret på reolen.
-                koords[0] = hylder[i].findFad(fad); // koords[0] = pladsnummeret på hylden
+                koords[1] = i; // koords[1] = hyldenummer
+                koords[0] = hylder[i].findFad(fad); // koords[0] = pladsnummer
                 return koords;
             }
         }
-        koords[0] = -1; // koords[0] = pladsnummeret på hylden
-        koords[1] = -1; // koords[1] = hyldenummeret på reolen.
+        koords[0] = -1; // koords[0] = pladsnummer
+        koords[1] = -1; // koords[1] = hyldenummer
         return koords;
     }
 
@@ -90,14 +90,9 @@ public class LagerReol {
     }
 
     public Fad setFad(Fad fad, int hylde, int plads) {
-        if (hylde > hylder.length) {
+        if (hylde >= hylder.length || hylde < 0) {
             throw new IllegalArgumentException("Denne hylde findes ikke.");
         }
-        for (int i = 0; i < hylder.length; i++) {
-            if (i == hylde) {
-                return hylder[i].setFad(fad, plads);
-            }
-        }
-        return null;
+        return hylder[hylde].setFad(fad, plads);
     }
 }

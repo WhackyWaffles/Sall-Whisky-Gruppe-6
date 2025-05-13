@@ -15,7 +15,7 @@ class DestilleringTest {
         Destillat destillering = new Destillat("NM100",72.0, 35, LocalDate.of(2025, 01,01),Ristning.VIENNAMALT);
         // Act
         // Assert
-        assertEquals("NM100","NM100");
+        assertEquals("NM100",destillering.getBatchNr());
     }
 
     @Test
@@ -24,6 +24,6 @@ class DestilleringTest {
         Destillat destillering = new Destillat("NM100",72.0, 35, LocalDate.of(2025, 01,01),Ristning.VIENNAMALT);
         // Act
         // Assert
-        assertEquals("65","65");
+        assertEquals("65",destillering.getAlkoholProcent());
     }
 }
