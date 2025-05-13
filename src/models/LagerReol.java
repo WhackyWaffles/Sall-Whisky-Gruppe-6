@@ -3,6 +3,7 @@ package models;
 public class LagerReol {
     private LagerHylde[] hylder;
 
+    // Constructor
     /**
      * Laver en ny LagerReol.
      * @param antalHylder Antallet af Hylder i den nye Reol.
@@ -27,17 +28,14 @@ public class LagerReol {
      * {@code int[0] = -1} hvis det ikke bliver fundet.
      */
     public int[] findFad(Fad fad) {
-        int[] koords = new int[2];
         for (int i = 0; i < hylder.length; i++) {
-            if (hylder[i].findFad(fad) != -1) {
-                koords[1] = i; // koords[1] = hyldenummer
-                koords[0] = hylder[i].findFad(fad); // koords[0] = pladsnummer
-                return koords;
+            if (hylder[i].findFad(fad)[2] != -1) {
+                int[] koordinater = hylder[i].findFad(fad);
+                koordinater[1] = i; // koordinater[1] = hyldenummer
+                return koordinater;
             }
         }
-        koords[0] = -1; // koords[0] = pladsnummer
-        koords[1] = -1; // koords[1] = hyldenummer
-        return koords;
+        return new int[]{-1, -1, -1};
     }
 
     /**
@@ -45,28 +43,6 @@ public class LagerReol {
      */
     public int getAntalHylder() {
         return hylder.length;
-    }
-
-    /**
-     * Hvis det nye antal hylder er mindre end det nuværende antal, tjekker de hylder, der er ved at blive slettet.
-     * Hvis de ikke er tomme, kaldes en IllegalArgumentException.
-     * Kopierer derefter indholdet af {@code hylder} over til
-     * {@code temp}, der har den nye størrelse. Til sidst gøres {@code temp} til {@code hylder}.
-     */
-    public void setAntalHylder(int antalHylder) {
-        if (antalHylder < hylder.length) {
-            for (int i = antalHylder; i < hylder.length; i++) {
-                for (int j = 0; j < hylder[i].getPladser().length; j++) {
-                    if (hylder[i].getPladser()[j].isEmpty()) {
-                        throw new IllegalArgumentException("Du er ved at slette en hylde, " +
-                                "hvorpå der stadig er et fad! Fjern venligst fadet først, og forsøg så igen.");
-                    }
-                }
-            }
-        }
-        LagerHylde[] tempHyldeArray = new LagerHylde[antalHylder];
-        System.arraycopy(hylder, 0, tempHyldeArray, 0, tempHyldeArray.length);
-        hylder = tempHyldeArray;
     }
 
     /**
@@ -89,10 +65,28 @@ public class LagerReol {
         return hylder;
     }
 
-    public Fad setFad(Fad fad, int hylde, int plads) {
-        if (hylde >= hylder.length || hylde < 0) {
-            throw new IllegalArgumentException("Denne hylde findes ikke.");
+    /**
+     * Hvis det nye antal hylder er mindre end det nuværende antal, tjekker de hylder, der er ved at blive slettet.
+     * Hvis de ikke er tomme, kaldes en IllegalArgumentException.
+     * Kopierer derefter indholdet af {@code hylder} over til
+     * {@code temp}, der har den nye størrelse. Til sidst gøres {@code temp} til {@code hylder}.
+     */
+    public void setAntalHylder(int antalHylder) {
+        if (antalHylder < 0) {
+            throw new IllegalArgumentException("DET MÅ DU SLET IKKE, DET DER!");
         }
-        return hylder[hylde].setFad(fad, plads);
+        if (antalHylder < hylder.length && !this.isEmpty()) {
+            for (int i = antalHylder; i < hylder.length; i++) {
+                for (int j = 0; j < hylder[i].getPladser().length; j++) {
+                    if (hylder[i].getPladser()[j].isEmpty()) {
+                        throw new IllegalArgumentException("Du er ved at slette en hylde, " +
+                                "hvorpå der stadig er et fad! Fjern venligst fadet først, og forsøg så igen.");
+                    }
+                }
+            }
+        }
+        LagerHylde[] tempHyldeArray = new LagerHylde[antalHylder];
+        System.arraycopy(hylder, 0, tempHyldeArray, 0, tempHyldeArray.length);
+        hylder = tempHyldeArray;
     }
 }

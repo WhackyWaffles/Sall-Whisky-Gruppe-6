@@ -3,6 +3,7 @@ package models;
 public class LagerPlads {
     private Fad fad = null;
 
+    // Constructor
     /**
      * Laver en tom LagerPlads.
      */
@@ -26,7 +27,7 @@ public class LagerPlads {
      * @return {@code Fad} Fadet, der er blevet sat på plads.
      */
     public Fad setFad(Fad fad) {
-        if (!this.isEmpty()) {
+        if (!this.isEmpty() ) {
             throw new IllegalArgumentException("Denne plads er optaget.");
         }
         this.fad = fad;
@@ -38,13 +39,10 @@ public class LagerPlads {
      * <p></p>
      * {@code null} hvis pladsen er tom.
      */
-    public Fad removeFad(Fad fad) {
-        if (!this.isEmpty()) {
-            Fad removedFad = this.fad;
-            this.fad = null;
-            return removedFad;
-        }
-        return null;
+    public Fad removeFad() {
+        Fad removedFad = fad;
+        this.fad = null;
+        return removedFad;
     }
 
     /**

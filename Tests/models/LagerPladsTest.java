@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LagerPladsTest {
 
-    // TODO - Gennemgå alle Lagerklasser for at se, om alle RELEVANTE(!) metoder er dækket
+    // ======================================================================
+    // getFad
+    // ======================================================================
 
     @Test
     void getFad() {
@@ -20,6 +22,10 @@ class LagerPladsTest {
         assertNotNull(lagerPlads.getFad());
     }
 
+    // ======================================================================
+    // setFad
+    // ======================================================================
+
     @Test
     void setFad() {
         // Arrange
@@ -32,17 +38,50 @@ class LagerPladsTest {
     }
 
     @Test
+    void setFad_Optaget() {
+        // Arrange
+        LagerPlads lagerPlads = new LagerPlads();
+        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        Fad fad2 = new Fad("test2", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        lagerPlads.setFad(fad);
+        lagerPlads.setFad(fad2);
+        // Act
+        // Assert
+        assertThrows(IllegalArgumentException.class, () -> lagerPlads.setFad(fad),
+                "Denne plads er optaget.");
+    }
+
+    // ======================================================================
+    // Remove
+    // ======================================================================
+
+    @Test
     void removeFad() {
         // Arrange
         LagerPlads lagerPlads = new LagerPlads();
         Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         lagerPlads.setFad(fad);
         // Act
-        Fad expected = lagerPlads.removeFad(fad);
+        Fad expected = lagerPlads.removeFad();
         // Assert
         assertNotEquals(expected, lagerPlads.getFad());
         assertNull(lagerPlads.getFad());
     }
+
+    @Test
+    void removeIngenting() {
+        // Arrange
+        LagerPlads lagerPlads = new LagerPlads();
+        // Act
+        Fad expected = lagerPlads.removeFad();
+        // Assert
+        assertEquals(expected, lagerPlads.getFad());
+        assertNull(expected);
+    }
+
+    // ======================================================================
+    // isEmpty
+    // ======================================================================
 
     @Test
     void isNotEmpty() {

@@ -3,8 +3,10 @@ package models;
 public class LagerHylde {
     private final LagerPlads[] pladser;
 
+    // Constructor
     /**
      * Laver en ny LagerHylde.
+     *
      * @param antalPladser Antallet af pladser på den nye Hylde.
      */
     public LagerHylde(int antalPladser) {
@@ -18,24 +20,27 @@ public class LagerHylde {
 
     /**
      * Leder efter et bestemt Fad.
+     *
      * @param fad Fadet der ledes efter
      * @return koordinaterne på Fadet, hvis det bliver fundet
      * <p></p>
      * {@code -1} hvis det ikke bliver fundet.
      */
-    public int findFad(Fad fad) {
+    public int[] findFad(Fad fad) {
+        int[] koordinater = new int[]{-1, -1, -1};
         for (int i = 0; i < pladser.length; i++) {
-            if (pladser[i].getFad() == fad)
-                return i;
+            if (pladser[i].getFad() == fad) {
+                koordinater[2] = i;
+            }
         }
-        return -1;
+        return koordinater;
     }
 
     /**
-     * @return {@code LagerPlads[]} med de pladser, Hylden har.
+     * @return {@code int} Hvor mange pladser, der er på hver hylde.
      */
-    public LagerPlads[] getPladser() {
-        return pladser;
+    public int getAntalPladser() {
+        return pladser.length;
     }
 
     /**
@@ -50,14 +55,10 @@ public class LagerHylde {
         return true;
     }
 
-    public Fad setFad(Fad fad, int plads) {
-        if (plads >= pladser.length || plads < 0) {
-            throw new IllegalArgumentException("Denne plads findes ikke.");
-        }
-        return pladser[plads].setFad(fad);
-    }
-
-    public int getAntalPladser() {
-        return pladser.length;
+    /**
+     * @return {@code LagerPlads[]} med de pladser, Hylden har.
+     */
+    public LagerPlads[] getPladser() {
+        return pladser;
     }
 }

@@ -6,58 +6,41 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LagerHyldeTest {
 
-    // TODO - Gennemgå alle Lagerklasser for at se, om alle RELEVANTE(!) metoder er dækket
-
-    @Test
-    void setFad() {
-        // Arrange
-        LagerHylde lagerHylde = new LagerHylde(2);
-        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        // Act
-        lagerHylde.setFad(fad, 1);
-        // Assert
-        assertEquals(fad, lagerHylde.getPladser()[1].getFad());
-    }
-
-    @Test
-    void findFad() {
-        // Arrange
-        LagerHylde lagerHylde = new LagerHylde(2);
-        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        lagerHylde.setFad(fad, 1);
-        // Act
-        int actual = lagerHylde.findFad(fad);
-        // Assert
-        assertEquals(1, actual);
-    }
+    // ======================================================================
+    // getAntalPladser
+    // ======================================================================
 
     @Test
     void getAntalPladser() {
         // Arrange
-        LagerHylde lagerHylde = new LagerHylde(2);
+        Lager testLager = new Lager("Test", "Test", 30, 4,2);
         // Act
-        int actual = lagerHylde.getAntalPladser();
+        int actual = testLager.getReoler()[0].getHylder()[0].getAntalPladser();
         // Assert
         assertEquals(2, actual);
     }
 
+    // ======================================================================
+    // isEmpty
+    // ======================================================================
+
     @Test
     void isNotEmpty() {
         // Arrange
-        LagerHylde lagerHylde = new LagerHylde(2);
+        Lager testLager = new Lager("Test", "Test", 30, 4,2);
         Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        lagerHylde.setFad(fad, 1);
         // Act
+        testLager.setFad(fad, 0, 0, 1);
         // Assert
-        assertFalse(lagerHylde.isEmpty());
+        assertFalse(testLager.getReoler()[0].getHylder()[0].isEmpty());
     }
 
     @Test
     void isEmpty() {
         // Arrange
-        LagerHylde lagerHylde = new LagerHylde(2);
+        Lager testLager = new Lager("Test", "Test", 30, 4,2);
         // Act
         // Assert
-        assertTrue(lagerHylde.isEmpty());
+        assertTrue(testLager.getReoler()[0].getHylder()[0].isEmpty());
     }
 }

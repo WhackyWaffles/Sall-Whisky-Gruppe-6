@@ -6,37 +6,16 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LagerReolTest {
 
-    // TODO - Gennemgå alle Lagerklasser for at se, om alle RELEVANTE(!) metoder er dækket
-
-    @Test
-    void setFad() {
-        // Arrange
-        LagerReol lagerReol = new LagerReol(4, 2);
-        Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        // Act
-        lagerReol.setFad(fad, 2, 1);
-        // Assert
-        assertEquals(fad, lagerReol.getHylder()[2].getPladser()[1].getFad());
-    }
-
-    @Test
-    void findFad() {
-        // Arrange
-        LagerReol lagerReol = new LagerReol(4,2);
-        Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        lagerReol.setFad(fad, 2, 1);
-        // Act
-        int[] expected = new int[]{2,1};
-        // Assert
-        assertArrayEquals(expected, lagerReol.findFad(fad));
-    }
+    // ======================================================================
+    // AntalHylder
+    // ======================================================================
 
     @Test
     void getAntalHylder() {
         // Arrange
-        LagerReol lagerReol = new LagerReol(4,2);
+        Lager testLager = new Lager("Test", "Test", 30, 4,2);
         // Act
-        int actual = lagerReol.getAntalHylder();
+        int actual = testLager.getReoler()[0].getAntalHylder();
         // Assert
         assertEquals(4, actual);
     }
@@ -44,31 +23,46 @@ class LagerReolTest {
     @Test
     void setAntalHylder() {
         // Arrange
-        LagerReol lagerReol = new LagerReol(4,2);
+        Lager testLager = new Lager("Test", "Test", 30, 4,2);
         // Act
-        lagerReol.setAntalHylder(3);
-        int actual = lagerReol.getAntalHylder();
+        testLager.getReoler()[0].setAntalHylder(3);
+        int actual = testLager.getReoler()[0].getAntalHylder();
         // Assert
         assertEquals(3, actual);
     }
 
     @Test
+    void setAntalHylderTilUnderNul() {
+        // Arrange
+        Lager testLager = new Lager("Test", "Test", 30, 4,2);
+        // Act
+        testLager.getReoler()[0].setAntalHylder(-1);
+        // Assert
+        assertThrows(IllegalArgumentException.class, () -> testLager.getReoler()[0].setAntalHylder(-1),
+                "DET MÅ DU SLET IKKE DET DER");
+    }
+
+    // ======================================================================
+    // isEmpty
+    // ======================================================================
+
+    @Test
     void isNotEmpty() {
         // Arrange
-        LagerReol lagerReol = new LagerReol(4, 2);
-        Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        lagerReol.setFad(fad, 2, 1);
+        Lager testLager = new Lager("Test", "Test", 30, 4,2);
+        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         // Act
+        testLager.setFad(fad, 0, 2, 1);
         // Assert
-        assertFalse(lagerReol.isEmpty());
+        assertFalse(testLager.getReoler()[0].isEmpty());
     }
 
     @Test
     void isEmpty() {
         // Arrange
-        LagerReol lagerReol = new LagerReol(4, 2);
+        Lager testLager = new Lager("Test", "Test", 30, 4,2);
         // Act
         // Assert
-        assertTrue(lagerReol.isEmpty());
+        assertTrue(testLager.getReoler()[0].isEmpty());
     }
 }
