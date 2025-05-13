@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import models.Destillat;
 import models.Ristning;
 import storage.Storage;
@@ -20,6 +21,7 @@ public class OpretDestilleringPane extends GridPane {
     private TextField txtAntalLiter = new TextField();
     private ComboBox<Ristning> comboMalt = new ComboBox<>();
     private DatePicker datePicker = new DatePicker();
+    private ListView<Destillat> lvDestillater = new ListView<>();
 
     public OpretDestilleringPane() {
 
@@ -58,14 +60,26 @@ public class OpretDestilleringPane extends GridPane {
         comboMalt.setPromptText("Vælg Malt Type");
         this.add(comboMalt, 1, 5);
 
+        Label lbldestillater = new Label("Destillater");
+        this.add(lbldestillater,0,6);
+        this.add(this.lvDestillater, 0,7,2,1);
+        // Fyld ListView med destillater fra Controller
+        lvDestillater.getItems().addAll(Controller.getController().getAllDestillater());
+        lvDestillater.setPrefHeight(200); // Sætter en passende højde
+
         //Button til Opret og Annullér
         Button btnOpretDestl = new Button("Opret");
-        this.add(btnOpretDestl,0,15);
         btnOpretDestl.setOnAction(event -> this.opretAction());
 
         Button btnAnnuller = new Button("Annullér");
-        this.add(btnAnnuller,1,15);
         btnAnnuller.setOnAction(event -> this.annullerAction());
+
+        Button btnOpdater = new Button("Opdatér");
+        btnOpdater.setOnAction(event -> this.updaterLister());
+
+        HBox buttonBox = new HBox(30);
+        this.add(buttonBox,0,8,2,1);
+        buttonBox.getChildren().addAll(btnOpretDestl, btnAnnuller, btnOpdater);
     }
 
     private void opretAction() {
@@ -112,5 +126,10 @@ public class OpretDestilleringPane extends GridPane {
     private void annullerAction() {
         clearFields();
         System.out.println("Handling annulleret. Felter nulstillet.");
+    }
+
+    private void updaterLister(){
+        lvDestillater.getItems().setAll(Controller.getController().getAllDestillater());
+        System.out.println(("Destillaterne er opdateret"));
     }
 }

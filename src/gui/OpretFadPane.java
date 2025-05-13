@@ -1,13 +1,15 @@
 package gui;
 
+import controller.Controller;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import models.Charring;
+import models.Fad;
 import models.FillNummer;
+
+import java.util.ArrayList;
 
 
 public class OpretFadPane extends GridPane {
@@ -18,7 +20,7 @@ public class OpretFadPane extends GridPane {
     private TextField txtKapacitet = new TextField();
     private ComboBox<FillNummer> comboFillNr = new ComboBox<>();
     private ComboBox<Charring> comboCharring = new ComboBox<>();
-
+    private ListView<Fad> lvFade = new ListView<>();
 
     public OpretFadPane() {
         this.setPadding(new Insets(20));
@@ -26,9 +28,7 @@ public class OpretFadPane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
 
-
         //Label og textfield
-
         Label lblFadNr = new Label("Fad nummer");
         this.add(lblFadNr, 0, 1);
         this.add(this.txtFadNr, 1, 1);
@@ -52,7 +52,7 @@ public class OpretFadPane extends GridPane {
         comboFillNr.setPromptText("Vælg Fill nummer");
         this.add(comboFillNr, 1, 5);
 
-        // ComboBox for Cherring
+        // ComboBox for Charring
         Label lblCherring = new Label("Charring");
         this.add(lblCherring, 0, 6);
         comboCharring.getItems().addAll(Charring.LIGHT_TOAST, Charring.MEDIUM_CHAR, Charring.HEAVY_TOAST,
@@ -60,19 +60,31 @@ public class OpretFadPane extends GridPane {
         comboCharring.setPromptText("Vælg Charring");
         this.add(comboCharring, 1, 6);
 
+        // ListView til fade
+        Label lblFade = new Label("Oprettede fade");
+        this.add(lblFade,0,7);
+        this.add(lvFade,0,8,2,1);
+
+        // Fyld ListView med fade fra Controller
+        lvFade.getItems().addAll(Controller.getController().getAlleFade());
+        lvFade.setPrefHeight(200); // Sætter en passende højde
+
         //Button til Opret og Annuler
         Button btnOpretFad = new Button("Opret");
-        this.add(btnOpretFad, 0, 18);
         btnOpretFad.setOnAction(event -> this.opretAction());
 
         Button btnAnnuller = new Button("Annullér");
-        this.add(btnAnnuller, 2, 18);
         btnAnnuller.setOnAction(event -> this.aflystAction());
 
+        Button btnOpdater = new Button("Opdatér");
+        btnOpdater.setOnAction(event -> this.updaterLister());
+
+        HBox buttonBox = new HBox(30);
+        this.add(buttonBox,0,9,2,1);
+        buttonBox.getChildren().addAll(btnOpretFad, btnAnnuller, btnOpdater);
     }
 
     private void opretAction() {
-
         String fadNr = txtFadNr.getText();
         String fadType = txtFadType.getText();
         String fadMateriale = txtFadMateriale.getText();
@@ -85,11 +97,14 @@ public class OpretFadPane extends GridPane {
             System.out.println("Udfyld venligst alle felter.");
             return;
         }
+
         try {
             double kapacitetVal = Double.parseDouble(kapacitet);
 
+            // Gemmer fadobjekt i storage
+            Controller.getController().opretFad(fadNr,fadType,fadMateriale,kapacitetVal,selectedCharring,selectedFillNr, new ArrayList<>());
 
-            //Gemmer alle dataoen
+            //Udskriver alle dataoen
             System.out.println("Opretter fad:");
             System.out.println("Fad nummer: " + fadNr);
             System.out.println("Fad type: " + fadType);
@@ -100,15 +115,18 @@ public class OpretFadPane extends GridPane {
 
             clearFields();
         } catch (NumberFormatException e) {
-
+            System.out.println("Fejl: Kapacitet skal være et tal.");
         }
     }
 
     private void aflystAction() {
-
         clearFields();
         System.out.println("Handling annulleret. Felter nulstillet.");
+    }
 
+    private void updaterLister() {
+        lvFade.getItems().setAll(Controller.getController().getAlleFade());
+        System.out.println(("Fadene er opdateret"));
     }
 
     private void clearFields() {

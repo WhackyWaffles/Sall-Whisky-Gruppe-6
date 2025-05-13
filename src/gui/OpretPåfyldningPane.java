@@ -54,7 +54,7 @@ public class OpretPåfyldningPane extends GridPane {
         lvFade.getItems().addAll(Controller.getController().getAlleFade());
         lvFade.setPrefHeight(200); // Sætter en passende højde
 
-        // Fyld ListView med fade fra Controller
+        // Fyld ListView med destillater fra Controller
         lvDestillater.getItems().addAll(Controller.getController().getAllDestillater());
         lvDestillater.setPrefHeight(200); // Sætter en passende højde
 
