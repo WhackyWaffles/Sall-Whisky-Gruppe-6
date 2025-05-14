@@ -50,4 +50,30 @@ public class Controller {
         fad.tilføjPåfyldning(påfyldning);
         storage.addPåfyldning(påfyldning);
     }
+
+    //Her er metode opretFad() i controller:
+//    public static Fad opretFad(String nr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer, ArrayList<Påfyldning> påfyldninger) {
+//        Fad fad = new Fad(nr, fadtype, fadMateriale, kapacitet, charring, fillNummer, påfyldninger);
+//        Storage.addFad(fad);
+//        return fad;
+//    }
+
+    //Create a Whisky
+    public  Whisky opretWhisky(String whiskyId, String navn, int flaskeNr, String slutAlkoholProcent, LocalDate aftapningsDato, Fad fad) {
+        Whisky whisky = new Whisky(whiskyId, navn, flaskeNr, slutAlkoholProcent, aftapningsDato, fad);
+        storage.addWhisky(whisky);
+        return whisky;
+    }
+    public List getAllWhisky() {
+        return storage.getWhiskyList();
+    }
+    public boolean removeWhiskyById(String id) {
+        return storage.removeWhiskyById(id);
+    }
+    public Whisky findWhiskyById(String id) {
+        return storage.findWhiskyById(id);
+    }
+
+
+
 }

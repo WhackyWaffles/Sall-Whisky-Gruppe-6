@@ -1,9 +1,6 @@
 package storage;
 
-import models.Destillat;
-import models.Korn;
-import models.Malt;
-import models.Påfyldning;
+import models.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +10,15 @@ public class Storage {
     private List<Malt> malts;
     private List<Destillat> destilleringer;
     private List<Påfyldning> påfyldninger;
+    private List<Whisky>whiskyList;
+    private List<Fad>fade;
 
     public Storage() {
         kornSorter = new ArrayList<>();
         malts = new ArrayList<>();
         destilleringer = new ArrayList<>();
         påfyldninger = new ArrayList<>();
+        whiskyList = new ArrayList<>();
     }
 
     /**
@@ -56,16 +56,16 @@ public class Storage {
     /**
      * Returnerer en liste med alle gemte destilleringer
      */
-    public List<Destillat> getAllDestilleringer() {
+    public List<Destillat> getAllDestillater() {
         return new ArrayList<>(destilleringer);
     }
 
     /**
      * Gemmer destillering
      */
-    public void addDestillering(Destillat destillering) {
-        if (!destilleringer.contains(destillering)) {
-            destilleringer.add(destillering);
+    public void addDestillat(Destillat destillat) {
+        if (!destilleringer.contains(destillat)) {
+            destilleringer.add(destillat);
         }
     }
 
@@ -83,5 +83,29 @@ public class Storage {
         if (!påfyldninger.contains(påfyldning)) {
             påfyldninger.add(påfyldning);
         }
+    }
+
+    /** Whisky */
+    public List<Whisky> getWhiskyList() {
+        return new ArrayList<>(whiskyList);
+    }
+    public void addWhisky(Whisky whisky) {
+        if(!whiskyList.contains(whisky)) {
+            whiskyList.add(whisky);
+        }
+    }
+
+    public  void addFad(Fad fad) {
+        if (!fade.contains(fad)) {
+            fade.add(fad);}}
+
+    public boolean removeWhiskyById(String id) {
+        return whiskyList.removeIf(w -> w.getWhiskyId().equals(id));
+    }
+    public Whisky findWhiskyById(String id) {
+        for (Whisky w : whiskyList) {
+            if (w.getWhiskyId().equals(id)) return w;
+        }
+        return null;
     }
 }
