@@ -30,17 +30,17 @@ public class App {
         //    ==================================================================================
         //    Opretter Destillater
         //    ==================================================================================
-        Destillat nm100 = Controller.opretDestillat("NM100",72.0, 35, LocalDate.of(2025, 1,1),Ristning.VIENNAMALT);
-        Destillat nm101 = Controller.opretDestillat("NM101",72.0, 35, LocalDate.of(2025, 1,1),Ristning.VIENNAMALT);
-        Destillat nm102 = Controller.opretDestillat("NM102",72.0, 35, LocalDate.of(2025, 1,1),Ristning.VIENNAMALT);
-        Destillat nm103 = Controller.opretDestillat("NM103",72.0, 35, LocalDate.of(2025, 1,1),Ristning.VIENNAMALT);
+        Destillat nm100 = Controller.opretDestillat("NM100", 72.0, 35, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT);
+        Destillat nm101 = Controller.opretDestillat("NM101", 72.0, 35, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT);
+        Destillat nm102 = Controller.opretDestillat("NM102", 72.0, 35, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT);
+        Destillat nm103 = Controller.opretDestillat("NM103", 72.0, 35, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT);
 
         //    ==================================================================================
         //    Opretter Påfyldninger
         //    ==================================================================================
-        Påfyldning påfyldning100 = new Påfyldning("100", nm100, fad68, 35, LocalDate.of(2025,1,2));
-        Påfyldning påfyldning101 = new Påfyldning("101", nm101, fad69, 35, LocalDate.of(2025,1,2));
-        Påfyldning påfyldning102 = new Påfyldning("102", nm102, fad70, 35, LocalDate.of(2025,1,2));
-        Påfyldning påfyldning103 = new Påfyldning("103", nm103, fad71, 35, LocalDate.of(2025,1,2));
+//        Påfyldning påfyldning100 = Controller.opretPåfyldning("100", nm100, fad68, 35, LocalDate.of(2025,1,2));
+//        Påfyldning påfyldning101 = Controller.opretPåfyldning("101", nm101, fad68, 25, LocalDate.of(2025,1,2));
+//        Påfyldning påfyldning102 = Controller.opretPåfyldning("102", nm102, fad70, 15, LocalDate.of(2025,1,2));
+//        Påfyldning påfyldning103 = Controller.opretPåfyldning("103", nm103, fad70, 15, LocalDate.of(2025,1,2));
     }
 }

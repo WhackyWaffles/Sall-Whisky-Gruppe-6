@@ -1,9 +1,11 @@
 package models;
 
+import storage.Storage;
+
 import java.util.ArrayList;
 
 public class Fad {
-    private String nr;
+    private String fadNr;
     private String fadtype;
     private String fadMateriale;
     private double kapacitet;
@@ -13,23 +15,24 @@ public class Fad {
 
     /**
      * Constructor af et fyldt Fad.
-     * @param nr {@code String} Fadets unikke ID.
-     * @param fadtype {@code String} Hvilken slags drik, der før har været i Fadet, eks. Ex-Oloroso
+     *
+     * @param nr           {@code String} Fadets unikke ID.
+     * @param fadtype      {@code String} Hvilken slags drik, der før har været i Fadet, eks. Ex-Oloroso
      * @param fadMateriale {@code String} Hvilken slags træ, Fadet er lavet af.
-     * @param kapacitet {@code double} Hvor mange Liter, der kan være i Fadet.
-     * @param charring {@code Charring} Hvilken behandling Fadet har.
-     * @param fillNummer {@code FillNummer} Hvor mange gange fadet har været brugt.
+     * @param kapacitet    {@code double} Hvor mange Liter, der kan være i Fadet.
+     * @param charring     {@code Charring} Hvilken behandling Fadet har.
+     * @param fillNummer   {@code FillNummer} Hvor mange gange fadet har været brugt.
      * @param påfyldninger {@code ArrayList<Påfyldning>} Hvilke påfyldninger, der er hældt i Fadet, dvs. Fadets indhold. Hvis {@code null} oprettes et tomt fad.
      */
     public Fad(String nr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer, ArrayList<Påfyldning> påfyldninger) {
-        this.nr = nr;
+        this.fadNr = nr;
         this.fadtype = fadtype;
         this.fadMateriale = fadMateriale;
         this.kapacitet = kapacitet;
         this.charring = charring;
         this.fillNummer = fillNummer;
         if (påfyldninger != null) {
-            this.påfyldninger  = new ArrayList<>(påfyldninger);
+            this.påfyldninger = new ArrayList<>(påfyldninger);
         } else
             this.påfyldninger = new ArrayList<>();
     }
@@ -37,6 +40,10 @@ public class Fad {
     public void tilføjPåfyldning(Påfyldning påfyldning) {
         if (getVolumenLedig() >= påfyldning.getPåfyldningLiter()) {
             påfyldninger.add(påfyldning);
+
+            // Opdater Storage med det nye fad
+            Storage.opdaterFad(this);
+
         } else {
             throw new IllegalArgumentException("Ikke nok plads i fadet!");
         }
@@ -47,8 +54,8 @@ public class Fad {
         return kapacitet - totalFyldt;
     }
 
-    public String getNr() {
-        return nr;
+    public String getFadNr() {
+        return fadNr;
     }
 
     public String getFadtype() {
@@ -75,13 +82,30 @@ public class Fad {
         return påfyldninger;
     }
 
+    //    @Override
+//    public String toString() {
+//        return "Fad " +
+//                fadNr + ',' +
+//                " " + fadtype + ',' +
+//                " " + kapacitet + ',' +
+//                " " + charring + ',' +
+//                " " + fillNummer + ',' +
+//                " " + påfyldninger;
+//    }
     @Override
     public String toString() {
-        return "Fad " +
-                 nr + ',' +
-                " " + fadtype + ',' +
-                " " + kapacitet + ',' +
-                " " + charring + ',' +
-                " " + fillNummer;
+        StringBuilder sb = new StringBuilder();
+        sb.append("Fad ").append(fadNr).append(", ").append(fadtype).append(", ")
+                .append(kapacitet).append("L, ").append(charring).append(", ").append(fillNummer);
+
+        if (!påfyldninger.isEmpty()) {
+            sb.append(", Påfyldninger: ");
+            for (Påfyldning p : påfyldninger) {
+                sb.append("[ID ").append(p.getIdNr()).append("] ");
+            }
+        } else {
+            sb.append(", (Tomt fad)");
+        }
+        return sb.toString();
     }
 }

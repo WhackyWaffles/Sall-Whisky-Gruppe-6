@@ -1,13 +1,16 @@
 package gui;
 
+import controller.Controller;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import models.Charring;
+import models.Fad;
 import models.FillNummer;
+import models.Påfyldning;
+
+import java.util.ArrayList;
 
 
 public class OpretFadPane extends GridPane {
@@ -18,6 +21,7 @@ public class OpretFadPane extends GridPane {
     private TextField txtKapacitet = new TextField();
     private ComboBox<FillNummer> comboFillNr = new ComboBox<>();
     private ComboBox<Charring> comboCharring = new ComboBox<>();
+    private ListView<Fad> lvFade = new ListView<>();
 
 
     public OpretFadPane() {
@@ -27,8 +31,7 @@ public class OpretFadPane extends GridPane {
         this.setGridLinesVisible(false);
 
 
-        //Label og textfield
-
+        //Labels og textfields
         Label lblFadNr = new Label("Fad nummer");
         this.add(lblFadNr, 0, 1);
         this.add(this.txtFadNr, 1, 1);
@@ -52,27 +55,38 @@ public class OpretFadPane extends GridPane {
         comboFillNr.setPromptText("Vælg Fill nummer");
         this.add(comboFillNr, 1, 5);
 
-        // ComboBox for Cherring
-        Label lblCherring = new Label("Charring");
-        this.add(lblCherring, 0, 6);
+        // ComboBox for Charring
+        Label lblCharring = new Label("Charring");
+        this.add(lblCharring, 0, 6);
         comboCharring.getItems().addAll(Charring.LIGHT_TOAST, Charring.MEDIUM_CHAR, Charring.HEAVY_TOAST,
                 Charring.NO_CHAR, Charring.LIGHT_CHAR, Charring.MEDIUM_CHAR, Charring.HEAVY_CHAR);
         comboCharring.setPromptText("Vælg Charring");
         this.add(comboCharring, 1, 6);
 
-        //Button til Opret og Annuler
+        // ListView til fade
+        Label lblFade = new Label("Oprettede fade");
+        this.add(lblFade,0,7);
+        this.add(lvFade,0,8,3,1);
+        // Fyld ListView med fade fra Controller
+        lvFade.getItems().addAll(Controller.getController().getAlleFade());
+        lvFade.setPrefSize(450,150); // Sætter en passende højde
+
+        //Button til Opret, Annullér og Opdatér
         Button btnOpretFad = new Button("Opret");
-        this.add(btnOpretFad, 0, 18);
         btnOpretFad.setOnAction(event -> this.opretAction());
 
         Button btnAnnuller = new Button("Annullér");
-        this.add(btnAnnuller, 2, 18);
-        btnAnnuller.setOnAction(event -> this.aflystAction());
+        btnAnnuller.setOnAction(event -> this.annullerAction());
 
+        Button btnOpdater = new Button("Opdatér");
+        btnOpdater.setOnAction(event -> this.opdaterLister());
+
+        HBox buttonBox = new HBox(30);
+        this.add(buttonBox,0,9,3,1);
+        buttonBox.getChildren().addAll(btnOpretFad, btnAnnuller, btnOpdater);
     }
 
     private void opretAction() {
-
         String fadNr = txtFadNr.getText();
         String fadType = txtFadType.getText();
         String fadMateriale = txtFadMateriale.getText();
@@ -86,15 +100,19 @@ public class OpretFadPane extends GridPane {
             return;
         }
         try {
-            double kapacitetVal = Double.parseDouble(kapacitet);
+            double kapacitetVol = Double.parseDouble(kapacitet);
 
+            // Send en tom ArrayList, hvis der ikke er påfyldninger
+            ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
 
-            //Gemmer alle dataoen
+            Controller.getController().opretFad(fadNr,fadType,fadMateriale,kapacitetVol,selectedCharring,selectedFillNr,påfyldninger);
+
+            // Udskriver data om opretning
             System.out.println("Opretter fad:");
             System.out.println("Fad nummer: " + fadNr);
             System.out.println("Fad type: " + fadType);
             System.out.println("Fad materiale: " + fadMateriale);
-            System.out.println("Kapacitet: " + kapacitet);
+            System.out.println("Kapacitet: " + kapacitetVol);
             System.out.println("Fill nummer: " + selectedFillNr);
             System.out.println("Charring: " + selectedCharring);
 
@@ -104,11 +122,9 @@ public class OpretFadPane extends GridPane {
         }
     }
 
-    private void aflystAction() {
-
+    private void annullerAction() {
         clearFields();
         System.out.println("Handling annulleret. Felter nulstillet.");
-
     }
 
     private void clearFields() {
@@ -118,5 +134,10 @@ public class OpretFadPane extends GridPane {
         txtKapacitet.clear();
         comboFillNr.getSelectionModel().clearSelection();
         comboCharring.getSelectionModel().clearSelection();
+    }
+
+    private void opdaterLister(){
+        lvFade.getItems().setAll(Controller.getController().getAlleFade());
+        System.out.println(("Fadene er opdateret"));
     }
 }

@@ -7,6 +7,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import models.Destillat;
 import models.Fad;
+import models.Påfyldning;
 
 import java.time.LocalDate;
 
@@ -17,6 +18,7 @@ public class OpretPåfyldningPane extends GridPane {
     private ListView<Fad> lvFade = new ListView<>();
     private TextField txtLiter = new TextField();
     private DatePicker datePicker = new DatePicker();
+    private ListView<Påfyldning> lvPåfyldning = new ListView<>();
 
     public OpretPåfyldningPane() {
 
@@ -52,14 +54,22 @@ public class OpretPåfyldningPane extends GridPane {
 
         // Fyld ListView med fade fra Controller
         lvFade.getItems().addAll(Controller.getController().getAlleFade());
-        lvFade.setPrefHeight(200); // Sætter en passende højde
+        lvFade.setPrefSize(300,150);
 
-        // Fyld ListView med fade fra Controller
+        // Fyld ListView med destillater fra Controller
         lvDestillater.getItems().addAll(Controller.getController().getAllDestillater());
-        lvDestillater.setPrefHeight(200); // Sætter en passende højde
+        lvDestillater.setPrefSize(300,150);
 
-        //Button til Opret og Annuller
+        // Label og listview til oprettede påfyldninger
+        Label lblPåfyldninger = new Label("Påfyldninger");
+        this.add(lblPåfyldninger,0,7);
+        this.add(lvPåfyldning,0,8,2,1);
 
+        // Fyld ListView med påfyldninger fra Controller
+        lvPåfyldning.getItems().addAll(Controller.getController().getAllePåfyldninger());
+        lvPåfyldning.setPrefSize(300,150);
+
+        //Button til Opret, Annullér og Opdatér
         Button btnOpretPåfyld = new Button("Opret");
         btnOpretPåfyld.setOnAction(event -> this.opretPåfyldAction());
 
@@ -70,7 +80,7 @@ public class OpretPåfyldningPane extends GridPane {
         btnOpdater.setOnAction(event -> this.updaterLister());
 
         HBox buttonBox = new HBox(30);
-        this.add(buttonBox,0,7,2,1);
+        this.add(buttonBox,0,9,3,1);
         buttonBox.getChildren().addAll(btnOpretPåfyld, btnAnnuller, btnOpdater);
     }
 
@@ -98,13 +108,14 @@ public class OpretPåfyldningPane extends GridPane {
             }
 
             // Gemmer al data i storage
+            Controller.getController().opretPåfyldning(idNr, destillat, fad, påfyldningLiterStr, valgtDato);
             Controller.getController().tilføjPåfyldning(idNr, destillat, fad, påfyldningLiterStr, valgtDato);
 
             // Udskriv data
             System.out.println("Opretter påfyldning:");
             System.out.println("IDnr: " + idNr);
             System.out.println("Destillat: " + destillat.getBatchNr());
-            System.out.println("Fad: " + fad.getNr());
+            System.out.println("Fad: " + fad.getFadNr());
             System.out.println("Antal liter: " + påfyldningLiter);
             System.out.println("Dato: " + valgtDato);
 
@@ -128,6 +139,7 @@ public class OpretPåfyldningPane extends GridPane {
     private void updaterLister(){
         lvFade.getItems().setAll(Controller.getController().getAlleFade());
         lvDestillater.getItems().setAll(Controller.getController().getAllDestillater());
+        lvPåfyldning.getItems().setAll(Controller.getController().getAllePåfyldninger());
         System.out.println(("Listerne er opdateret"));
     }
 }

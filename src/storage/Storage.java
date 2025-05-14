@@ -85,6 +85,18 @@ public class Storage {
     }
 
     /**
+     * Opdaterer storage med fade, der har modtaget en påfyldning
+     */
+    public static void opdaterFad(Fad opdateretFad) {
+        for (int i = 0; i < fade.size(); i++) {
+            if (fade.get(i).getFadNr().equals(opdateretFad.getFadNr())) {
+                fade.set(i, opdateretFad); // opdaterer fadet i listen
+                return;
+            }
+        }
+    }
+
+    /**
      * Returnerer en liste med alle gemte påfyldninger
      */
     public List<Påfyldning> getAllPåfyldninger() {
@@ -98,5 +110,11 @@ public class Storage {
         if (!påfyldninger.contains(påfyldning)) {
             påfyldninger.add(påfyldning);
         }
+    }
+    /**
+     * Returnerer en liste med alle gemte påfyldninger
+     */
+    public List<Påfyldning> getAllePåfyldninger() {
+        return new ArrayList<>(påfyldninger);
     }
 }

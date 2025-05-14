@@ -39,4 +39,14 @@ public class Påfyldning {
     public LocalDate getPåfyldningDato() {
         return påfyldningDato;
     }
+
+    @Override
+    public String toString() {
+        return "Påfyldning " +
+                idNr + ',' +
+                " " + påfyldningLiter + ',' +
+                " " + påfyldningDato +
+                " " + destillat + ',' +
+                " " + fad;
+    }
 }
