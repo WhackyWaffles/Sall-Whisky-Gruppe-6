@@ -56,7 +56,8 @@ public class OpretDestilleringPane extends GridPane {
         // ComboBox for Malt
         Label lblmalt = new Label("Malt Type");
         this.add(lblmalt, 0,5);
-        comboMalt.getItems().addAll(Ristning.PILSNER,Ristning.PALE,Ristning.VIENNAMALT);
+        comboMalt.getItems().addAll(Ristning.PILSNERMALT,Ristning.PALEMALT,Ristning.VIENNAMALT,
+                Ristning.PILSNERMALT_RØGET,Ristning.PALEMALT_RØGET, Ristning.VIENNAMALT_RØGET);
         comboMalt.setPromptText("Vælg Malt Type");
         this.add(comboMalt, 1, 5);
 
