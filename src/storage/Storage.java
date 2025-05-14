@@ -11,6 +11,7 @@ public class Storage {
     private List<Destillat> destillater;
     private static List<Fad> fade;
     private List<Påfyldning> påfyldninger;
+    private List<Whisky> whiskyList;
 
     public Storage() {
         kornSorter = new ArrayList<>();
@@ -18,6 +19,7 @@ public class Storage {
         destillater = new ArrayList<>();
         fade = new ArrayList<>();
         påfyldninger = new ArrayList<>();
+        whiskyList = new ArrayList<>();
     }
 
     /**
@@ -116,5 +118,28 @@ public class Storage {
      */
     public List<Påfyldning> getAllePåfyldninger() {
         return new ArrayList<>(påfyldninger);
+    }
+
+    /**
+     * Gemmer whisky
+     */
+    public void addWhisky(Whisky whisky) {
+        if (!whiskyList.contains(whisky)) {
+            whiskyList.add(whisky);
+        }
+    }
+
+    public List getWhiskyList() {
+        return new ArrayList(whiskyList);
+    }
+
+    public boolean removeWhiskyById(String id) {
+        return whiskyList.removeIf(w -> w.getWhiskyId().equals(id));
+    }
+    public Whisky findWhiskyById(String id) {
+        for (Whisky w : whiskyList) {
+            if (w.getWhiskyId().equals(id)) return w;
+        }
+        return null;
     }
 }

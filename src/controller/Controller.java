@@ -92,5 +92,24 @@ public class Controller {
     public List<Påfyldning> getAllePåfyldninger() {
         return storage.getAllePåfyldninger();
     }
+
+    //Create a Whisky
+    public Whisky opretWhisky(String whiskyId, String navn, int flaskeNr, String slutAlkoholProcent, LocalDate aftapningsDato, Fad fad) {
+        Whisky whisky = new Whisky(whiskyId, navn, flaskeNr, slutAlkoholProcent, aftapningsDato, fad);
+        storage.addWhisky(whisky);
+        return whisky;
+    }
+
+    public List getAllWhisky() {
+        return storage.getWhiskyList();
+    }
+
+    public boolean removeWhiskyById(String id) {
+        return storage.removeWhiskyById(id);
+    }
+
+    public Whisky findWhiskyById(String id) {
+        return storage.findWhiskyById(id);
+    }
 }
 
