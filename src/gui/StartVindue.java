@@ -18,8 +18,8 @@ public class StartVindue extends Application {
 
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
-        primaryStage.setHeight(500);
-        primaryStage.setWidth(400);
+        primaryStage.setHeight(700);
+        primaryStage.setWidth(500);
         primaryStage.show();
 
     }
@@ -34,20 +34,24 @@ public class StartVindue extends Application {
 
         Tab tabStart = new Tab("");
         Tab tabDestillering = new Tab("Opret Destillering");
-        Tab tabPåfyldning = new Tab("Opret Påfyldning");
         Tab tabFad = new Tab("Opret Fad");
+        Tab tabPåfyldning = new Tab("Opret Påfyldning");
+        Tab tabWhisky = new Tab("Opret Whisky");
 
 
         OpretDestilleringPane opretDestilleringPane = new OpretDestilleringPane();
         tabDestillering.setContent(opretDestilleringPane);
-        OpretPåfyldningPane opretPåfyldningPane = new OpretPåfyldningPane();
-        tabPåfyldning.setContent(opretPåfyldningPane);
         OpretFadPane opretFadPane = new OpretFadPane();
         tabFad.setContent(opretFadPane);
+        OpretPåfyldningPane opretPåfyldningPane = new OpretPåfyldningPane();
+        tabPåfyldning.setContent(opretPåfyldningPane);
+        OpretWhiskyPane opretWhiskyPane = new OpretWhiskyPane();
+        tabWhisky.setContent(opretWhiskyPane);
 
         tabPane.getTabs().add(tabDestillering);
-        tabPane.getTabs().add(tabPåfyldning);
         tabPane.getTabs().add(tabFad);
+        tabPane.getTabs().add(tabPåfyldning);
+        tabPane.getTabs().add(tabWhisky);
 
 
     }

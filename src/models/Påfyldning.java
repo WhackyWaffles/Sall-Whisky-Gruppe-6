@@ -7,17 +7,17 @@ public class Påfyldning {
     private Destillat destillat;
     private Fad fad;
     private double påfyldningLiter;
-    private LocalDate dato;
+    private LocalDate påfyldningDato;
 
-    public Påfyldning(Destillat destillat, Fad fad, double volumenLiter, LocalDate dato) {
-        if (fad.getVolumenLedig() < volumenLiter) {
+    public Påfyldning(String idNr, Destillat destillat, Fad fad, double påfyldningLiter, LocalDate påfyldningDato) {
+        if (fad.getVolumenLedig() < påfyldningLiter) {
             throw new IllegalArgumentException("Ikke nok plads i fadet!");
         }
         this.idNr = idNr;
         this.destillat = destillat;
         this.fad = fad;
-        this.påfyldningLiter = volumenLiter;
-        this.dato = dato;
+        this.påfyldningLiter = påfyldningLiter;
+        this.påfyldningDato = påfyldningDato;
     }
 
     public String getIdNr() {
@@ -36,7 +36,17 @@ public class Påfyldning {
         return påfyldningLiter;
     }
 
-    public LocalDate getDato() {
-        return dato;
+    public LocalDate getPåfyldningDato() {
+        return påfyldningDato;
+    }
+
+    @Override
+    public String toString() {
+        return "Påfyldning " +
+                idNr + ',' +
+                " " + påfyldningLiter + ',' +
+                " " + påfyldningDato +
+                " " + destillat + ',' +
+                " " + fad;
     }
 }
