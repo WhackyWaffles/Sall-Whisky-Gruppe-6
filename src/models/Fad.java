@@ -5,7 +5,7 @@ import storage.Storage;
 import java.util.ArrayList;
 
 public class Fad {
-    private String nr;
+    private String fadNr;
     private String fadtype;
     private String fadMateriale;
     private double kapacitet;
@@ -15,7 +15,7 @@ public class Fad {
 
     /**
      * Constructor af et fyldt Fad.
-     * @param nr {@code String} Fadets unikke ID.
+     * @param fadNr {@code String} Fadets unikke ID.
      * @param fadtype {@code String} Hvilken slags drik, der før har været i Fadet, eks. Ex-Oloroso
      * @param fadMateriale {@code String} Hvilken slags træ, Fadet er lavet af.
      * @param kapacitet {@code double} Hvor mange Liter, der kan være i Fadet.
@@ -23,8 +23,8 @@ public class Fad {
      * @param fillNummer {@code FillNummer} Hvor mange gange fadet har været brugt.
      * @param påfyldninger {@code ArrayList<Påfyldning>} Hvilke påfyldninger, der er hældt i Fadet, dvs. Fadets indhold. Hvis {@code null} oprettes et tomt fad.
      */
-    public Fad(String nr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer, ArrayList<Påfyldning> påfyldninger) {
-        this.nr = nr;
+    public Fad(String fadNr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer, ArrayList<Påfyldning> påfyldninger) {
+        this.fadNr = fadNr;
         this.fadtype = fadtype; // eks. EX-OLOROSO
         this.fadMateriale = fadMateriale; // eks. EGETRÆ
         this.kapacitet = kapacitet;
@@ -55,8 +55,8 @@ public class Fad {
         return kapacitet - totalFyldt;
     }
 
-    public String getNr() {
-        return nr;
+    public String getFadNr() {
+        return fadNr;
     }
 
     public String getFadtype() {
