@@ -50,6 +50,4 @@ public class Controller {
         fad.tilføjPåfyldning(påfyldning);
         storage.addPåfyldning(påfyldning);
     }
-
-    hahahahahahahah
 }
