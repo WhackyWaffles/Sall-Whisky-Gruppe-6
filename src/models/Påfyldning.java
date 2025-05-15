@@ -49,4 +49,8 @@ public class Påfyldning {
                 " " + destillat + ',' +
                 " " + fad;
     }
+
+    public void setLiter() {
+
+    }
 }

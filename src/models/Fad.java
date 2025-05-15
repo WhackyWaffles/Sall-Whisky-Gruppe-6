@@ -5,7 +5,7 @@ import storage.Storage;
 import java.util.ArrayList;
 
 public class Fad {
-    private String fadNr;
+    private String nr;
     private String fadtype;
     private String fadMateriale;
     private double kapacitet;
@@ -15,19 +15,18 @@ public class Fad {
 
     /**
      * Constructor af et fyldt Fad.
-     *
-     * @param nr           {@code String} Fadets unikke ID.
-     * @param fadtype      {@code String} Hvilken slags drik, der før har været i Fadet, eks. Ex-Oloroso
+     * @param nr {@code String} Fadets unikke ID.
+     * @param fadtype {@code String} Hvilken slags drik, der før har været i Fadet, eks. Ex-Oloroso
      * @param fadMateriale {@code String} Hvilken slags træ, Fadet er lavet af.
-     * @param kapacitet    {@code double} Hvor mange Liter, der kan være i Fadet.
-     * @param charring     {@code Charring} Hvilken behandling Fadet har.
-     * @param fillNummer   {@code FillNummer} Hvor mange gange fadet har været brugt.
+     * @param kapacitet {@code double} Hvor mange Liter, der kan være i Fadet.
+     * @param charring {@code Charring} Hvilken behandling Fadet har.
+     * @param fillNummer {@code FillNummer} Hvor mange gange fadet har været brugt.
      * @param påfyldninger {@code ArrayList<Påfyldning>} Hvilke påfyldninger, der er hældt i Fadet, dvs. Fadets indhold. Hvis {@code null} oprettes et tomt fad.
      */
     public Fad(String nr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer, ArrayList<Påfyldning> påfyldninger) {
-        this.fadNr = nr;
-        this.fadtype = fadtype;
-        this.fadMateriale = fadMateriale;
+        this.nr = nr;
+        this.fadtype = fadtype; // eks. EX-OLOROSO
+        this.fadMateriale = fadMateriale; // eks. EGETRÆ
         this.kapacitet = kapacitet;
         this.charring = charring;
         this.fillNummer = fillNummer;
@@ -41,6 +40,8 @@ public class Fad {
         if (getVolumenLedig() >= påfyldning.getPåfyldningLiter()) {
             påfyldninger.add(påfyldning);
 
+
+//            TODO: rYK TIL CONTROLLER
             // Opdater Storage med det nye fad
             Storage.opdaterFad(this);
 
@@ -54,8 +55,8 @@ public class Fad {
         return kapacitet - totalFyldt;
     }
 
-    public String getFadNr() {
-        return fadNr;
+    public String getNr() {
+        return nr;
     }
 
     public String getFadtype() {
