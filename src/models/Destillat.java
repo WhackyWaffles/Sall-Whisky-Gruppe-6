@@ -5,6 +5,7 @@ import javafx.scene.control.DatePicker;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+// TODO: Alkohol skal være en string
 public class Destillat {
     private String batchNr;
     private double alkoholProcent;
@@ -35,4 +36,13 @@ public class Destillat {
     public LocalDate getDestilleringDato() {return destilleringDato;}
 
     public Ristning getRistning() {return ristning;}
+
+    @Override
+    public String toString() {
+        return "Destillat " +
+                batchNr + ',' +
+                alkoholProcent + ',' +
+                destilleringDato + ',' +
+                ristning;
+    }
 }

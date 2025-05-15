@@ -1,5 +1,7 @@
 package models;
 
+import storage.Storage;
+
 import java.util.ArrayList;
 
 public class Fad {
@@ -29,7 +31,7 @@ public class Fad {
         this.charring = charring;
         this.fillNummer = fillNummer;
         if (påfyldninger != null) {
-            this.påfyldninger  = new ArrayList<>(påfyldninger);
+            this.påfyldninger = new ArrayList<>(påfyldninger);
         } else
             this.påfyldninger = new ArrayList<>();
     }
@@ -37,6 +39,12 @@ public class Fad {
     public void tilføjPåfyldning(Påfyldning påfyldning) {
         if (getVolumenLedig() >= påfyldning.getPåfyldningLiter()) {
             påfyldninger.add(påfyldning);
+
+
+//            TODO: rYK TIL CONTROLLER
+            // Opdater Storage med det nye fad
+            Storage.opdaterFad(this);
+
         } else {
             throw new IllegalArgumentException("Ikke nok plads i fadet!");
         }
@@ -73,5 +81,32 @@ public class Fad {
 
     public ArrayList<Påfyldning> getPåfyldninger() {
         return påfyldninger;
+    }
+
+    //    @Override
+//    public String toString() {
+//        return "Fad " +
+//                fadNr + ',' +
+//                " " + fadtype + ',' +
+//                " " + kapacitet + ',' +
+//                " " + charring + ',' +
+//                " " + fillNummer + ',' +
+//                " " + påfyldninger;
+//    }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Fad ").append(fadNr).append(", ").append(fadtype).append(", ")
+                .append(kapacitet).append("L, ").append(charring).append(", ").append(fillNummer);
+
+        if (!påfyldninger.isEmpty()) {
+            sb.append(", Påfyldninger: ");
+            for (Påfyldning p : påfyldninger) {
+                sb.append("[ID ").append(p.getIdNr()).append("] ");
+            }
+        } else {
+            sb.append(", (Tomt fad)");
+        }
+        return sb.toString();
     }
 }
