@@ -119,6 +119,7 @@ public class OpretPåfyldningPane extends GridPane {
             System.out.println("Antal liter: " + påfyldningLiter);
             System.out.println("Dato: " + valgtDato);
 
+            updaterLister();
             clearFields();
         } catch (NumberFormatException e) {
             System.out.println("Fejl: 'Liter' skal være et korrekt decimaltal.");
