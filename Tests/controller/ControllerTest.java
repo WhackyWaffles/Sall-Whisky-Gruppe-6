@@ -47,7 +47,7 @@ class ControllerTest {
         korn2024C.add(korn4);
 
         Malt malt1 = new Malt(korn2024B, Ristning.VIENNAMALT, true, "carlsbergensis");
-        Malt malt2 = new Malt(korn2024C, Ristning.PILSNER, false, "BRY-97 American West Coast Ale Gær");
+        Malt malt2 = new Malt(korn2024C, Ristning.PILSNERMALT, false, "BRY-97 American West Coast Ale Gær");
 
         List<Malt> result2 = Controller.getController().getAllMalts();
 
