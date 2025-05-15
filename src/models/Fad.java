@@ -23,8 +23,8 @@ public class Fad {
      */
     public Fad(String nr, String fadtype, String fadMateriale, double kapacitet, Charring charring, FillNummer fillNummer, ArrayList<Påfyldning> påfyldninger) {
         this.nr = nr;
-        this.fadtype = fadtype;
-        this.fadMateriale = fadMateriale;
+        this.fadtype = fadtype; // eks. EX-OLOROSO
+        this.fadMateriale = fadMateriale; // eks. EGETRÆ
         this.kapacitet = kapacitet;
         this.charring = charring;
         this.fillNummer = fillNummer;

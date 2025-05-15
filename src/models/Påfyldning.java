@@ -39,4 +39,8 @@ public class Påfyldning {
     public LocalDate getDato() {
         return dato;
     }
+
+    public void setLiter() {
+
+    }
 }
