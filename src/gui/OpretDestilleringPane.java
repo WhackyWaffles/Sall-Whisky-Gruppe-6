@@ -70,9 +70,11 @@ public class OpretDestilleringPane extends GridPane {
 
         //Button til Opret, Annullér og Opdater
         Button btnOpretDestl = new Button("Opret");
+        this.add(btnOpretDestl,0,15);
         btnOpretDestl.setOnAction(event -> this.opretAction());
 
         Button btnAnnuller = new Button("Annullér");
+        this.add(btnAnnuller,1,15);
         btnAnnuller.setOnAction(event -> this.annullerAction());
 
         Button btnOpdater = new Button("Opdatér");

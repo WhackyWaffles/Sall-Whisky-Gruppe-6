@@ -30,7 +30,6 @@ public class OpretFadPane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
 
-
         //Labels og textfields
         Label lblFadNr = new Label("Fad nummer");
         this.add(lblFadNr, 0, 1);
@@ -87,6 +86,7 @@ public class OpretFadPane extends GridPane {
     }
 
     private void opretAction() {
+
         String fadNr = txtFadNr.getText();
         String fadType = txtFadType.getText();
         String fadMateriale = txtFadMateriale.getText();
@@ -99,6 +99,7 @@ public class OpretFadPane extends GridPane {
             System.out.println("Udfyld venligst alle felter.");
             return;
         }
+
         try {
             double kapacitetVol = Double.parseDouble(kapacitet);
 
@@ -118,13 +119,18 @@ public class OpretFadPane extends GridPane {
 
             clearFields();
         } catch (NumberFormatException e) {
-
+            System.out.println("Fejl: Kapacitet skal være et tal.");
         }
     }
 
     private void annullerAction() {
         clearFields();
         System.out.println("Handling annulleret. Felter nulstillet.");
+    }
+
+    private void updaterLister() {
+        lvFade.getItems().setAll(Controller.getController().getAlleFade());
+        System.out.println(("Fadene er opdateret"));
     }
 
     private void clearFields() {
