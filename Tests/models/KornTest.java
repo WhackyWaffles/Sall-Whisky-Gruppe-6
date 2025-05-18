@@ -1,5 +1,6 @@
 package models;
 
+import controller.Controller;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,7 +10,7 @@ class KornTest {
     @Test
     void getMark() {
         // Arrange
-        Korn korn = new Korn("Stadsgaard", "Brabrand", "Belgravia");
+        Korn korn = Controller.opretKorn("Stadsgaard", "Brabrand", "Belgravia");
         // Act
         // Assert
         assertEquals("Stadsgaard", korn.getMark());
@@ -18,7 +19,7 @@ class KornTest {
     @Test
     void getLokation() {
         // Arrange
-        Korn korn = new Korn("Mosegaard", "Brabrand", "Shuffle");
+        Korn korn = Controller.opretKorn("Mosegaard", "Brabrand", "Shuffle");
         // Act
         // Assert
         assertEquals("Brabrand", korn.getLokation());
@@ -27,7 +28,7 @@ class KornTest {
     @Test
     void getKornSort() {
         // Arrange
-        Korn korn = new Korn("Stadsgaard", "Brabrand", "Moonshine");
+        Korn korn = Controller.opretKorn("Stadsgaard", "Brabrand", "Moonshine");
         // Act
         // Assert
         assertEquals("Moonshine", korn.getKornSort());

@@ -53,11 +53,11 @@ public class OpretPåfyldningPane extends GridPane {
         this.add(datePicker, 1, 5);
 
         // Fyld ListView med fade fra Controller
-        lvFade.getItems().addAll(Controller.getController().getAlleFade());
+        lvFade.getItems().addAll(Controller.getAlleFade());
         lvFade.setPrefSize(300,150);
 
         // Fyld ListView med destillater fra Controller
-        lvDestillater.getItems().addAll(Controller.getController().getAllDestillater());
+        lvDestillater.getItems().addAll(Controller.getAllDestillater());
         lvDestillater.setPrefSize(300,150);
 
         // Label og listview til oprettede påfyldninger
@@ -66,7 +66,7 @@ public class OpretPåfyldningPane extends GridPane {
         this.add(lvPåfyldning,0,8,2,1);
 
         // Fyld ListView med påfyldninger fra Controller
-        lvPåfyldning.getItems().addAll(Controller.getController().getAllePåfyldninger());
+        lvPåfyldning.getItems().addAll(Controller.getAllePåfyldninger());
         lvPåfyldning.setPrefSize(300,150);
 
         //Button til Opret, Annullér og Opdatér
@@ -108,8 +108,7 @@ public class OpretPåfyldningPane extends GridPane {
             }
 
             // Gemmer al data i storage
-            Controller.getController().opretPåfyldning(idNr, destillat, fad, påfyldningLiterStr, valgtDato);
-            Controller.getController().tilføjPåfyldning(idNr, destillat, fad, påfyldningLiterStr, valgtDato);
+            Controller.opretPåfyldning(idNr, destillat, fad, påfyldningLiterStr, valgtDato);
 
             // Udskriv data
             System.out.println("Opretter påfyldning:");
@@ -138,9 +137,9 @@ public class OpretPåfyldningPane extends GridPane {
     }
 
     private void updaterLister(){
-        lvFade.getItems().setAll(Controller.getController().getAlleFade());
-        lvDestillater.getItems().setAll(Controller.getController().getAllDestillater());
-        lvPåfyldning.getItems().setAll(Controller.getController().getAllePåfyldninger());
+        lvFade.getItems().setAll(Controller.getAlleFade());
+        lvDestillater.getItems().setAll(Controller.getAllDestillater());
+        lvPåfyldning.getItems().setAll(Controller.getAllePåfyldninger());
         System.out.println(("Listerne er opdateret"));
     }
 }

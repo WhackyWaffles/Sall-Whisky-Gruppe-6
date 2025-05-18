@@ -67,7 +67,7 @@ public class OpretFadPane extends GridPane {
         this.add(lblFade,0,7);
         this.add(lvFade,0,8,3,1);
         // Fyld ListView med fade fra Controller
-        lvFade.getItems().addAll(Controller.getController().getAlleFade());
+        lvFade.getItems().addAll(Controller.getAlleFade());
         lvFade.setPrefSize(450,150); // Sætter en passende højde
 
         //Button til Opret, Annullér og Opdatér
@@ -106,7 +106,7 @@ public class OpretFadPane extends GridPane {
             // Send en tom ArrayList, hvis der ikke er påfyldninger
             ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
 
-            Controller.getController().opretFad(fadNr,fadType,fadMateriale,kapacitetVol,selectedCharring,selectedFillNr,påfyldninger);
+            Controller.opretFad(fadNr,fadType,fadMateriale,kapacitetVol,selectedCharring,selectedFillNr,påfyldninger);
 
             // Udskriver data om opretning
             System.out.println("Opretter fad:");
@@ -129,7 +129,7 @@ public class OpretFadPane extends GridPane {
     }
 
     private void updaterLister() {
-        lvFade.getItems().setAll(Controller.getController().getAlleFade());
+        lvFade.getItems().setAll(Controller.getAlleFade());
         System.out.println(("Fadene er opdateret"));
     }
 
@@ -143,7 +143,7 @@ public class OpretFadPane extends GridPane {
     }
 
     private void opdaterLister(){
-        lvFade.getItems().setAll(Controller.getController().getAlleFade());
+        lvFade.getItems().setAll(Controller.getAlleFade());
         System.out.println(("Fadene er opdateret"));
     }
 }

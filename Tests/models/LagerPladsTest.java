@@ -1,5 +1,6 @@
 package models;
 
+import controller.Controller;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,13 +14,13 @@ class LagerPladsTest {
     @Test
     void getFad() {
         // Arrange
-        LagerPlads lagerPlads = new LagerPlads();
-        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        lagerPlads.setFad(fad);
+        Lager testLager = Controller.opretLager("Test", "Test", 30, 4,2);
+        Fad fad = Controller.opretFad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        testLager.setFad(fad, 4, 2, 1);
         // Act
         // Assert
-        assertEquals(fad, lagerPlads.getFad());
-        assertNotNull(lagerPlads.getFad());
+        assertEquals(fad, testLager.getFad(4,2,1));
+        assertNotNull(testLager.getFad(4,2,1));
     }
 
     // ======================================================================
@@ -29,25 +30,24 @@ class LagerPladsTest {
     @Test
     void setFad() {
         // Arrange
-        LagerPlads lagerPlads = new LagerPlads();
-        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        lagerPlads.setFad(fad);
+        Lager testLager = Controller.opretLager("Test", "Test", 30, 4,2);
+        Fad fad = Controller.opretFad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        testLager.setFad(fad, 4, 2, 1);
         // Act
         // Assert
-        assertEquals(fad, lagerPlads.getFad());
+        assertEquals(fad, testLager.getFad(4,2,1));
     }
 
     @Test
     void setFad_Optaget() {
         // Arrange
-        LagerPlads lagerPlads = new LagerPlads();
-        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        Fad fad2 = new Fad("test2", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        lagerPlads.setFad(fad);
+        Lager testLager = Controller.opretLager("Test", "Test", 30, 4,2);
+        Fad fad = Controller.opretFad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        Fad fad2 = Controller.opretFad("test2", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        testLager.setFad(fad, 4, 2, 1);
         // Act
-            // lagerPlads.setFad(fad2);
         // Assert
-        assertThrows(IllegalArgumentException.class, () -> lagerPlads.setFad(fad2),
+        assertThrows(IllegalArgumentException.class, () -> testLager.setFad(fad2, 4, 2, 1),
                 "Denne plads er optaget.");
     }
 
@@ -58,24 +58,24 @@ class LagerPladsTest {
     @Test
     void removeFad() {
         // Arrange
-        LagerPlads lagerPlads = new LagerPlads();
-        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        lagerPlads.setFad(fad);
+        Lager testLager = Controller.opretLager("Test", "Test", 30, 4,2);
+        Fad fad = Controller.opretFad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        testLager.setFad(fad, 4, 2, 1);
         // Act
-        Fad expected = lagerPlads.removeFad();
+        Fad expected = testLager.removeFad(4,2,1);
         // Assert
-        assertNotEquals(expected, lagerPlads.getFad());
-        assertNull(lagerPlads.getFad());
+        assertNotEquals(expected, testLager.getFad(4,2,1));
+        assertNull(testLager.getFad(4,2,1));
     }
 
     @Test
     void removeIngenting() {
         // Arrange
-        LagerPlads lagerPlads = new LagerPlads();
+        Lager testLager = Controller.opretLager("Test", "Test", 30, 4,2);
         // Act
-        Fad expected = lagerPlads.removeFad();
+        Fad expected = testLager.removeFad(4,2,1);
         // Assert
-        assertEquals(expected, lagerPlads.getFad());
+        assertEquals(expected, testLager.getFad(4,2,1));
         assertNull(expected);
     }
 
@@ -86,22 +86,22 @@ class LagerPladsTest {
     @Test
     void isNotEmpty() {
         // Arrange
-        LagerPlads lagerPlads = new LagerPlads();
-        Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        lagerPlads.setFad(fad);
+        Lager testLager = Controller.opretLager("Test", "Test", 30, 4,2);
+        Fad fad = Controller.opretFad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        testLager.setFad(fad, 4, 2, 1);
         // Act
         // Assert
-        assertFalse(lagerPlads.isEmpty());
-        assertNotNull(lagerPlads.getFad());
+        assertFalse(testLager.getReoler()[4].getHylder()[2].getPladser()[1].isEmpty());
+        assertNotNull(testLager.getReoler()[4].getHylder()[2].getPladser()[1].getFad());
     }
 
     @Test
     void isEmpty() {
         // Arrange
-        LagerPlads lagerPlads = new LagerPlads();
+        Lager testLager = Controller.opretLager("Test", "Test", 30, 4,2);
         // Act
         // Assert
-        assertTrue(lagerPlads.isEmpty());
-        assertNull(lagerPlads.getFad());
+        assertTrue(testLager.getReoler()[4].getHylder()[2].getPladser()[1].isEmpty());
+        assertNull(testLager.getReoler()[4].getHylder()[2].getPladser()[1].getFad());
     }
 }

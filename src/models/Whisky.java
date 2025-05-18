@@ -78,4 +78,5 @@ public class Whisky {
                         '\'' + aftapningsDato +
                         "fad "+ '\'' + fad ;
     }
+
 }

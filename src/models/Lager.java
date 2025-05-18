@@ -1,9 +1,11 @@
 package models;
 
+import java.util.ArrayList;
+
 public class Lager {
     private String navn;
     private String lokation;
-    private LagerReol[] reoler;
+    private final LagerReol[] reoler;
 
     // Constructor
     /**
@@ -191,6 +193,24 @@ public class Lager {
             }
         }
         return ledigePladser; // Returner ledigePladser
+    }
+
+    /**
+     * @return En {@code ArrayList<String>}, der indeholder alt, hvad der er lagret i dette Lager.
+     */
+    public ArrayList<String> indholdsOversigt() {
+        ArrayList<String> indholdsOversigt = new ArrayList<>();
+        for (int i = 0; i < reoler.length; i++) { // For alle Reoler
+            for (int j = 0; j < reoler[i].getHylder().length; j++) { // For alle Hylder
+                for (int k = 0; k < reoler[i].getHylder()[i].getPladser().length; k++) { // For alle Pladser
+                    if (!reoler[i].getHylder()[i].getPladser()[k].isEmpty()) { // Hvis der er et Fad på den.
+                        indholdsOversigt.add(reoler[i].getHylder()[i].getPladser()[k].getFad().toString()
+                                + " [" + i + ", " + j + ", " + k + "]"); // Tilføj til indholdsOversigt med koordinater
+                    }
+                }
+            }
+        }
+        return indholdsOversigt;
     }
 
 // ======================================================================================

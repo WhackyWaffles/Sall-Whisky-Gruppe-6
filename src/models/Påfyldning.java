@@ -9,6 +9,9 @@ public class Påfyldning {
     private double påfyldningLiter;
     private LocalDate påfyldningDato;
 
+    // TODO: Måske implementere sådan, at idNr automatisk tæller op
+    //   - så der ikke kommer duplicate numre, og så man ikke selv skal huske hvilket nummer man er kommet til
+    //     - og derved fjerne String idNr fra Constructor
     public Påfyldning(String idNr, Destillat destillat, Fad fad, double påfyldningLiter, LocalDate påfyldningDato) {
         if (fad.getVolumenLedig() < påfyldningLiter) {
             throw new IllegalArgumentException("Ikke nok plads i fadet!");
@@ -18,6 +21,9 @@ public class Påfyldning {
         this.fad = fad;
         this.påfyldningLiter = påfyldningLiter;
         this.påfyldningDato = påfyldningDato;
+        if (!fad.getPåfyldninger().contains(this)) {
+            fad.tilføjPåfyldning(this);
+        }
     }
 
     public String getIdNr() {
@@ -30,6 +36,10 @@ public class Påfyldning {
 
     public Fad getFad() {
         return fad;
+    }
+
+    public void setFad(Fad fad) {
+        this.fad = fad;
     }
 
     public double getPåfyldningLiter() {

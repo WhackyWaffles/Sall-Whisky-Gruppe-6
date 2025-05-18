@@ -1,8 +1,5 @@
 package models;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-
 public class WhiskyFlaske {
     private String navn;
     private int flaskeNr;

@@ -14,7 +14,6 @@ import java.time.LocalDate;
 
 public class OpretWhiskyPane extends GridPane {
 
-    private final Controller controller =Controller.getController();;
     private TextField txtWhiskyId = new TextField();
     private TextField txtNavn = new TextField();
     private TextField txtslutAlkoholProcent = new TextField();
@@ -75,7 +74,7 @@ public class OpretWhiskyPane extends GridPane {
         btnRemove.setOnAction(event -> this.removeAction());
 
         //Listview med fade fra Controller
-        lvWhisky.getItems().addAll(Controller.getController().getAllWhisky());
+        lvWhisky.getItems().addAll(Controller.getAllWhisky());
         lvWhisky.setPrefHeight(200);
 
         HBox buttonBox = new HBox(30);
@@ -98,12 +97,12 @@ public class OpretWhiskyPane extends GridPane {
             double alkohol = Double.parseDouble(alkoholStr);
             int antal = Integer.parseInt(antalStr);
 
-            Whisky existing = controller.findWhiskyById(id);
+            Whisky existing = Controller.findWhiskyById(id);
             if (existing != null) {
                 showAlert(Alert.AlertType.ERROR, "Fejl", "Whisky med ID " + id + " findes allerede.");
                 return;
             }
-            Whisky whisky = controller.opretWhisky(id, navn, antal, String.valueOf(alkohol), dato, null);
+            Whisky whisky = Controller.opretWhisky(id, navn, antal, String.valueOf(alkohol), dato, null);
             lvWhisky.getItems().add(whisky);
             showAlert(Alert.AlertType.INFORMATION, "Oprettet", "Whisky er oprettet.");
             clearFields();
@@ -121,7 +120,7 @@ public class OpretWhiskyPane extends GridPane {
     private void opdateAction() {
 
         String id = txtWhiskyId.getText().trim();
-        Whisky whisky = controller.findWhiskyById(id);
+        Whisky whisky = Controller.findWhiskyById(id);
         if (whisky == null) {
             showAlert(Alert.AlertType.ERROR, "Fejl", "Whisky med ID " + id + " blev ikke fundet.");
             return;
@@ -159,7 +158,7 @@ public class OpretWhiskyPane extends GridPane {
             showAlert(Alert.AlertType.WARNING, "Ingen valgt", "Vælg en whisky, der skal fjernes.");
             return;
         }
-        boolean removed = controller.removeWhiskyById(selected.getWhiskyId());
+        boolean removed = Controller.removeWhiskyById(selected.getWhiskyId());
         if (removed) {
             lvWhisky.getItems().remove(selected);
             showAlert(Alert.AlertType.INFORMATION, "Fjernet", "Whisky er blevet fjernet.");

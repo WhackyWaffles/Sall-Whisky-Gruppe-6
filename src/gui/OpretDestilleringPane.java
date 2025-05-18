@@ -65,7 +65,7 @@ public class OpretDestilleringPane extends GridPane {
         this.add(lbldestillater,0,6);
         this.add(this.lvDestillater, 0,7,3,1);
         // Fyld ListView med destillater fra Controller
-        lvDestillater.getItems().addAll(Controller.getController().getAllDestillater());
+        lvDestillater.getItems().addAll(Controller.getAllDestillater());
         lvDestillater.setPrefSize(300,150); // Sætter en passende højde
 
         //Button til Opret, Annullér og Opdater
@@ -103,7 +103,7 @@ public class OpretDestilleringPane extends GridPane {
             double antalLiter = Double.parseDouble(txtAntalLiter.getText());
 
             // Gemmer al data i storage
-            Controller.getController().opretDestillat(batchNr, alkoholProcent, antalLiter, valgtDato, selectedMalt);
+            Controller.opretDestillat(batchNr, alkoholProcent, antalLiter, valgtDato, selectedMalt);
 
         } catch (NumberFormatException e) {
             System.out.println("Fejl:Indtast korrekt talformat i procent, antal og liter felterne.");
@@ -132,7 +132,7 @@ public class OpretDestilleringPane extends GridPane {
     }
 
     private void updaterLister(){
-        lvDestillater.getItems().setAll(Controller.getController().getAllDestillater());
+        lvDestillater.getItems().setAll(Controller.getAllDestillater());
         System.out.println(("Destillaterne er opdateret"));
     }
 }

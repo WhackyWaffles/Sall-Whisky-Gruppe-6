@@ -1,6 +1,7 @@
 package models;
 
 import org.junit.jupiter.api.Test;
+import controller.Controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,7 +14,7 @@ class LagerHyldeTest {
     @Test
     void getAntalPladser() {
         // Arrange
-        Lager testLager = new Lager("Test", "Test", 30, 4,2);
+        Lager testLager = Controller.opretLager("Test", "Test", 30, 4,2);
         // Act
         int actual = testLager.getReoler()[0].getHylder()[0].getAntalPladser();
         // Assert
@@ -27,7 +28,7 @@ class LagerHyldeTest {
     @Test
     void isNotEmpty() {
         // Arrange
-        Lager testLager = new Lager("Test", "Test", 30, 4,2);
+        Lager testLager = Controller.opretLager("Test", "Test", 30, 4,2);
         Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         // Act
         testLager.setFad(fad, 0, 0, 1);
@@ -38,7 +39,7 @@ class LagerHyldeTest {
     @Test
     void isEmpty() {
         // Arrange
-        Lager testLager = new Lager("Test", "Test", 30, 4,2);
+        Lager testLager = Controller.opretLager("Test", "Test", 30, 4,2);
         // Act
         // Assert
         assertTrue(testLager.getReoler()[0].getHylder()[0].isEmpty());

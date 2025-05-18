@@ -1,5 +1,6 @@
 package models;
 
+import controller.Controller;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -12,9 +13,9 @@ class MaltTest {
     void getKornSorter() {
         // Arrange
         ArrayList<Korn> kornBlanding2024 = new ArrayList<>();
-        kornBlanding2024.add(new Korn("Mosegaard", "Viborg", "Moonshine"));
-        kornBlanding2024.add(new Korn("Stadsgaard", "Brabrand", "Belagria"));
-        Malt malt = new Malt(kornBlanding2024, Ristning.VIENNAMALT, true, "carlsbergensis");
+        kornBlanding2024.add(Controller.opretKorn("Mosegaard", "Viborg", "Moonshine"));
+        kornBlanding2024.add(Controller.opretKorn("Stadsgaard", "Brabrand", "Belagria"));
+        Malt malt = Controller.opretMalt(kornBlanding2024, Ristning.VIENNAMALT, true, "carlsbergensis");
         // Act
         // Assert
         assertEquals(kornBlanding2024, malt.getKornSorter());
@@ -24,9 +25,9 @@ class MaltTest {
     void getRistning() {
         // Arrange
         ArrayList<Korn> kornBlanding2024 = new ArrayList<>();
-        kornBlanding2024.add(new Korn("Mosegaard", "Viborg", "Moonshine"));
-        kornBlanding2024.add(new Korn("Stadsgaard", "Brabrand", "Belagria"));
-        Malt malt = new Malt(kornBlanding2024, Ristning.VIENNAMALT, true, "carlsbergensis");
+        kornBlanding2024.add(Controller.opretKorn("Mosegaard", "Viborg", "Moonshine"));
+        kornBlanding2024.add(Controller.opretKorn("Stadsgaard", "Brabrand", "Belagria"));
+        Malt malt = Controller.opretMalt(kornBlanding2024, Ristning.VIENNAMALT, true, "carlsbergensis");
         // Act
         // Assert
         assertEquals(Ristning.VIENNAMALT, malt.getRistning());
@@ -36,9 +37,9 @@ class MaltTest {
     void erRoeget() {
         // Arrange
         ArrayList<Korn> kornBlanding2024 = new ArrayList<>();
-        kornBlanding2024.add(new Korn("Mosegaard", "Viborg", "Moonshine"));
-        kornBlanding2024.add(new Korn("Stadsgaard", "Brabrand", "Belagria"));
-        Malt malt = new Malt(kornBlanding2024, Ristning.VIENNAMALT, true, "carlsbergensis");
+        kornBlanding2024.add(Controller.opretKorn("Mosegaard", "Viborg", "Moonshine"));
+        kornBlanding2024.add(Controller.opretKorn("Stadsgaard", "Brabrand", "Belagria"));
+        Malt malt = Controller.opretMalt(kornBlanding2024, Ristning.VIENNAMALT, true, "carlsbergensis");
         // Act
         // Assert
         assertTrue(malt.erRoeget());
@@ -48,9 +49,9 @@ class MaltTest {
     void getGaer() {
         // Arrange
         ArrayList<Korn> kornBlanding2024 = new ArrayList<>();
-        kornBlanding2024.add(new Korn("Mosegaard", "Viborg", "Moonshine"));
-        kornBlanding2024.add(new Korn("Stadsgaard", "Brabrand", "Belagria"));
-        Malt malt = new Malt(kornBlanding2024, Ristning.VIENNAMALT, true, "carlsbergensis");
+        kornBlanding2024.add(Controller.opretKorn("Mosegaard", "Viborg", "Moonshine"));
+        kornBlanding2024.add(Controller.opretKorn("Stadsgaard", "Brabrand", "Belagria"));
+        Malt malt = Controller.opretMalt(kornBlanding2024, Ristning.VIENNAMALT, true, "carlsbergensis");
         // Act
         // Assert
         assertEquals("carlsbergensis", malt.getGaer());
@@ -60,15 +61,17 @@ class MaltTest {
     void addKorn() {
         // Arrange
         ArrayList<Korn> kornBlanding2024 = new ArrayList<>();
-        kornBlanding2024.add(new Korn("Mosegaard", "Viborg", "Moonshine"));
-        Malt malt = new Malt(kornBlanding2024, Ristning.VIENNAMALT, true, "carlsbergensis");
+        Korn korn1 = Controller.opretKorn("Mosegaard", "Viborg", "Moonshine");
+        Korn korn2 = Controller.opretKorn("Stadsgaard", "Brabrand", "Belagria");
+
+        kornBlanding2024.add(korn1);
+        Malt malt = Controller.opretMalt(kornBlanding2024, Ristning.VIENNAMALT, true, "carlsbergensis");
+
         // Act
-        malt.addKorn(new Korn("Stadsgaard", "Brabrand", "Belagria"));
-        ArrayList<Korn> expectedKornBlanding = new ArrayList<>();
-        expectedKornBlanding.add(new Korn("Mosegaard", "Viborg", "Moonshine"));
-        expectedKornBlanding.add(new Korn("Stadsgaard", "Brabrand", "Belagria"));
+        malt.addKorn(korn2);
+        kornBlanding2024.add(korn2);
         // Assert
-        assertEquals(expectedKornBlanding, malt.getKornSorter());
+        assertEquals(kornBlanding2024, malt.getKornSorter());
     }
 
 }

@@ -16,16 +16,17 @@ public class App {
     }
 
     /**
-     * initialiserer storage med nogle objekter
+     * Initialiserer storage med nogle objekter
      */
     public static void initStorage() {
+
         //    ==================================================================================
         //    Opretter Fade
         //    ==================================================================================
-        Fad fad68 = Controller.getController().opretFad("68", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        Fad fad69 = Controller.getController().opretFad("69", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        Fad fad70 = Controller.getController().opretFad("70", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        Fad fad71 = Controller.getController().opretFad("71", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        Fad fad68 = Controller.opretFad("68", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        Fad fad69 = Controller.opretFad("69", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        Fad fad70 = Controller.opretFad("70", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        Fad fad71 = Controller.opretFad("71", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
 
         //    ==================================================================================
         //    Opretter Destillater
