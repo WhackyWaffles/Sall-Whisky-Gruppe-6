@@ -31,10 +31,10 @@ public class App {
         //    ==================================================================================
         //    Opretter Destillater
         //    ==================================================================================
-        Destillat nm100 = Controller.opretDestillat("NM100", 72.0, 35, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT);
-        Destillat nm101 = Controller.opretDestillat("NM101", 72.0, 35, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT);
-        Destillat nm102 = Controller.opretDestillat("NM102", 72.0, 35, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT);
-        Destillat nm103 = Controller.opretDestillat("NM103", 72.0, 35, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT);
+        Destillat nm100 = Controller.opretDestillat("NM100", 72.0, 35, LocalDate.of(2023, 1, 1), Ristning.VIENNAMALT);
+        Destillat nm101 = Controller.opretDestillat("NM101", 65.0, 25, LocalDate.of(2023, 6, 1), Ristning.VIENNAMALT);
+        Destillat nm102 = Controller.opretDestillat("NM102", 70.0, 27, LocalDate.of(2024, 4, 1), Ristning.VIENNAMALT);
+        Destillat nm103 = Controller.opretDestillat("NM103", 68.0, 15, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT);
 
         //    ==================================================================================
         //    Opretter Påfyldninger
@@ -43,5 +43,11 @@ public class App {
 //        Påfyldning påfyldning101 = Controller.opretPåfyldning("101", nm101, fad68, 25, LocalDate.of(2025,1,2));
 //        Påfyldning påfyldning102 = Controller.opretPåfyldning("102", nm102, fad70, 15, LocalDate.of(2025,1,2));
 //        Påfyldning påfyldning103 = Controller.opretPåfyldning("103", nm103, fad70, 15, LocalDate.of(2025,1,2));
+
+        //    ==================================================================================
+        //    Opretter Lagre
+        //    ==================================================================================
+        Lager lagerSall = Controller.opretLager("Sall lager", "Sall", 32, 3, 2);
+        Lager lagerViborg = Controller.opretLager("Viborg lager", "Viborg", 14, 3, 2);
     }
 }

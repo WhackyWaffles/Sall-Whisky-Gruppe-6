@@ -203,7 +203,7 @@ public class Lager {
         for (int i = 0; i < reoler.length; i++) { // For alle Reoler
             for (int j = 0; j < reoler[i].getHylder().length; j++) { // For alle Hylder
                 for (int k = 0; k < reoler[i].getHylder()[i].getPladser().length; k++) { // For alle Pladser
-                    if (!reoler[i].getHylder()[i].getPladser()[k].isEmpty()) { // Hvis der er et Fad på den.
+                    if (!reoler[i].getHylder()[i].getPladser()[k].isEmpty()) { // Hvis der er et Fad på pladsen.
                         indholdsOversigt.add(reoler[i].getHylder()[i].getPladser()[k].getFad().toString()
                                 + " [" + i + ", " + j + ", " + k + "]"); // Tilføj til indholdsOversigt med koordinater
                     }
