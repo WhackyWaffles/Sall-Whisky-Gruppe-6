@@ -44,10 +44,10 @@ class LagerPladsTest {
         Fad fad = new Fad("test", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         Fad fad2 = new Fad("test2", "test", "test", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         lagerPlads.setFad(fad);
-        lagerPlads.setFad(fad2);
         // Act
+            // lagerPlads.setFad(fad2);
         // Assert
-        assertThrows(IllegalArgumentException.class, () -> lagerPlads.setFad(fad),
+        assertThrows(IllegalArgumentException.class, () -> lagerPlads.setFad(fad2),
                 "Denne plads er optaget.");
     }
 

@@ -36,6 +36,10 @@ public class Påfyldning {
         return påfyldningLiter;
     }
 
+    public double setPåfyldningLiter(double Liter) {
+        return påfyldningLiter;
+    }
+
     public LocalDate getPåfyldningDato() {
         return påfyldningDato;
     }

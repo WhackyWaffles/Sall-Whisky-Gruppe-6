@@ -28,7 +28,7 @@ class LagerTest {
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         // Act
-        testLager.setFad(fad, 47,2, 1);
+            // testLager.setFad(fad, 47,2, 1);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.setFad(fad, 47,2, 1),
                 "Denne plads findes ikke.");
@@ -40,7 +40,7 @@ class LagerTest {
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         // Act
-        testLager.setFad(fad, 17,8, 1);
+            // testLager.setFad(fad, 17,8, 1);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.setFad(fad, 17,8, 1),
                 "Denne plads findes ikke.");
@@ -52,7 +52,7 @@ class LagerTest {
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         // Act
-        testLager.setFad(fad, 17,2, 4);
+            // testLager.setFad(fad, 17,2, 4);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.setFad(fad, 17,2, 4),
                 "Denne plads findes ikke.");
@@ -66,7 +66,7 @@ class LagerTest {
         Fad fad2 = new Fad("36", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         // Act
         testLager.setFad(fad, 17,2, 1);
-        testLager.setFad(fad2, 17,2, 1);
+            // testLager.setFad(fad2, 17,2, 1);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.setFad(fad,17,2,1),
                 "Denne plads er optaget.");
@@ -78,7 +78,7 @@ class LagerTest {
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         // Act
-        testLager.setFad(fad, -1,2, 1);
+            // testLager.setFad(fad, -1,2, 1);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.setFad(fad, -1,2, 1),
                 "Denne plads findes ikke.");
@@ -90,7 +90,7 @@ class LagerTest {
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         // Act
-        testLager.setFad(fad, 17,-1, 1);
+            // testLager.setFad(fad, 17,-1, 1);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.setFad(fad, 17,-1, 1),
                 "Denne plads findes ikke.");
@@ -102,7 +102,7 @@ class LagerTest {
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         Fad fad = new Fad("35", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
         // Act
-        testLager.setFad(fad, 17,2, -1);
+            // testLager.setFad(fad, 17,2, -1);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.setFad(fad, 17,2, -1),
                 "Denne plads findes ikke.");
@@ -177,7 +177,7 @@ class LagerTest {
         // Arrange
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         // Act
-        testLager.removeFad(47,2,1);
+            // testLager.removeFad(47,2,1);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.removeFad(47,2, 1),
                 "Denne plads findes ikke.");
@@ -188,7 +188,7 @@ class LagerTest {
         // Arrange
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         // Act
-        testLager.removeFad(17,8,1);
+            // testLager.removeFad(17,8,1);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.removeFad(17,8, 1),
                 "Denne plads findes ikke.");
@@ -199,7 +199,7 @@ class LagerTest {
         // Arrange
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         // Act
-        testLager.removeFad(17,2,4);
+            // testLager.removeFad(17,2,4);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.removeFad(17,2, 4),
                 "Denne plads findes ikke.");
@@ -210,7 +210,7 @@ class LagerTest {
         // Arrange
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         // Act
-        testLager.removeFad(-1,2,1);
+            // testLager.removeFad(-1,2,1);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.removeFad(-1,2, 1),
                 "Denne plads findes ikke.");
@@ -221,7 +221,7 @@ class LagerTest {
         // Arrange
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         // Act
-        testLager.removeFad(17,-1,1);
+            // testLager.removeFad(17,-1,1);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.removeFad(17,-1, 1),
                 "Denne plads findes ikke.");
@@ -232,7 +232,7 @@ class LagerTest {
         // Arrange
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         // Act
-        testLager.removeFad(17,2,-1);
+            // testLager.removeFad(17,2,-1);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.removeFad(17,2, -1),
                 "Denne plads findes ikke.");

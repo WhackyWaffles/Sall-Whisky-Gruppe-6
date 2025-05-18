@@ -71,6 +71,10 @@ public class Fad {
         return kapacitet;
     }
 
+    public double hvorMegetErDerPaa() {
+        return getKapacitet() - getVolumenLedig();
+    }
+
     public Charring getCharring() {
         return charring;
     }

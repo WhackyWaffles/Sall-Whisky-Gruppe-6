@@ -36,10 +36,10 @@ class LagerReolTest {
         // Arrange
         Lager testLager = new Lager("Test", "Test", 30, 4,2);
         // Act
-        testLager.getReoler()[0].setAntalHylder(-1);
+            // testLager.getReoler()[0].setAntalHylder(-1);
         // Assert
         assertThrows(IllegalArgumentException.class, () -> testLager.getReoler()[0].setAntalHylder(-1),
-                "DET MÅ DU SLET IKKE DET DER");
+                "DET MÅ DU SLET IKKE, DET DER!");
     }
 
     // ======================================================================
