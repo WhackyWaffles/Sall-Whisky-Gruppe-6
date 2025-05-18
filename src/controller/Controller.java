@@ -93,7 +93,7 @@ public class Controller {
         return storage.getAllePåfyldninger();
     }
 
-    //Create a Whisky
+    //Opret en Whisky
     public Whisky opretWhisky(String whiskyId, String navn, int flaskeNr, String slutAlkoholProcent, LocalDate aftapningsDato, Fad fad) {
         Whisky whisky = new Whisky(whiskyId, navn, flaskeNr, slutAlkoholProcent, aftapningsDato, fad);
         storage.addWhisky(whisky);
@@ -110,6 +110,17 @@ public class Controller {
 
     public Whisky findWhiskyById(String id) {
         return storage.findWhiskyById(id);
+    }
+
+    // Opret et lager
+    public Lager opretLager(String navn, String lokation, int antalReoler, int antalHylder, int antalPladserPerHylde) {
+        Lager lager = new Lager(navn,lokation,antalReoler,antalHylder,antalPladserPerHylde);
+        storage.addLager(lager);
+        return lager;
+    }
+
+    public List<Lager> getAlleLagre() {
+        return storage.getAlleLagre();
     }
 }
 

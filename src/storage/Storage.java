@@ -12,6 +12,7 @@ public class Storage {
     private static List<Fad> fade;
     private List<Påfyldning> påfyldninger;
     private List<Whisky> whiskyList;
+    private static List<Lager> lagerListe;
 
     public Storage() {
         kornSorter = new ArrayList<>();
@@ -20,6 +21,7 @@ public class Storage {
         fade = new ArrayList<>();
         påfyldninger = new ArrayList<>();
         whiskyList = new ArrayList<>();
+        lagerListe = new ArrayList<>();
     }
 
     /**
@@ -141,5 +143,14 @@ public class Storage {
             if (w.getWhiskyId().equals(id)) return w;
         }
         return null;
+    }
+
+    public void addLager(Lager lager) {
+        if (!lagerListe.contains(lager)) {
+            lagerListe.add(lager);
+        }
+    }
+
+    public static List<Lager> getAlleLagre() { return new ArrayList<>(lagerListe);
     }
 }

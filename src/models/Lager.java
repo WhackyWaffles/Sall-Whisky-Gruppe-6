@@ -1,5 +1,7 @@
 package models;
 
+import java.util.ArrayList;
+
 public class Lager {
     private String navn;
     private String lokation;
@@ -193,6 +195,23 @@ public class Lager {
         return ledigePladser; // Returner ledigePladser
     }
 
+    // indholdsOversigt metoden, der skal i Lager.class:
+    public ArrayList<String> indholdsOversigt() {
+        ArrayList<String> indholdsOversigt = new ArrayList<>();
+        for (int i = 0; i < reoler.length; i++) { // For alle Reoler
+            for (int j = 0; j < reoler[i].getHylder().length; j++) { // For alle Hylder
+                for (int k = 0; k < reoler[i].getHylder()[j].getPladser().length; k++) { // For alle Pladser
+                    if (!reoler[i].getHylder()[j].getPladser()[k].isEmpty()) { // Hvis der er et Fad på pladsen
+                        indholdsOversigt.add(reoler[i].getHylder()[j].getPladser()[k].getFad().toString()
+                                + " [" + i + ", " + j + ", " + k + "]"); // Tilføj til oversigt med koordinater
+                    }
+                }
+            }
+        }
+        return indholdsOversigt;
+    }
+
+
 // ======================================================================================
     // Simple metoder under (1 linjes metoder)
 // ======================================================================================
@@ -239,4 +258,10 @@ public class Lager {
         return reoler;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("");
+        sb.append(navn);
+        return sb.toString();
+    }
 }

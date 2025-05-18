@@ -41,7 +41,7 @@ public class Fad {
             påfyldninger.add(påfyldning);
 
 
-//            TODO: rYK TIL CONTROLLER
+//            TODO: Ryk til Controller
             // Opdater Storage med det nye fad
             Storage.opdaterFad(this);
 
