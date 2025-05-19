@@ -93,10 +93,10 @@ public class LagerReol {
         hylder = tempHyldeArray;
     }
 
-//    @Override
-//    public String toString() {
-//        final StringBuilder sb = new StringBuilder("");
-//        sb.append(Arrays.toString(hylder));
-//        return sb.toString();
-//    }
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("");
+        sb.append(Arrays.toString(hylder));
+        return sb.toString();
+    }
 }

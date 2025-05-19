@@ -228,6 +228,22 @@ public class Lager {
         return fade;
     }
 
+    // Metode til at vise fade, med lagerkoordinater
+    public ArrayList<String> hentFadeMedKoordinater() {
+        ArrayList<String> fadeMedKoordinater = new ArrayList<>();
+
+        for (int i = 0; i < reoler.length; i++) { // For alle reoler
+            for (int j = 0; j < reoler[i].getHylder().length; j++) { // For alle hylder
+                for (int k = 0; k < reoler[i].getHylder()[j].getPladser().length; k++) { // For alle pladser
+                    if (!reoler[i].getHylder()[j].getPladser()[k].isEmpty()) { // Hvis der er et Fad på pladsen
+                        Fad fad = reoler[i].getHylder()[j].getPladser()[k].getFad();
+                        fadeMedKoordinater.add(fad.toString() + " [Reol: " + i + ", Hylde: " + j + ", Plads: " + k + "]");
+                    }
+                }
+            }
+        }
+        return fadeMedKoordinater; // Returner liste med fad + koordinater
+    }
 
 // ======================================================================================
     // Simple metoder (1 linjes metoder)
@@ -278,7 +294,7 @@ public class Lager {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(navn);
+        sb.append(navn + ", " + reoler.length + " reoler");
         return sb.toString();
     }
 }

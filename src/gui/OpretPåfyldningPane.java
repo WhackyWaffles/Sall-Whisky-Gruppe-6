@@ -29,7 +29,6 @@ public class OpretPåfyldningPane extends GridPane {
 
         this.setMinSize(700,400);
 
-
         //Label og textfield
         Label lblIdNr = new Label("IdNr");
         this.add(lblIdNr, 0, 1);

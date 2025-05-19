@@ -21,6 +21,10 @@ public class OpretLagerPane extends GridPane {
     private ComboBox<Lager> comboLager = new ComboBox<>();
     private ListView<Fad> lvSeFadePåLager = new ListView<>();
     private ListView<Fad> lvFadeTilLager = new ListView<>();
+    private TextField txtReol = new TextField();
+    private TextField txtHylde = new TextField();
+    private TextField txtPlads = new TextField();
+    private Button btnSætFadPåLager = new Button("Sæt fad på lager");
 
     public OpretLagerPane() {
         this.setPadding(new Insets(20));
@@ -79,8 +83,20 @@ public class OpretLagerPane extends GridPane {
         lvFadeTilLager.getItems().setAll(Controller.getAlleFade()); //
         lvFadeTilLager.setPrefSize(250,100);
 
+        // TextFields til at pladsere fade i lagerets koordinatsystem
+        Label lblVælgReol = new Label("Vælg reol");
+        this.add(lblVælgReol,0,8);
+        this.add(txtReol,0,9);
+        Label lblVælgHylde = new Label("Vælg hylde");
+        this.add(lblVælgHylde,1,8);
+        this.add(txtHylde,1,9);
+        Label lblVælgPlads = new Label("Vælg plads");
+        this.add(lblVælgPlads,2,8);
+        this.add(txtPlads,2,9);
 
-
+        // Knap til at sætte fade på lager
+        btnSætFadPåLager.setOnAction(event -> sætFadPåLagerAction());
+        this.add(btnSætFadPåLager,0,10,2,1);
     }
 
     private void opretAction() {
@@ -119,10 +135,45 @@ public class OpretLagerPane extends GridPane {
         txtHyldePladser.clear();
     }
 
+    private void sætFadPåLagerAction() {
+        Fad fad = lvFadeTilLager.getSelectionModel().getSelectedItem();
+        Lager lager = comboLager.getSelectionModel().getSelectedItem();
+
+        try {
+            int reol = Integer.parseInt(txtReol.getText());
+            int hylde = Integer.parseInt(txtHylde.getText());
+            int plads = Integer.parseInt(txtPlads.getText());
+
+            // Tjek om koordinaterne er gyldige
+            if (reol >= lager.getAntalReoler() || reol < 0 ||
+                    hylde >= lager.getReoler()[reol].getHylder().length || hylde < 0 ||
+                    plads >= lager.getReoler()[reol].getHylder()[hylde].getPladser().length || plads < 0) {
+
+                System.out.println("Fejl: De angivne koordinater er uden for lagerets grænser!");
+                return;
+            }
+            if (lager.getReoler().length == 0) {
+                System.out.println("Fejl: Lageret har ingen reoler!");
+                return;
+            }
+
+            if (fad != null && lager != null) {
+                lager.setFad(fad, reol, hylde, plads);
+                System.out.println("Fad placeret på lageret!");
+
+                opdaterFadePåLager(); // Opdater GUI'en
+            } else {
+                System.out.println("Vælg både et fad og et lager først!");
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Fejl: Reol, hylde og plads skal være tal!");
+        }
+    }
+
     private void opdaterFadePåLager() {
         Lager valgtLager = comboLager.getValue();
         if (valgtLager != null) {
-            lvSeFadePåLager.getItems().setAll(valgtLager.indholdsOversigt()); // Henter fade som tekst
+            lvSeFadePåLager.getItems().setAll(valgtLager.hentFade()); // Henter fade som tekst
         } else {
             lvSeFadePåLager.getItems().clear(); // Rydder listen, hvis intet lager er valgt
         }
