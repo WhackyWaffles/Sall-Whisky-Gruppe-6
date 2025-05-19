@@ -19,7 +19,7 @@ public class OpretLagerPane extends GridPane {
     private TextField txtHyldePladser = new TextField();
     Button btnOpretLager = new Button("Opret lager");
     private ComboBox<Lager> comboLager = new ComboBox<>();
-    private ListView<Fad> lvSeFadePåLager = new ListView<>();
+    private ListView<String> lvSeFadePåLager = new ListView<>();
     private ListView<Fad> lvFadeTilLager = new ListView<>();
     private TextField txtReol = new TextField();
     private TextField txtHylde = new TextField();
@@ -173,7 +173,7 @@ public class OpretLagerPane extends GridPane {
     private void opdaterFadePåLager() {
         Lager valgtLager = comboLager.getValue();
         if (valgtLager != null) {
-            lvSeFadePåLager.getItems().setAll(valgtLager.hentFade()); // Henter fade som tekst
+            lvSeFadePåLager.getItems().setAll(valgtLager.hentFadeMedKoordinater()); // Henter fade som tekst
         } else {
             lvSeFadePåLager.getItems().clear(); // Rydder listen, hvis intet lager er valgt
         }
