@@ -1,5 +1,7 @@
 package models;
 
+import java.util.Arrays;
+
 public class LagerReol {
     private LagerHylde[] hylder;
 
@@ -90,4 +92,11 @@ public class LagerReol {
         System.arraycopy(hylder, 0, tempHyldeArray, 0, tempHyldeArray.length);
         hylder = tempHyldeArray;
     }
+
+//    @Override
+//    public String toString() {
+//        final StringBuilder sb = new StringBuilder("");
+//        sb.append(Arrays.toString(hylder));
+//        return sb.toString();
+//    }
 }

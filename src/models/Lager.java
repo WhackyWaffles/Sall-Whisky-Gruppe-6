@@ -198,20 +198,36 @@ public class Lager {
     /**
      * @return En {@code ArrayList<String>}, der indeholder alt, hvad der er lagret i dette Lager.
      */
-    public ArrayList<String> indholdsOversigt() {
-        ArrayList<String> indholdsOversigt = new ArrayList<>();
+    public ArrayList<Fad> indholdsOversigt() {
+        ArrayList<Fad> indholdsOversigt = new ArrayList<>();
         for (int i = 0; i < reoler.length; i++) { // For alle Reoler
             for (int j = 0; j < reoler[i].getHylder().length; j++) { // For alle Hylder
-                for (int k = 0; k < reoler[i].getHylder()[i].getPladser().length; k++) { // For alle Pladser
-                    if (!reoler[i].getHylder()[i].getPladser()[k].isEmpty()) { // Hvis der er et Fad på den.
-                        indholdsOversigt.add(reoler[i].getHylder()[i].getPladser()[k].getFad().toString()
-                                + " [" + i + ", " + j + ", " + k + "]"); // Tilføj til indholdsOversigt med koordinater
-                    }
+                for (int k = 0; k < reoler[i].getHylder()[j].getPladser().length; k++) // For alle Pladser
+                    if (!reoler[i].getHylder()[j].getPladser()[k].isEmpty()) { // Hvis der er et Fad på den.
+                        indholdsOversigt.add(reoler[i].getHylder()[j].getPladser()[k].getFad());
+//                                + " [" + i + ", " + j + ", " + k + "]"); // Tilføj til indholdsOversigt med koordinater
+//                    }
                 }
             }
         }
         return indholdsOversigt;
     }
+
+    // Bruges til at vise fade på lager
+    public ArrayList<Fad> hentFade() {
+        ArrayList<Fad> fade = new ArrayList<>();
+        for (LagerReol reol : reoler) { // Gå igennem alle reoler
+            for (LagerHylde hylde : reol.getHylder()) { // Gå igennem alle hylder
+                for (LagerPlads plads : hylde.getPladser()) { // Gå igennem alle pladser
+                    if (!plads.isEmpty()) { // Hvis der er et fad på pladsen
+                        fade.add(plads.getFad()); // Tilføj fadet til listen
+                    }
+                }
+            }
+        }
+        return fade;
+    }
+
 
 // ======================================================================================
     // Simple metoder (1 linjes metoder)
@@ -259,4 +275,10 @@ public class Lager {
         return reoler;
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(navn);
+        return sb.toString();
+    }
 }

@@ -19,7 +19,7 @@ public class StartVindue extends Application {
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
         primaryStage.setHeight(700);
-        primaryStage.setWidth(500);
+        primaryStage.setWidth(550);
         primaryStage.show();
 
     }

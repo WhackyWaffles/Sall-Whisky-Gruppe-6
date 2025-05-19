@@ -19,7 +19,8 @@ public class OpretLagerPane extends GridPane {
     private TextField txtHyldePladser = new TextField();
     Button btnOpretLager = new Button("Opret lager");
     private ComboBox<Lager> comboLager = new ComboBox<>();
-    private ListView<String> lvSeFadePåLager = new ListView<>();
+    private ListView<Fad> lvSeFadePåLager = new ListView<>();
+    private ListView<Fad> lvFadeTilLager = new ListView<>();
 
     public OpretLagerPane() {
         this.setPadding(new Insets(20));
@@ -29,46 +30,57 @@ public class OpretLagerPane extends GridPane {
 
         //Labels og textfields
         javafx.scene.control.Label lblLagerNavn = new javafx.scene.control.Label("Lager navn");
-        this.add(lblLagerNavn, 0, 1);
-        this.add(this.txtLagerNavn, 1, 1);
+        this.add(lblLagerNavn, 0, 0);
+        this.add(this.txtLagerNavn, 1, 0);
 
         javafx.scene.control.Label lblLagerLokation = new javafx.scene.control.Label("Lager lokation");
-        this.add(lblLagerLokation, 0, 2);
-        this.add(this.txtLagerLokation, 1, 2);
+        this.add(lblLagerLokation, 0, 1);
+        this.add(this.txtLagerLokation, 1, 1);
 
         javafx.scene.control.Label lblLagerReoler = new javafx.scene.control.Label("Lager reoler");
-        this.add(lblLagerReoler, 0, 3);
-        this.add(this.txtAntalReoler, 1, 3);
+        this.add(lblLagerReoler, 2, 0);
+        this.add(this.txtAntalReoler, 3, 0);
 
         Label lblReolHylder = new Label("Hylder per reol");
-        this.add(lblReolHylder, 0, 4);
-        this.add(txtReolHylder, 1, 4);
+        this.add(lblReolHylder, 2, 1);
+        this.add(txtReolHylder, 3, 1);
 
         Label lblHyldePladser = new Label("Pladser per hylde");
-        this.add(lblHyldePladser, 0, 5);
-        this.add(txtHyldePladser, 1, 5);
+        this.add(lblHyldePladser, 2, 2);
+        this.add(txtHyldePladser, 3, 2);
 
         // Opret Lager knap
         btnOpretLager.setOnAction(event -> opretAction());
-        this.add(btnOpretLager, 0, 6);
+        this.add(btnOpretLager, 0, 2,2,1);
 
         // ComboBox for lagre
-        Label lblLager = new Label("Vælg lager");
-        this.add(lblLager, 0, 7);
+//        Label lblLager = new Label("Vælg lager");
+//        this.add(lblLager, 0, 3);
 
-        comboLager.getItems().setAll(Storage.getAlleLagre()); // Fyld combobox med lagre
+        comboLager.getItems().setAll(Storage.getAllLagerhuse()); // Fyld combobox med lagre
         comboLager.setPromptText("Vælg lager");
-        this.add(comboLager, 1, 7);
+        this.add(comboLager, 0, 3,2,1);
 
         // Sørg for at opdatere listen af fade, når et lager vælges
         comboLager.setOnAction(event -> opdaterFadePåLager());
 
         Label lblSeFadePåLager = new Label("Fade på lager");
-        this.add(lblSeFadePåLager, 0, 8);
-        this.add(lvSeFadePåLager, 1, 8);
-        // Fyld ListView med destillater fra Controller
-        lvSeFadePåLager.getItems().addAll(); //
-        lvSeFadePåLager.setPrefSize(300,150); // Sætter en passende højde
+        this.add(lblSeFadePåLager, 0, 4,2,1);
+        this.add(lvSeFadePåLager, 0, 5,4,1);
+        // Fyld ListView med fade på lager fra Controller
+        lvSeFadePåLager.getItems().setAll(Controller.getFadePåLager(comboLager.getValue())); //
+        lvSeFadePåLager.setPrefSize(250,100);
+
+        // ListView til fade, der skal tilknyttes lager
+        Label lblSeFadeTilLager = new Label("Fade til lagring");
+        this.add(lblSeFadeTilLager, 0, 6,2,1);
+        this.add(lvFadeTilLager, 0,7,4,1);
+        // Fyld ListView med fade til lager fra Controller
+        lvFadeTilLager.getItems().setAll(Controller.getAlleFade()); //
+        lvFadeTilLager.setPrefSize(250,100);
+
+
+
     }
 
     private void opretAction() {
@@ -86,10 +98,13 @@ public class OpretLagerPane extends GridPane {
             int antalPladserPerHylde = Integer.parseInt(txtHyldePladser.getText());
 
             // Opret lager i Controller
-            Controller.getController().opretLager(navn,lokation,antalReoler,antalHylder,antalPladserPerHylde);
+            Controller.opretLager(navn,lokation,antalReoler,antalHylder,antalPladserPerHylde);
 
             System.out.println("Lager oprettet: " + navn + " med " + antalReoler + " reoler.");
             clearFields();
+
+            comboLager.getItems().setAll(Storage.getAllLagerhuse()); // Opdater lagre efter oprettelse
+
         } catch (
                 NumberFormatException e) {
             System.out.println("Fejl: Antal reoler skal være et tal!");

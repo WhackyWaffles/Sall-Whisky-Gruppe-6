@@ -202,6 +202,12 @@ public class Controller {
         return Storage.getAllLagerhuse();
     }
 
-
+    public static List<Fad> getFadePåLager(Lager lager) {
+        if (lager != null) {
+            return lager.hentFade(); // Brug lagerets metode til at hente fade
+        } else {
+            return new ArrayList<>(); // Returner tom liste, hvis intet lager er valgt
+        }
+    }
 }
 
