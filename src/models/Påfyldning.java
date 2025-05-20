@@ -65,6 +65,5 @@ public class Påfyldning {
     }
 
     public void setLiter() {
-
     }
 }

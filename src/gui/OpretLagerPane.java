@@ -57,46 +57,46 @@ public class OpretLagerPane extends GridPane {
         btnOpretLager.setOnAction(event -> opretAction());
         this.add(btnOpretLager, 0, 2,2,1);
 
-        // ComboBox for lagre
-//        Label lblLager = new Label("Vælg lager");
-//        this.add(lblLager, 0, 3);
+        // Skillelabel
+        Label lblLager = new Label("Placeringer af fade på lagre");
+        this.add(lblLager, 0, 3,3,1);
 
         comboLager.getItems().setAll(Storage.getAllLagerhuse()); // Fyld combobox med lagre
         comboLager.setPromptText("Vælg lager");
-        this.add(comboLager, 0, 3,2,1);
+        this.add(comboLager, 0, 4,2,1);
 
         // Sørg for at opdatere listen af fade, når et lager vælges
         comboLager.setOnAction(event -> opdaterFadePåLager());
 
         Label lblSeFadePåLager = new Label("Fade på lager");
-        this.add(lblSeFadePåLager, 0, 4,2,1);
-        this.add(lvSeFadePåLager, 0, 5,4,1);
+        this.add(lblSeFadePåLager, 0, 5,2,1);
+        this.add(lvSeFadePåLager, 0, 6,4,1);
         // Fyld ListView med fade på lager fra Controller
         lvSeFadePåLager.getItems().setAll(Controller.getFadePåLager(comboLager.getValue())); //
         lvSeFadePåLager.setPrefSize(250,100);
 
         // ListView til fade, der skal tilknyttes lager
         Label lblSeFadeTilLager = new Label("Fade til lagring");
-        this.add(lblSeFadeTilLager, 0, 6,2,1);
-        this.add(lvFadeTilLager, 0,7,4,1);
+        this.add(lblSeFadeTilLager, 0, 7,2,1);
+        this.add(lvFadeTilLager, 0,8,4,1);
         // Fyld ListView med fade til lager fra Controller
         lvFadeTilLager.getItems().setAll(Controller.getAlleFade()); //
         lvFadeTilLager.setPrefSize(250,100);
 
         // TextFields til at pladsere fade i lagerets koordinatsystem
         Label lblVælgReol = new Label("Vælg reol");
-        this.add(lblVælgReol,0,8);
-        this.add(txtReol,0,9);
+        this.add(lblVælgReol,0,9);
+        this.add(txtReol,0,10);
         Label lblVælgHylde = new Label("Vælg hylde");
-        this.add(lblVælgHylde,1,8);
-        this.add(txtHylde,1,9);
+        this.add(lblVælgHylde,1,9);
+        this.add(txtHylde,1,10);
         Label lblVælgPlads = new Label("Vælg plads");
-        this.add(lblVælgPlads,2,8);
-        this.add(txtPlads,2,9);
+        this.add(lblVælgPlads,2,9);
+        this.add(txtPlads,2,10);
 
         // Knap til at sætte fade på lager
         btnSætFadPåLager.setOnAction(event -> sætFadPåLagerAction());
-        this.add(btnSætFadPåLager,0,10,2,1);
+        this.add(btnSætFadPåLager,0,11,2,1);
     }
 
     private void opretAction() {

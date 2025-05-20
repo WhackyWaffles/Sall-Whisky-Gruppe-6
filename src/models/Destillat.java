@@ -9,8 +9,6 @@ import java.util.ArrayList;
 public class Destillat {
     private String batchNr;
     private double alkoholProcent;
-    // TODO: Gøre noget ved evtAntalGange
-    private int evtAntalGange; // skal ikke bruges til whisky-produktion
     private double destillatLiter;
     private LocalDate destilleringDato;
     private Ristning ristning; // bruges i stedet for malt
