@@ -1,10 +1,8 @@
 package controller;
 
-import models.Destillat;
-import models.Korn;
-import models.Malt;
-import models.Ristning;
+import models.*;
 import org.junit.jupiter.api.Test;
+import storage.Storage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -54,6 +52,52 @@ class ControllerTest {
         // Assert
         assertTrue(result2.contains(korn1));
         assertTrue(result2.contains(korn2));
+    }
+
+    @Test
+    void testOpretFad() {
+        // Arrange
+        String fadNr = "F001";
+        String fadtype = "Sherry";
+        String fadMateriale = "Eg";
+        double kapacitet = 200.0;
+        Charring charring = Charring.MEDIUM_CHAR;
+        FillNummer fillNummer = FillNummer.SECOND_FILL;
+        ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
+
+        // Act
+        Fad fad = Controller.opretFad(fadNr, fadtype, fadMateriale, kapacitet, charring, fillNummer, påfyldninger);
+
+        // Assert
+        assertNotNull(fad);
+        assertEquals(fadNr, fad.getFadNr());
+        assertEquals(fadtype, fad.getFadtype());
+        assertEquals(fadMateriale, fad.getFadMateriale());
+        assertEquals(kapacitet, fad.getKapacitet());
+        assertEquals(charring, fad.getCharring());
+        assertEquals(fillNummer, fad.getFillNummer());
+        assertEquals(påfyldninger, fad.getPåfyldninger());
+
+        // Verificér at fadet er tilføjet til Storage
+        assertTrue(Storage.getAlleFade().contains(fad));
+    }
+
+    @Test
+    void testOpretFad_UgyldigtKapacitet() {
+        // Skal kaste en exception, hvis kapacitet er negativ
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            Controller.opretFad("F002", "Bourbon", "Eg", -50, Charring.HEAVY_TOAST, FillNummer.FIRST_FILL, new ArrayList<>());
+        });
+        assertEquals("Kapacitet kan ikke være negativ eller nul", exception.getMessage());
+    }
+
+    @Test
+    void testOpretFad_NullFadNr() {
+        // Skal kaste en exception, hvis fadNr er null
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            Controller.opretFad(null, "Sherry", "Eg", 150, Charring.HEAVY_CHAR, FillNummer.SECOND_FILL, new ArrayList<>());
+        });
+        assertEquals("Fadnummer kan ikke være null eller tomt", exception.getMessage());
     }
 
     @Test

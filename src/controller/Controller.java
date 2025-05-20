@@ -60,6 +60,12 @@ public class Controller {
     public static Fad opretFad(String fadNr, String fadtype, String fadMateriale,
                                double kapacitet, Charring charring, FillNummer fillNummer,
                                ArrayList<Påfyldning> påfyldninger) {
+        if (kapacitet <= 0) {
+            throw new IllegalArgumentException("Kapacitet kan ikke være negativ eller nul");
+        }
+        if (fadNr == null || fadNr.isBlank()) {
+            throw new IllegalArgumentException("Fadnummer kan ikke være null eller tomt");
+        }
         Fad fad = new Fad(fadNr, fadtype, fadMateriale, kapacitet, charring, fillNummer, påfyldninger);
         Storage.addFad(fad);
         return fad;
