@@ -168,4 +168,16 @@ public class Storage {
         return new ArrayList<>(lagerhuse);
     }
 
+    /**
+     * Sletter alle objekter, der er gemt i Storage
+     */
+    public static void clearAll() {
+        kornSorter.clear();
+        malts.clear();
+        destillater.clear();
+        fade.clear();
+        påfyldninger.clear();
+        whiskyList.clear();
+        lagerhuse.clear();
+    }
 }

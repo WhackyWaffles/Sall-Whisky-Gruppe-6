@@ -236,8 +236,8 @@ public class Lager {
             for (int j = 0; j < reoler[i].getHylder().length; j++) { // For alle hylder
                 for (int k = 0; k < reoler[i].getHylder()[j].getPladser().length; k++) { // For alle pladser
                     if (!reoler[i].getHylder()[j].getPladser()[k].isEmpty()) { // Hvis der er et Fad på pladsen
-                        Fad fad = reoler[i].getHylder()[j].getPladser()[k].getFad();
-                        fadeMedKoordinater.add(fad.toString() + " [Reol: " + i + ", Hylde: " + j + ", Plads: " + k + "]");
+                        fadeMedKoordinater.add(reoler[i].getHylder()[j].getPladser()[k].getFad().toString()
+                                + " [Reol: " + i + ", Hylde: " + j + ", Plads: " + k + "]");
                     }
                 }
             }

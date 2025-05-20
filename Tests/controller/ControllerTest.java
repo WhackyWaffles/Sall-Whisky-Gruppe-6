@@ -14,6 +14,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
 
+    // TODO: Lav JunitTests til alle metoder i kontrolleren
+    // TODO: I GUI, lav sådan, at de fade der ses viser om de er placeret på et lager allerede,
+    //      og implementer sådan, at hvis de rykkes fra en plads,
+    //      at de så bliver removed fra den plads og sat ind på den nye.
+    // TODO: GUI exception handlers
+
     @Test
     void getAllKornSorter() {
         // Arrange
