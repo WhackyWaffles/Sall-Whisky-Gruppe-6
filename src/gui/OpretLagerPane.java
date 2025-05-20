@@ -7,8 +7,6 @@ import javafx.scene.control.*;
 import models.*;
 import storage.Storage;
 
-import java.util.ArrayList;
-
 
 public class OpretLagerPane extends GridPane {
 
@@ -49,7 +47,7 @@ public class OpretLagerPane extends GridPane {
         this.add(txtHyldePladser, 1, 5);
 
         // Opret Lager knap
-        btnOpretLager.setOnAction(event -> opretAction());
+        btnOpretLager.setOnAction(event -> opretLagerAction());
         this.add(btnOpretLager, 0, 6);
 
         // ComboBox for lagre
@@ -71,15 +69,19 @@ public class OpretLagerPane extends GridPane {
         lvSeFadePåLager.setPrefSize(300,150); // Sætter en passende højde
     }
 
-    private void opretAction() {
+    private void opretLagerAction() {
+        // henter lager og lokation fra relevante felter
         String navn = txtLagerNavn.getText();
         String lokation = txtLagerLokation.getText();
 
+        // Hvis der ikke er angivet hvor mange reoler, hylder og pladser, print besked og stop metoden.
         if (txtAntalReoler.getText().isEmpty() || txtReolHylder.getText().isEmpty() || txtHyldePladser.getText().isEmpty()) {
             System.out.println("Udfyld venligst alle felter.");
             return;
         }
 
+        // Læser felterne for antal reoler, hylder og pladser, og opretter derefter Lager via Controller
+        // try/catch for at fange, om data er angivet som andet end tal
         try {
             int antalReoler = Integer.parseInt(txtAntalReoler.getText());
             int antalHylder = Integer.parseInt(txtReolHylder.getText());
@@ -92,7 +94,7 @@ public class OpretLagerPane extends GridPane {
             clearFields();
         } catch (
                 NumberFormatException e) {
-            System.out.println("Fejl: Antal reoler skal være et tal!");
+            System.out.println("Fejl: Antal reoler, hylder og pladser skal være være angivet som tal!");
         }
     }
 
@@ -104,8 +106,14 @@ public class OpretLagerPane extends GridPane {
         txtHyldePladser.clear();
     }
 
+    // TODO: I GUI, lav sådan, at de fade der ses viser om de er placeret på et lager allerede,
+    //      og implementer sådan, at hvis de rykkes fra en plads,
+    //      at de så bliver removed fra den plads og sat ind på den nye.
+
     private void opdaterFadePåLager() {
+        // finder det valgte lager fra comboBox
         Lager valgtLager = comboLager.getValue();
+        // Fylder listen med Fade fra
         if (valgtLager != null) {
             lvSeFadePåLager.getItems().setAll(valgtLager.indholdsOversigt()); // Henter fade som tekst
         } else {
