@@ -56,7 +56,7 @@ public class OpretLagerPane extends GridPane {
         Label lblLager = new Label("Vælg lager");
         this.add(lblLager, 0, 7);
 
-        comboLager.getItems().setAll(Storage.getAlleLagre()); // Fyld combobox med lagre
+        comboLager.getItems().setAll(Storage.getAllLagerhuse()); // Fyld combobox med lagre
         comboLager.setPromptText("Vælg lager");
         this.add(comboLager, 1, 7);
 
@@ -86,7 +86,7 @@ public class OpretLagerPane extends GridPane {
             int antalPladserPerHylde = Integer.parseInt(txtHyldePladser.getText());
 
             // Opret lager i Controller
-            Controller.getController().opretLager(navn,lokation,antalReoler,antalHylder,antalPladserPerHylde);
+            Controller.opretLager(navn,lokation,antalReoler,antalHylder,antalPladserPerHylde);
 
             System.out.println("Lager oprettet: " + navn + " med " + antalReoler + " reoler.");
             clearFields();
