@@ -49,5 +49,13 @@ public class App {
         //    ==================================================================================
         Lager lagerSall = Controller.opretLager("Sall lager", "Sall", 32, 3, 2);
         Lager lagerViborg = Controller.opretLager("Viborg lager", "Viborg", 14, 3, 2);
+
+        //    ==================================================================================
+        //    Placerer Fade på lager
+        //    ==================================================================================
+//        lagerSall.setFad(fad68,1,2,1);
+//        lagerSall.setFad(fad69,2,2,0);
+//        lagerViborg.setFad(fad70,1,1,1);
+//        lagerViborg.setFad(fad71,2,1,0);
     }
 }

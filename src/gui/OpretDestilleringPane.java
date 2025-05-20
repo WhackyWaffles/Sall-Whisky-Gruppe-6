@@ -10,7 +10,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import models.Destillat;
 import models.Ristning;
-import storage.Storage;
 
 import java.time.LocalDate;
 
@@ -56,7 +55,7 @@ public class OpretDestilleringPane extends GridPane {
         // ComboBox for Malt
         Label lblmalt = new Label("Malt Type");
         this.add(lblmalt, 0,5);
-        comboMalt.getItems().addAll(Ristning.PILSNERMALT,Ristning.PALEMALT,Ristning.VIENNAMALT,
+        comboMalt.getItems().addAll(Ristning.PILSNERMALT, Ristning.PALEMALT,Ristning.VIENNAMALT,
                 Ristning.PILSNERMALT_RØGET,Ristning.PALEMALT_RØGET, Ristning.VIENNAMALT_RØGET);
         comboMalt.setPromptText("Vælg Malt Type");
         this.add(comboMalt, 1, 5);
