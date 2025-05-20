@@ -17,7 +17,7 @@ class ControllerTest {
 
     @Test
     void getAllKornSorter() {
-        // Arrange
+        // Arrange (Vi tester også opretKorn())
         Korn korn1 = Controller.opretKorn("Mosegaard", "Viborg", "Moonshine");
         Korn korn2 = Controller.opretKorn("Stadsgaard", "Brabrand", "Belagria");
         // Act
@@ -41,7 +41,7 @@ class ControllerTest {
         korn2024B.add(korn1);
         korn2024C.add(korn2);
 
-        // Opretter Malt
+        // Opretter Malt (tester også opretMalt())
         Malt malt1 = Controller.opretMalt(korn2024B, Ristning.VIENNAMALT, true, "carlsbergensis");
         Malt malt2 = Controller.opretMalt(korn2024C, Ristning.PILSNERMALT, false, "BRY-97 American West Coast Ale Gær");
 
@@ -101,8 +101,46 @@ class ControllerTest {
     }
 
     @Test
-    void getAllDestillater() {
+    void testFindFad_ValidFadNr() {
         // Arrange
+        Fad fad1 = new Fad("F001", "Sherry", "Eg", 200.0, Charring.HEAVY_TOAST, FillNummer.FIRST_FILL, new ArrayList<>());
+        Fad fad2 = new Fad("F002", "Bourbon", "Eg", 180.0, Charring.LIGHT_TOAST, FillNummer.SECOND_FILL, new ArrayList<>());
+
+        // Act
+        Storage.addFad(fad1);
+        Storage.addFad(fad2);
+
+        // Assert
+        Fad fundetFad = Controller.findFad("F001");
+        assertNotNull(fundetFad);
+        assertEquals("F001", fundetFad.getFadNr());
+
+        // Assert
+        Fad fundetFad2 = Controller.findFad("F002");
+        assertNotNull(fundetFad2);
+        assertEquals("F002", fundetFad2.getFadNr());
+    }
+
+    @Test
+    void testFindFad_UgyldigtFadNr() {
+        // Arrange søgning efter et fad, der ikke eksisterer
+        Fad fundetFad = Controller.findFad("F999");
+        assertNull(fundetFad);
+    }
+
+    @Test
+    void testFindFad_NullFadNr() {
+        // Arrange håndtering af null-input
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            Controller.findFad(null);
+        });
+        // Assert
+        assertEquals("Fadnummer må ikke være null", exception.getMessage());
+    }
+
+    @Test
+    void getAllDestillater() {
+        // Arrange (tester også opretDestillat())
         Destillat destillat1 = Controller.opretDestillat("testNr1", 55.0, 20.0,
                 LocalDate.of(2024, 1, 1), Ristning.VIENNAMALT);
         Destillat destillat2 = Controller.opretDestillat("testNr2", 55.0, 20.0,
@@ -112,5 +150,15 @@ class ControllerTest {
         // Assert
         assertTrue(Controller.getAllDestillater().contains(destillat1));
         assertTrue(Controller.getAllDestillater().contains(destillat2));
+    }
+
+    @Test
+    void testFindDestilat_NullBatchNummer() {
+        // Arrange håndtering af null-input
+        Exception exception = assertThrows(NullPointerException.class, () -> {
+            Controller.findDestillat(null);
+        });
+        // Assert
+        assertEquals("BatchNummer må ikke være null!", exception.getMessage());
     }
 }

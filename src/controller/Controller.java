@@ -85,6 +85,9 @@ public class Controller {
      * @return fadet hvis det bliver fundet, ellers {@code null}
      */
     public static Fad findFad(String fadNr) {
+        if (fadNr == null) {
+            throw new NullPointerException("Fadnummer må ikke være null");
+        }
         for (Fad fad : Storage.getAlleFade()) {
             if (fad.getFadNr().equals(fadNr)) {
                 return fad;
@@ -110,6 +113,9 @@ public class Controller {
     }
 
     public static Destillat findDestillat(String batchNr) {
+        if (batchNr == null) {
+            throw new NullPointerException("BatchNummer må ikke være null!");
+        }
         for (Destillat destillat : Storage.getAlleDestillater()) {
             if (destillat.getBatchNr().equals(batchNr)) {
                 return destillat;
