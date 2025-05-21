@@ -274,9 +274,6 @@ public class OpretLagerPane extends GridPane {
     private void btnOpdaterFadeAction() {
         opdaterFadePåLager();
     }
-
-    // TODO: TestCase Skema for LagerHyldeTest.java
-
 }
 
 

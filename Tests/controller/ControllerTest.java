@@ -12,8 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
 
-    // TODO: GUI exception handlers
-
     @Test
     void getAllKornSorter() {
         // Arrange (Vi tester også opretKorn())

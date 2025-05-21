@@ -4,8 +4,6 @@ public class Korn {
     private String mark;
     private String lokation;
     private String kornSort;
-    // TODO: finde ud af hvad vi gør med maengde for korn (hvis noget)
-    private int maengde;
 
     public Korn(String mark, String lokation, String kornSort) {
         this.mark = mark;
@@ -25,7 +23,4 @@ public class Korn {
         return kornSort;
     }
 
-    public int getMaengde() {
-        return maengde;
-    }
 }

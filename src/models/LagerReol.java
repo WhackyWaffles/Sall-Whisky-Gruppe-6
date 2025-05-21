@@ -67,12 +67,14 @@ public class LagerReol {
         return hylder;
     }
 
-    // TODO: Finde ud af, om denne metode skal beholdes.
     /**
      * Hvis det nye antal hylder er mindre end det nuværende antal, tjekker de hylder, der er ved at blive slettet.
      * Hvis de ikke er tomme, kaldes en IllegalArgumentException.
      * Kopierer derefter indholdet af {@code hylder} over til
      * {@code temp}, der har den nye størrelse. Til sidst gøres {@code temp} til {@code hylder}.
+     * <p>
+     * DEVNOTE: Denne metode er hverken implementeret eller brugt i version 1.0,
+     * men kan let implementeres hvis det bliver nødvendigt på et senere tidspunkt.
      */
     public void setAntalHylder(int antalHylder) {
         if (antalHylder < 0) {
