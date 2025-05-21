@@ -13,12 +13,12 @@ import java.time.LocalDate;
 
 public class OpretPåfyldningPane extends GridPane {
 
-    private TextField txtIdNr = new TextField();
-    private ListView<Destillat> lvDestillater = new ListView<>();
-    private ListView<Fad> lvFade = new ListView<>();
-    private TextField txtLiter = new TextField();
-    private DatePicker datePicker = new DatePicker();
-    private ListView<Påfyldning> lvPåfyldning = new ListView<>();
+    private final TextField txtIdNr = new TextField();
+    private final ListView<Destillat> lvDestillater = new ListView<>();
+    private final ListView<Fad> lvFade = new ListView<>();
+    private final TextField txtLiter = new TextField();
+    private final DatePicker datePicker = new DatePicker();
+    private final ListView<Påfyldning> lvPåfyldning = new ListView<>();
 
     public OpretPåfyldningPane() {
 

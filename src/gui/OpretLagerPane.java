@@ -14,22 +14,19 @@ import java.util.OptionalInt;
 
 public class OpretLagerPane extends GridPane {
 
-    private TextField txtLagerNavn = new TextField();
-    private TextField txtLagerLokation = new TextField();
-    private TextField txtAntalReoler = new TextField();
-    private TextField txtReolHylder = new TextField();
-    private TextField txtHyldePladser = new TextField();
-    Button btnOpretLager = new Button("Opret lager");
-    private ComboBox<Lager> comboLager = new ComboBox<>();
-    private ListView<String> lvSeFadePåDetteLager = new ListView<>();
-    private ListView<Fad> lvFadeIStorage = new ListView<>();
-    private TextField txtReol = new TextField();
-    private TextField txtHylde = new TextField();
-    private TextField txtPlads = new TextField();
-    private Button btnSætFadPåLager = new Button("Sæt fad på lager");
-    private Button btnOpdaterFade = new Button("Opdater fade");
-    private Label errorLabel = new Label();
-    private Label infoLabel = new Label();
+    private final TextField txtLagerNavn = new TextField();
+    private final TextField txtLagerLokation = new TextField();
+    private final TextField txtAntalReoler = new TextField();
+    private final TextField txtReolHylder = new TextField();
+    private final TextField txtHyldePladser = new TextField();
+    private final ComboBox<Lager> comboLager = new ComboBox<>();
+    private final ListView<String> lvSeFadePåDetteLager = new ListView<>();
+    private final ListView<Fad> lvFadeIStorage = new ListView<>();
+    private final TextField txtReol = new TextField();
+    private final TextField txtHylde = new TextField();
+    private final TextField txtPlads = new TextField();
+    private final Label errorLabel = new Label();
+    private final Label infoLabel = new Label();
 
     public OpretLagerPane() {
         this.setPadding(new Insets(20));
@@ -59,6 +56,7 @@ public class OpretLagerPane extends GridPane {
         this.add(txtHyldePladser, 3, 2);
 
         // Opret Lager knap
+        Button btnOpretLager = new Button("Opret lager");
         btnOpretLager.setOnAction(event -> opretAction());
         this.add(btnOpretLager, 0, 2,2,1);
 
@@ -100,10 +98,12 @@ public class OpretLagerPane extends GridPane {
         this.add(txtPlads,2,10);
 
         // Knap til at sætte fade på lager
+        Button btnSætFadPåLager = new Button("Sæt fad på lager");
         btnSætFadPåLager.setOnAction(event -> sætFadPåLagerAction());
         this.add(btnSætFadPåLager,0,11,2,1);
 
         // Knap til at opdatere fade på lager
+        Button btnOpdaterFade = new Button("Opdater fade");
         btnOpdaterFade.setOnAction(event -> btnOpdaterFadeAction());
         this.add(btnOpdaterFade,1,11,2,1);
         lvFadeIStorage.getItems().setAll(Controller.getAlleFade());

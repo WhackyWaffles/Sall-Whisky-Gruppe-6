@@ -1,17 +1,16 @@
 package models;
 
-import javafx.scene.control.DatePicker;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Destillat {
     private String batchNr;
     private String alkoholProcent;
     private double destillatLiter;
     private LocalDate destilleringDato;
-    private Ristning ristning; // bruges i stedet for malt
-    private ArrayList<Malt> malts;
+
+    // Ristning bruges i stedet for malt
+    private Ristning ristning;
+    // private ArrayList<Malt> malts;
 
     public Destillat(String batchNr, String alkoholProcent, double destillatLiter, LocalDate destilleringDato, Ristning ristning) {
         this.batchNr = batchNr;

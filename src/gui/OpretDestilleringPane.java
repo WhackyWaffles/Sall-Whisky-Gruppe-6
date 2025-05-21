@@ -15,12 +15,12 @@ import java.time.LocalDate;
 
 public class OpretDestilleringPane extends GridPane {
 
-    private TextField txtBatchNr = new TextField();
-    private TextField txtAlkoholProcent = new TextField();
-    private TextField txtAntalLiter = new TextField();
-    private ComboBox<Ristning> comboMalt = new ComboBox<>();
-    private DatePicker datePicker = new DatePicker();
-    private ListView<Destillat> lvDestillater = new ListView<>();
+    private final TextField txtBatchNr = new TextField();
+    private final TextField txtAlkoholProcent = new TextField();
+    private final TextField txtAntalLiter = new TextField();
+    private final ComboBox<Ristning> comboMalt = new ComboBox<>();
+    private final DatePicker datePicker = new DatePicker();
+    private final ListView<Destillat> lvDestillater = new ListView<>();
 
     public OpretDestilleringPane() {
 
@@ -29,9 +29,6 @@ public class OpretDestilleringPane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
 
-        this.txtBatchNr = new TextField();
-        this.txtAlkoholProcent = new TextField();
-        this.txtAntalLiter = new TextField();
         this.datePicker.setValue(LocalDate.now());
 
         //Label og textfield

@@ -7,19 +7,17 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import models.Whisky;
-import storage.Storage;
-
 
 import java.time.LocalDate;
 
 public class OpretWhiskyPane extends GridPane {
 
-    private TextField txtWhiskyId = new TextField();
-    private TextField txtNavn = new TextField();
-    private TextField txtslutAlkoholProcent = new TextField();
-    private TextField txtAntalFlasker = new TextField();
-    private DatePicker datePicker = new DatePicker();
-    private ListView<Whisky> lvWhisky = new ListView<>();
+    private final TextField txtWhiskyId = new TextField();
+    private final TextField txtNavn = new TextField();
+    private final TextField txtSlutAlkoholProcent = new TextField();
+    private final TextField txtAntalFlasker = new TextField();
+    private final DatePicker datePicker = new DatePicker();
+    private final ListView<Whisky> lvWhisky = new ListView<>();
 
 
     public OpretWhiskyPane() {
@@ -29,7 +27,7 @@ public class OpretWhiskyPane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
 
-        //Label og Textfield
+        // Label og TextField
         Label lblWhiskyId = new Label("Whisky ID ");
         this.add(lblWhiskyId, 0, 1);
         this.add(this.txtWhiskyId, 1, 1);
@@ -40,7 +38,7 @@ public class OpretWhiskyPane extends GridPane {
 
         Label lblAlkoholPrct = new Label("Alkohol % ");
         this.add(lblAlkoholPrct, 0, 3);
-        this.add(this.txtslutAlkoholProcent, 1, 3);
+        this.add(this.txtSlutAlkoholProcent, 1, 3);
 
         Label lblAntalFlasker = new Label("Antal flasker ");
         this.add(lblAntalFlasker, 0, 4);
@@ -48,7 +46,7 @@ public class OpretWhiskyPane extends GridPane {
 
         Label lblAftapDato = new Label("Aftapningsdato ");
         this.add(lblAftapDato, 0, 5);  //
-        datePicker.setValue(LocalDate.now());// default idag
+        datePicker.setValue(LocalDate.now()); // default er i dag
         this.add(datePicker, 1, 5);
 
         Label lblWhiskyList = new Label("Whisky Lister");
@@ -65,9 +63,9 @@ public class OpretWhiskyPane extends GridPane {
         btnAnnuller.setOnAction(event -> this.annullerAction());
 
 
-        Button btnOpdate = new Button("Opdate");
-        this.add(btnOpdate, 2, 15);
-        btnOpdate.setOnAction(event -> this.opdateAction());
+        Button btnUpdate = new Button("Update");
+        this.add(btnUpdate, 2, 15);
+        btnUpdate.setOnAction(event -> this.updateAction());
 
         Button btnRemove = new Button("Fjern");
         this.add(btnRemove, 3, 15);  // Position it appropriately
@@ -79,14 +77,14 @@ public class OpretWhiskyPane extends GridPane {
 
         HBox buttonBox = new HBox(30);
         this.add(buttonBox,0,7,2,1);
-        buttonBox.getChildren().addAll(btnOpretWhisky, btnAnnuller, btnOpdate, btnRemove);
+        buttonBox.getChildren().addAll(btnOpretWhisky, btnAnnuller, btnUpdate, btnRemove);
     }
 
     private void opretAction() {
         String id = txtWhiskyId.getText();
         String navn = txtNavn.getText();
         String antalStr = txtAntalFlasker.getText();
-        String alkoholStr = txtslutAlkoholProcent.getText();
+        String alkoholStr = txtSlutAlkoholProcent.getText();
         LocalDate dato = datePicker.getValue();
 
         if (id.isEmpty() || navn.isEmpty() || alkoholStr.isEmpty() || antalStr.isEmpty()) {
@@ -117,7 +115,7 @@ public class OpretWhiskyPane extends GridPane {
         System.out.println("Handling annulleret. Felter nulstillet.");
     }
 
-    private void opdateAction() {
+    private void updateAction() {
 
         String id = txtWhiskyId.getText().trim();
         Whisky whisky = Controller.findWhiskyById(id);
@@ -127,7 +125,7 @@ public class OpretWhiskyPane extends GridPane {
         }
 
         String navn = txtNavn.getText().trim();
-        String alkoholStr = txtslutAlkoholProcent.getText().trim();
+        String alkoholStr = txtSlutAlkoholProcent.getText().trim();
         String antalStr = txtAntalFlasker.getText().trim();
         LocalDate dato = datePicker.getValue();
         if (navn.isEmpty() || alkoholStr.isEmpty() || antalStr.isEmpty() || dato == null) {
@@ -170,7 +168,7 @@ public class OpretWhiskyPane extends GridPane {
     private void clearFields () {
         txtWhiskyId.clear();
         txtNavn.clear();
-        txtslutAlkoholProcent.clear();
+        txtSlutAlkoholProcent.clear();
         txtAntalFlasker.clear();
         datePicker.setValue(LocalDate.now());
     }

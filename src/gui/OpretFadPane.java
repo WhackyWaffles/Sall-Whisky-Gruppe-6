@@ -15,13 +15,13 @@ import java.util.ArrayList;
 
 public class OpretFadPane extends GridPane {
 
-    private TextField txtFadNr = new TextField();
-    private TextField txtFadType = new TextField();
-    private TextField txtFadMateriale = new TextField();
-    private TextField txtKapacitet = new TextField();
-    private ComboBox<FillNummer> comboFillNr = new ComboBox<>();
-    private ComboBox<Charring> comboCharring = new ComboBox<>();
-    private ListView<Fad> lvFade = new ListView<>();
+    private final TextField txtFadNr = new TextField();
+    private final TextField txtFadType = new TextField();
+    private final TextField txtFadMateriale = new TextField();
+    private final TextField txtKapacitet = new TextField();
+    private final ComboBox<FillNummer> comboFillNr = new ComboBox<>();
+    private final ComboBox<Charring> comboCharring = new ComboBox<>();
+    private final ListView<Fad> lvFade = new ListView<>();
 
 
     public OpretFadPane() {
@@ -126,11 +126,6 @@ public class OpretFadPane extends GridPane {
     private void annullerAction() {
         clearFields();
         System.out.println("Handling annulleret. Felter nulstillet.");
-    }
-
-    private void updaterLister() {
-        lvFade.getItems().setAll(Controller.getAlleFade());
-        System.out.println(("Fadene er opdateret"));
     }
 
     private void clearFields() {
