@@ -1,13 +1,13 @@
 package gui;
 
-import controller.Controller;
+import application.controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import models.Destillat;
-import models.Fad;
-import models.Påfyldning;
+import application.models.Destillat;
+import application.models.Fad;
+import application.models.Påfyldning;
 
 import java.time.LocalDate;
 

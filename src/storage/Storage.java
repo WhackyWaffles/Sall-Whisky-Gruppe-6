@@ -1,18 +1,18 @@
 package storage;
 
-import models.*;
+import application.models.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private static final List<Korn> kornSorter = new ArrayList<>();
-    private static final List<Malt> malts = new ArrayList<>();
-    private static final List<Destillat> destillater = new ArrayList<>();
-    private static final List<Fad> fade = new ArrayList<>();
-    private static final List<Påfyldning> påfyldninger = new ArrayList<>();
-    private static final List<Whisky> whiskyList = new ArrayList<>();
-    private static final List<Lager> lagerhuse = new ArrayList<>();
+    private static final ArrayList<Korn> kornSorter = new ArrayList<>();
+    private static final ArrayList<Malt> malts = new ArrayList<>();
+    private static final ArrayList<Destillat> destillater = new ArrayList<>();
+    private static final ArrayList<Fad> fade = new ArrayList<>();
+    private static final ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
+    private static final ArrayList<Whisky> whiskyList = new ArrayList<>();
+    private static final ArrayList<Lager> lagerhuse = new ArrayList<>();
 
     // ======================================================================
     // KornSort
@@ -30,7 +30,7 @@ public class Storage {
     /**
      * Returnerer en liste med alle gemte kornsorter
      */
-    public static List<Korn> getAllKornSorter() {
+    public static ArrayList<Korn> getAllKornSorter() {
         return new ArrayList<>(kornSorter);
     }
 
@@ -50,7 +50,7 @@ public class Storage {
     /**
      * Returnerer en liste med alle gemte malts
      */
-    public static List<Malt> getAllMalts() {
+    public static ArrayList<Malt> getAllMalts() {
         return new ArrayList<>(malts);
     }
 
@@ -70,7 +70,7 @@ public class Storage {
     /**
      * Returnerer en liste med alle gemte destilleringer
      */
-    public static List<Destillat> getAlleDestillater() {
+    public static ArrayList<Destillat> getAlleDestillater() {
         return new ArrayList<>(destillater);
     }
 
@@ -90,7 +90,7 @@ public class Storage {
     /**
      * Returnerer en liste med alle gemte fade
      */
-    public static List<Fad> getAlleFade() {
+    public static ArrayList<Fad> getAlleFade() {
         return new ArrayList<>(fade);
     }
 
@@ -102,7 +102,7 @@ public class Storage {
     /**
      * Returnerer en liste med alle gemte påfyldninger
      */
-    public static List<Påfyldning> getAllPåfyldninger() {
+    public static ArrayList<Påfyldning> getAllPåfyldninger() {
         return new ArrayList<>(påfyldninger);
     }
 
@@ -117,7 +117,7 @@ public class Storage {
     /**
      * Returnerer en liste med alle gemte påfyldninger
      */
-    public static List<Påfyldning> getAllePåfyldninger() {
+    public static ArrayList<Påfyldning> getAllePåfyldninger() {
         return new ArrayList<>(påfyldninger);
     }
 
@@ -134,7 +134,7 @@ public class Storage {
         }
     }
 
-    public static List<Whisky> getWhiskyList() {
+    public static ArrayList<Whisky> getWhiskyList() {
         return new ArrayList<>(whiskyList);
     }
 
@@ -165,7 +165,7 @@ public class Storage {
     /**
      * Returnerer en liste med alle gemte lagerhuse
      */
-    public static List<Lager> getAllLagerhuse() {
+    public static ArrayList<Lager> getAllLagerhuse() {
         return new ArrayList<>(lagerhuse);
     }
 

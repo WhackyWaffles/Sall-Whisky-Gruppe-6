@@ -1,11 +1,12 @@
 package gui;
 
-import controller.Controller;
+import application.models.Fad;
+import application.models.Lager;
+import application.controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
-import models.*;
 import storage.Storage;
 
 import java.util.Arrays;

@@ -1,6 +1,9 @@
 package models;
 
-import controller.Controller;
+import application.models.Korn;
+import application.models.Malt;
+import application.models.Ristning;
+import application.controller.Controller;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

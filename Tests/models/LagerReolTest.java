@@ -1,6 +1,10 @@
 package models;
 
-import controller.Controller;
+import application.models.Charring;
+import application.models.Fad;
+import application.models.FillNummer;
+import application.models.Lager;
+import application.controller.Controller;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

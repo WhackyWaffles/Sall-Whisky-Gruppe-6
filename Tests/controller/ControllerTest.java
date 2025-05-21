@@ -1,6 +1,7 @@
 package controller;
 
-import models.*;
+import application.controller.Controller;
+import application.models.*;
 import org.junit.jupiter.api.Test;
 import storage.Storage;
 
@@ -18,7 +19,7 @@ class ControllerTest {
         Korn korn1 = Controller.opretKorn("Mosegaard", "Viborg", "Moonshine");
         Korn korn2 = Controller.opretKorn("Stadsgaard", "Brabrand", "Belagria");
         // Act
-        List<Korn> result = Controller.getAllKornSorter();
+        ArrayList<Korn> result = Controller.getAllKornSorter();
         // Assert
         assertEquals(2, result.size());
         assertTrue(result.contains(korn1));
@@ -33,22 +34,32 @@ class ControllerTest {
         Korn korn2 = Controller.opretKorn("Stadsgaard", "Brabrand", "Chevallier");
 
         // Sætter Korn i ArrayLister
-        ArrayList<Korn> korn2024B = new ArrayList<>();
-        ArrayList<Korn> korn2024C = new ArrayList<>();
-        korn2024B.add(korn1);
-        korn2024C.add(korn2);
+        ArrayList<Korn> testKornArray1 = new ArrayList<>();
+        ArrayList<Korn> testKornArray2 = new ArrayList<>();
+        testKornArray1.add(korn1);
+        testKornArray2.add(korn2);
 
         // Opretter Malt (tester også opretMalt())
-        Malt malt1 = Controller.opretMalt(korn2024B, Ristning.VIENNAMALT, true, "carlsbergensis");
-        Malt malt2 = Controller.opretMalt(korn2024C, Ristning.PILSNERMALT, false, "BRY-97 American West Coast Ale Gær");
+        Malt malt1 = Controller.opretMalt(testKornArray1, Ristning.VIENNAMALT, true, "carlsbergensis");
+        Malt malt2 = Controller.opretMalt(testKornArray2, Ristning.PILSNERMALT, false, "BRY-97 American West Coast Ale Gær");
 
         // Opretter variabel for at kunne teste
-        List<Malt> result2 = Controller.getAllMalts();
+        ArrayList<Malt> result2 = Controller.getAllMalts();
 
         // Act
+        boolean containsKorn1 = false;
+        boolean containsKorn2 = false;
+        for (Malt malt : result2) {
+            if (malt.getKornSorter().contains(korn1)) {
+                containsKorn1 = true;
+            }
+            if (malt.getKornSorter().contains(korn2)) {
+                containsKorn2 = true;
+            }
+        }
         // Assert
-        assertTrue(result2.contains(korn1));
-        assertTrue(result2.contains(korn2));
+        assertTrue(containsKorn1);
+        assertTrue(containsKorn2);
     }
 
     @Test
@@ -82,18 +93,16 @@ class ControllerTest {
     @Test
     void testOpretFad_UgyldigtKapacitet() {
         // Skal kaste en exception, hvis kapacitet er negativ
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            Controller.opretFad("F002", "Bourbon", "Eg", -50, Charring.HEAVY_TOAST, FillNummer.FIRST_FILL, new ArrayList<>());
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                Controller.opretFad("F002", "Bourbon", "Eg", -50, Charring.HEAVY_TOAST, FillNummer.FIRST_FILL, new ArrayList<>()));
         assertEquals("Kapacitet kan ikke være negativ eller nul", exception.getMessage());
     }
 
     @Test
     void testOpretFad_NullFadNr() {
         // Skal kaste en exception, hvis fadNr er null
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            Controller.opretFad(null, "Sherry", "Eg", 150, Charring.HEAVY_CHAR, FillNummer.SECOND_FILL, new ArrayList<>());
-        });
+        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+                Controller.opretFad(null, "Sherry", "Eg", 150, Charring.HEAVY_CHAR, FillNummer.SECOND_FILL, new ArrayList<>()));
         assertEquals("Fadnummer kan ikke være null eller tomt", exception.getMessage());
     }
 
@@ -128,9 +137,8 @@ class ControllerTest {
     @Test
     void testFindFad_NullFadNr() {
         // Arrange håndtering af null-input
-        Exception exception = assertThrows(NullPointerException.class, () -> {
-            Controller.findFad(null);
-        });
+        Exception exception = assertThrows(NullPointerException.class, () ->
+                Controller.findFad(null));
         // Assert
         assertEquals("Fadnummer må ikke være null", exception.getMessage());
     }
@@ -152,9 +160,8 @@ class ControllerTest {
     @Test
     void testFindDestilat_NullBatchNummer() {
         // Arrange håndtering af null-input
-        Exception exception = assertThrows(NullPointerException.class, () -> {
-            Controller.findDestillat(null);
-        });
+        Exception exception = assertThrows(NullPointerException.class, () ->
+                Controller.findDestillat(null));
         // Assert
         assertEquals("BatchNummer må ikke være null!", exception.getMessage());
     }
@@ -189,7 +196,7 @@ class ControllerTest {
         int flaskeNr = 500;
         String slutAlkoholProcent = "51";
         LocalDate aftapningsDato = LocalDate.now();
-        Fad fad = new Fad("457", "Ex-Bourbon", "Egetræ", 200, Charring.MEDIUM_CHAR, FillNummer.FIRST_FILL, new ArrayList<>());;
+        Fad fad = new Fad("457", "Ex-Bourbon", "Egetræ", 200, Charring.MEDIUM_CHAR, FillNummer.FIRST_FILL, new ArrayList<>());
 
         // Act
         Whisky whisky = Controller.opretWhisky(whiskyId, navn, flaskeNr, slutAlkoholProcent, aftapningsDato, fad);
@@ -264,8 +271,8 @@ class ControllerTest {
         // Assert - Bekræft, at koordinater og fade vises korrekt
         assertNotNull(fadePåLager);
         assertEquals(2, fadePåLager.size());
-        assertTrue(fadePåLager.contains(fad1.toString() + " [Reol: 0, Hylde: 0, Plads: 0]"));
-        assertTrue(fadePåLager.contains(fad2.toString() + " [Reol: 1, Hylde: 1, Plads: 1]"));
+        assertTrue(fadePåLager.contains(fad1 + " [Reol: 0, Hylde: 0, Plads: 0]"));
+        assertTrue(fadePåLager.contains(fad2 + " [Reol: 1, Hylde: 1, Plads: 1]"));
 
         // Test at søgning på et tomt lager returnerer en tom liste
         Lager tomtLager = new Lager("Tomt Lager", "Ingen fade", 2, 2, 2);

@@ -1,6 +1,7 @@
 package models;
 
-import controller.Controller;
+import application.models.Korn;
+import application.controller.Controller;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

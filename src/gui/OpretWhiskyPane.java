@@ -1,12 +1,12 @@
 package gui;
 
 
-import controller.Controller;
+import application.controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import models.Whisky;
+import application.models.Whisky;
 
 import java.time.LocalDate;
 

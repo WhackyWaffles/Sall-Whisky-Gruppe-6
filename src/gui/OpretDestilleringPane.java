@@ -1,6 +1,6 @@
 package gui;
 
-import controller.Controller;
+import application.controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -8,8 +8,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import models.Destillat;
-import models.Ristning;
+import application.models.Destillat;
+import application.models.Ristning;
 
 import java.time.LocalDate;
 

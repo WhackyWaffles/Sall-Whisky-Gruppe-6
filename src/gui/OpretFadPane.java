@@ -1,14 +1,14 @@
 package gui;
 
-import controller.Controller;
+import application.controller.Controller;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import models.Charring;
-import models.Fad;
-import models.FillNummer;
-import models.Påfyldning;
+import application.models.Charring;
+import application.models.Fad;
+import application.models.FillNummer;
+import application.models.Påfyldning;
 
 import java.util.ArrayList;
 
