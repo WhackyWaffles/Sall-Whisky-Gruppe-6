@@ -12,7 +12,7 @@ class DestilleringTest {
     @Test
     void getBatchNr() {
         // Arrange
-        Destillat destillering = Controller.opretDestillat("NM100",72.0, 35, LocalDate.of(2025, 1,1),Ristning.VIENNAMALT);
+        Destillat destillering = Controller.opretDestillat("NM100","72.0", 35, LocalDate.of(2025, 1,1),Ristning.VIENNAMALT);
         // Act
         // Assert
         assertEquals("NM100",destillering.getBatchNr());
@@ -21,9 +21,9 @@ class DestilleringTest {
     @Test
     void getAlkoholProcent() {
         // Arrange
-        Destillat destillering = Controller.opretDestillat("NM100", 72.0, 35, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT);
+        Destillat destillering = Controller.opretDestillat("NM100", "72.0", 35, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT);
         // Act
         // Assert
-        assertEquals(72.0, destillering.getAlkoholProcent());
+        assertEquals("72.0", destillering.getAlkoholProcent());
     }
 }

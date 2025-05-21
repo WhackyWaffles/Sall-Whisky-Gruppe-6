@@ -98,11 +98,10 @@ public class OpretDestilleringPane extends GridPane {
         }
 
         try {
-            double alkoholProcent = Double.parseDouble(alkoholProcentStr);
             double antalLiter = Double.parseDouble(txtAntalLiter.getText());
 
             // Gemmer al data i storage
-            Controller.opretDestillat(batchNr, alkoholProcent, antalLiter, valgtDato, selectedMalt);
+            Controller.opretDestillat(batchNr, alkoholProcentStr, antalLiter, valgtDato, selectedMalt);
 
         } catch (NumberFormatException e) {
             System.out.println("Fejl:Indtast korrekt talformat i procent, antal og liter felterne.");

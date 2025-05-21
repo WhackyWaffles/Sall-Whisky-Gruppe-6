@@ -8,13 +8,13 @@ import java.util.ArrayList;
 // TODO: Alkohol skal være en string
 public class Destillat {
     private String batchNr;
-    private double alkoholProcent;
+    private String alkoholProcent;
     private double destillatLiter;
     private LocalDate destilleringDato;
     private Ristning ristning; // bruges i stedet for malt
     private ArrayList<Malt> malts;
 
-    public Destillat(String batchNr, double alkoholProcent, double destillatLiter, LocalDate destilleringDato, Ristning ristning) {
+    public Destillat(String batchNr, String alkoholProcent, double destillatLiter, LocalDate destilleringDato, Ristning ristning) {
         this.batchNr = batchNr;
         this.alkoholProcent = alkoholProcent;
         this.destillatLiter = destillatLiter;
@@ -26,7 +26,7 @@ public class Destillat {
         return batchNr;
     }
 
-    public double getAlkoholProcent() {
+    public String getAlkoholProcent() {
         return alkoholProcent;
     }
 

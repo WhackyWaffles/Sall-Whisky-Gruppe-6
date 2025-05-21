@@ -9,10 +9,6 @@ public class Påfyldning {
     private double påfyldningLiter;
     private LocalDate påfyldningDato;
 
-    // TODO: Måske implementere sådan, at idNr automatisk tæller op
-    //   - så der ikke kommer duplicate numre, og så man ikke selv skal huske hvilket nummer man er kommet til
-    //     - og derved fjerne String idNr fra Constructor
-    //       - Kan muligvis bruges til oprettelse af Fad, Destillat, Whisky og WhiskyFlaske.
     public Påfyldning(String idNr, Destillat destillat, Fad fad, double påfyldningLiter, LocalDate påfyldningDato) {
         if (fad.getVolumenLedig() < påfyldningLiter) {
             throw new IllegalArgumentException("Ikke nok plads i fadet!");

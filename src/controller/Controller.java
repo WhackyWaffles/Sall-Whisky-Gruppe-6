@@ -101,7 +101,7 @@ public class Controller {
     // ======================================================================
 
     // Constructor
-    public static Destillat opretDestillat(String batchNr, double alkoholProcent, double destillatLiter, LocalDate destilleringDato, Ristning ristning) {
+    public static Destillat opretDestillat(String batchNr, String alkoholProcent, double destillatLiter, LocalDate destilleringDato, Ristning ristning) {
         Destillat destillat = new Destillat(batchNr, alkoholProcent, destillatLiter, destilleringDato, ristning);
         Storage.addDestillat(destillat);
         return destillat;

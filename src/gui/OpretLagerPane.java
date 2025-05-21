@@ -135,10 +135,19 @@ public class OpretLagerPane extends GridPane {
             int antalHylder = Integer.parseInt(txtReolHylder.getText());
             int antalPladserPerHylde = Integer.parseInt(txtHyldePladser.getText());
 
+            if (antalReoler < 1 || antalHylder < 1  || antalPladserPerHylde < 1 ) {
+                errorLabel.setText("Angiv venligst positive tal for antallet af reoler, hylder og pladser per hylde.");
+                return;
+            }
+
             // Opret lager i Controller
             Controller.opretLager(navn,lokation,antalReoler,antalHylder,antalPladserPerHylde);
 
-            infoLabel.setText("Lager oprettet: " + navn + " med " + antalReoler + " reoler.");
+            String reolAntal = "reoler";
+            if (antalReoler < 2){
+                reolAntal = "reol";
+            }
+            infoLabel.setText("Lager oprettet: \"" + navn + "\" med " + antalReoler + " " + reolAntal + ".");
             clearFields();
 
             comboLager.getItems().setAll(Storage.getAllLagerhuse()); // Opdater lagre efter oprettelse

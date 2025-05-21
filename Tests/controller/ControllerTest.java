@@ -12,7 +12,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
 
-    // TODO: Lav JunitTests til alle metoder i kontrolleren
     // TODO: GUI exception handlers
 
     @Test
@@ -141,9 +140,9 @@ class ControllerTest {
     @Test
     void getAllDestillater() {
         // Arrange (tester også opretDestillat())
-        Destillat destillat1 = Controller.opretDestillat("testNr1", 55.0, 20.0,
+        Destillat destillat1 = Controller.opretDestillat("testNr1", "55.0", 20.0,
                 LocalDate.of(2024, 1, 1), Ristning.VIENNAMALT);
-        Destillat destillat2 = Controller.opretDestillat("testNr2", 55.0, 20.0,
+        Destillat destillat2 = Controller.opretDestillat("testNr2", "55.0", 20.0,
                 LocalDate.of(2024, 1, 1), Ristning.VIENNAMALT);
 
         // Act
@@ -167,7 +166,7 @@ class ControllerTest {
     void testOpretPåfyldning() {
         // Arrange - Opret testdata
         String idNr = "123";
-        Destillat destillat = new Destillat("TestDestillat", 72.0, 35, LocalDate.of(2023, 1, 1), Ristning.VIENNAMALT);
+        Destillat destillat = new Destillat("TestDestillat", "72.0", 35, LocalDate.of(2023, 1, 1), Ristning.VIENNAMALT);
         Fad fad = new Fad("456", "Ex-Sherry", "Egetræ", 200, Charring.MEDIUM_CHAR, FillNummer.FIRST_FILL, new ArrayList<>());
         double påfyldningLiter = 50.0;
         LocalDate påfyldningDato = LocalDate.now();
