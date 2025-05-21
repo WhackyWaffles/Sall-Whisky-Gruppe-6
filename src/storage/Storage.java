@@ -141,9 +141,10 @@ public class Storage {
     public static boolean removeWhiskyById(String id) {
         return whiskyList.removeIf(w -> w.getWhiskyId().equals(id));
     }
+
     public static Whisky findWhiskyById(String id) {
-        for (Whisky w : whiskyList) {
-            if (w.getWhiskyId().equals(id)) return w;
+        for (Whisky whisky : whiskyList) {
+            if (whisky.getWhiskyId().equals(id)) return whisky;
         }
         return null;
     }

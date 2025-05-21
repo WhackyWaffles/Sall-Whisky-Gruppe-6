@@ -161,4 +161,118 @@ class ControllerTest {
         // Assert
         assertEquals("BatchNummer må ikke være null!", exception.getMessage());
     }
+
+
+    @Test
+    void testOpretPåfyldning() {
+        // Arrange - Opret testdata
+        String idNr = "123";
+        Destillat destillat = new Destillat("TestDestillat", 72.0, 35, LocalDate.of(2023, 1, 1), Ristning.VIENNAMALT);
+        Fad fad = new Fad("456", "Ex-Sherry", "Egetræ", 200, Charring.MEDIUM_CHAR, FillNummer.FIRST_FILL, new ArrayList<>());
+        double påfyldningLiter = 50.0;
+        LocalDate påfyldningDato = LocalDate.now();
+
+        // Act - Kald metoden
+        Påfyldning påfyldning = Controller.opretPåfyldning(idNr, destillat, fad, påfyldningLiter, påfyldningDato);
+
+        // Assert - Bekræft, at værdierne er korrekte
+        assertNotNull(påfyldning);
+        assertEquals(idNr, påfyldning.getIdNr());
+        assertEquals(destillat, påfyldning.getDestillat());
+        assertEquals(fad, påfyldning.getFad());
+        assertEquals(påfyldningLiter, påfyldning.getPåfyldningLiter());
+        assertEquals(påfyldningDato, påfyldning.getPåfyldningDato());
+    }
+
+    @Test
+    void testOpretWhisky() {
+        // Arrange
+        String whiskyId = "wh102";
+        String navn = "Muld";
+        int flaskeNr = 500;
+        String slutAlkoholProcent = "51";
+        LocalDate aftapningsDato = LocalDate.now();
+        Fad fad = new Fad("457", "Ex-Bourbon", "Egetræ", 200, Charring.MEDIUM_CHAR, FillNummer.FIRST_FILL, new ArrayList<>());;
+
+        // Act
+        Whisky whisky = Controller.opretWhisky(whiskyId, navn, flaskeNr, slutAlkoholProcent, aftapningsDato, fad);
+
+        // Assert
+        assertNotNull(whisky);
+        assertEquals(whiskyId, whisky.getWhiskyId());
+        assertEquals(navn, whisky.getNavn());
+        assertEquals(flaskeNr, whisky.getFlaskeNr());
+        assertEquals(slutAlkoholProcent, whisky.getSlutAlkoholProcent());
+        assertEquals(aftapningsDato, whisky.getAftapningsDato());
+    }
+
+    @Test
+    void testFindWhiskyById() {
+        // Arrange - Opret en test-whisky og tilføj den til storage
+        Whisky whisky1 = new Whisky("001", "Glød", 100, "51", LocalDate.now(),
+                new Fad("F001", "Sherry", "Eg", 200.0, Charring.HEAVY_TOAST, FillNummer.FIRST_FILL, new ArrayList<>()));
+        Storage.addWhisky(whisky1);
+
+
+        // Act - Kald metoden
+        Whisky foundWhisky = Storage.findWhiskyById("001");
+
+        // Assert - Bekræft, at den rigtige whisky blev fundet
+        assertNotNull(foundWhisky);
+        assertEquals("001", foundWhisky.getWhiskyId());
+        assertEquals("Glød", foundWhisky.getNavn());
+
+        // Test at søgning efter en ikke-eksisterende whisky returnerer null
+        Whisky nonExistingWhisky = Storage.findWhiskyById("999");
+        assertNull(nonExistingWhisky);
+    }
+
+    @Test
+    void testOpretLager() {
+        // Arrange - Opret testdata
+        String navn = "Test Lager";
+        String lokation = "Test Lokation";
+        int antalReoler = 15;
+        int antalHylder = 3;
+        int antalPladserPerHylde = 2;
+
+        // Act - Kald metoden
+        Lager lager = Controller.opretLager(navn, lokation, antalReoler, antalHylder, antalPladserPerHylde);
+
+        // Assert - Bekræft, at lageret blev oprettet korrekt
+        assertNotNull(lager);
+        assertEquals(navn, lager.getNavn());
+        assertEquals(lokation, lager.getLokation());
+        assertEquals(antalReoler, lager.getAntalReoler());
+        assertEquals(antalHylder, lager.getReoler()[0].getHylder().length);
+        assertEquals(antalPladserPerHylde, lager.getReoler()[0].getHylder()[0].getPladser().length);
+    }
+
+    @Test
+    void testGetFadePåLager() {
+        // Arrange - Opret et testlager og tilføj fade
+        Lager lager = new Lager("Test Lager", "Test Lokation", 2, 2, 2); // 2 reoler, 2 hylder, 2 pladser
+
+        // Opret testfade
+        Fad fad1 = new Fad("001", "Ex-Bourbon", "Egetræ", 200, Charring.LIGHT_CHAR, FillNummer.SECOND_FILL, new ArrayList<>());
+        Fad fad2 = new Fad("002", "Ex-Sherry", "Egetræ", 250, Charring.MEDIUM_CHAR, FillNummer.FIRST_FILL, new ArrayList<>());
+
+        // Placer fade på lager
+        lager.setFad(fad1, 0, 0, 0);
+        lager.setFad(fad2, 1, 1, 1);
+
+        // Act - Kald metoden
+        List<String> fadePåLager = Controller.getFadePåLager(lager);
+
+        // Assert - Bekræft, at koordinater og fade vises korrekt
+        assertNotNull(fadePåLager);
+        assertEquals(2, fadePåLager.size());
+        assertTrue(fadePåLager.contains(fad1.toString() + " [Reol: 0, Hylde: 0, Plads: 0]"));
+        assertTrue(fadePåLager.contains(fad2.toString() + " [Reol: 1, Hylde: 1, Plads: 1]"));
+
+        // Test at søgning på et tomt lager returnerer en tom liste
+        Lager tomtLager = new Lager("Tomt Lager", "Ingen fade", 2, 2, 2);
+        List<String> tomListe = Controller.getFadePåLager(tomtLager);
+        assertTrue(tomListe.isEmpty());
+    }
 }
