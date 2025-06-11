@@ -24,18 +24,18 @@ public class App {
         //    ==================================================================================
         //    Opretter Fade
         //    ==================================================================================
-        Fad fad68 = Controller.opretFad("68", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        Fad fad69 = Controller.opretFad("69", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        Fad fad70 = Controller.opretFad("70", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
-        Fad fad71 = Controller.opretFad("71", "EX_OLOROSO", "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        Fad fad68 = Controller.opretFad("68", FadType.EX_OLOROSO, "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        Fad fad69 = Controller.opretFad("69", FadType.EX_BOURBON, "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        Fad fad70 = Controller.opretFad("70", FadType.EX_CRUZAN, "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
+        Fad fad71 = Controller.opretFad("71", FadType.EX_ISLAY, "EGETRÆ", 100.0, Charring.HEAVY_CHAR, FillNummer.FIRST_FILL, null);
 
         //    ==================================================================================
         //    Opretter Destillater
         //    ==================================================================================
-        Destillat nm100 = Controller.opretDestillat("NM100", "72.0", 35, LocalDate.of(2023, 1, 1), Ristning.VIENNAMALT);
-        Destillat nm101 = Controller.opretDestillat("NM101", "65.0", 25, LocalDate.of(2023, 6, 1), Ristning.VIENNAMALT);
-        Destillat nm102 = Controller.opretDestillat("NM102", "70.0", 27, LocalDate.of(2024, 4, 1), Ristning.VIENNAMALT);
-        Destillat nm103 = Controller.opretDestillat("NM103", "68.0", 15, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT);
+        Destillat nm100 = Controller.opretDestillat("NM100", 72.0, 35, LocalDate.of(2023, 1, 1), Ristning.VIENNAMALT);
+        Destillat nm101 = Controller.opretDestillat("NM101", 65.0, 25, LocalDate.of(2023, 6, 1), Ristning.PALEMALT_RØGET);
+        Destillat nm102 = Controller.opretDestillat("NM102", 70.0, 27, LocalDate.of(2024, 4, 1), Ristning.PILSNERMALT);
+        Destillat nm103 = Controller.opretDestillat("NM103", 68.0, 15, LocalDate.of(2025, 1, 1), Ristning.VIENNAMALT_RØGET);
 
         //    ==================================================================================
         //    Opretter Påfyldninger
@@ -50,6 +50,11 @@ public class App {
         //    ==================================================================================
         Lager lagerSall = Controller.opretLager("Sall lager", "Sall", 32, 3, 2);
         Lager lagerViborg = Controller.opretLager("Viborg lager", "Viborg", 14, 3, 2);
+
+        //    ==================================================================================
+        //    Opretter whisky
+        //    ==================================================================================
+        Whisky whisky = Controller.opretWhisky("RW100","Muld 3.3", 512,"51", LocalDate.now());
 
         //    ==================================================================================
         //    Placerer Fade på lager

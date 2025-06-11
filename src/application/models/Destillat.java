@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Destillat {
     private String batchNr;
-    private String alkoholProcent;
+    private double alkoholProcent;
     private double destillatLiter;
     private LocalDate destilleringDato;
 
@@ -12,7 +12,7 @@ public class Destillat {
     private Ristning ristning;
     // private ArrayList<Malt> malts;
 
-    public Destillat(String batchNr, String alkoholProcent, double destillatLiter, LocalDate destilleringDato, Ristning ristning) {
+    public Destillat(String batchNr, double alkoholProcent, double destillatLiter, LocalDate destilleringDato, Ristning ristning) {
         this.batchNr = batchNr;
         this.alkoholProcent = alkoholProcent;
         this.destillatLiter = destillatLiter;
@@ -24,7 +24,7 @@ public class Destillat {
         return batchNr;
     }
 
-    public String getAlkoholProcent() {
+    public double getAlkoholProcent() {
         return alkoholProcent;
     }
 
@@ -37,9 +37,9 @@ public class Destillat {
     @Override
     public String toString() {
         return "Destillat " +
-                batchNr + ',' +
-                alkoholProcent + ',' +
-                destilleringDato + ',' +
+                batchNr + ", " +
+                alkoholProcent + "%, " +
+                destilleringDato + ", " +
                 ristning;
     }
 }

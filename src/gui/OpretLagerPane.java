@@ -39,22 +39,27 @@ public class OpretLagerPane extends GridPane {
         Label lblLagerNavn = new Label("Lager navn");
         this.add(lblLagerNavn, 0, 0);
         this.add(this.txtLagerNavn, 1, 0);
+        txtLagerNavn.setPromptText("fx. Hammel Lager");
 
         Label lblLagerLokation = new Label("Lager lokation");
         this.add(lblLagerLokation, 0, 1);
         this.add(this.txtLagerLokation, 1, 1);
+        txtLagerLokation.setPromptText("fx. Hammel");
 
         Label lblLagerReoler = new Label("Lager reoler");
         this.add(lblLagerReoler, 2, 0);
         this.add(this.txtAntalReoler, 3, 0);
+        txtAntalReoler.setPromptText("fx. 30");
 
         Label lblReolHylder = new Label("Hylder per reol");
         this.add(lblReolHylder, 2, 1);
         this.add(txtReolHylder, 3, 1);
+        txtHylde.setPromptText("fx. 3");
 
         Label lblHyldePladser = new Label("Pladser per hylde");
         this.add(lblHyldePladser, 2, 2);
         this.add(txtHyldePladser, 3, 2);
+        txtPlads.setPromptText("fx. 2");
 
         // Opret Lager knap
         Button btnOpretLager = new Button("Opret lager");
@@ -108,6 +113,12 @@ public class OpretLagerPane extends GridPane {
         btnOpdaterFade.setOnAction(event -> btnOpdaterFadeAction());
         this.add(btnOpdaterFade,1,11,2,1);
         lvFadeIStorage.getItems().setAll(Controller.getAlleFade());
+
+        // Knap til at fjerne fade på lager
+        Button btnFjernFad = new Button("Fjern fad");
+        // btnFjernFad.setOnAction(event -> btnFjernFadAction());
+        this.add(btnFjernFad,2,11,2,1);
+        // lvFadeIStorage.getItems().setAll(Controller.getAlleFade());
 
         // InfoLabel til at informere User, hvad der er sket.
         this.add(infoLabel,0,12,4,1);

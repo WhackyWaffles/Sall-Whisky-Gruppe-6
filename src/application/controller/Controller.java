@@ -57,7 +57,7 @@ public class Controller {
      * @param fillNummer {@code FillNummer} Hvor mange gange fadet har været brugt.
      * @param påfyldninger {@code ArrayList<Påfyldning>} Hvilke påfyldninger, der er hældt i Fadet, dvs. Fadets indhold. Hvis {@code null} oprettes et tomt fad.
      */
-    public static Fad opretFad(String fadNr, String fadtype, String fadMateriale,
+    public static Fad opretFad(String fadNr, FadType fadtype, String fadMateriale,
                                double kapacitet, Charring charring, FillNummer fillNummer,
                                ArrayList<Påfyldning> påfyldninger) {
         if (kapacitet <= 0) {
@@ -101,7 +101,7 @@ public class Controller {
     // ======================================================================
 
     // Constructor
-    public static Destillat opretDestillat(String batchNr, String alkoholProcent, double destillatLiter, LocalDate destilleringDato, Ristning ristning) {
+    public static Destillat opretDestillat(String batchNr, double alkoholProcent, double destillatLiter, LocalDate destilleringDato, Ristning ristning) {
         Destillat destillat = new Destillat(batchNr, alkoholProcent, destillatLiter, destilleringDato, ristning);
         Storage.addDestillat(destillat);
         return destillat;
@@ -162,12 +162,11 @@ public class Controller {
      * @param flaskeNr Antallet af Whiskyflasker
      * @param slutAlkoholProcent Whiskyens alkoholprocent på aftapningstidspunktet.
      * @param aftapningsDato Datoen, whiskyen aftappes.
-     * @param fad Fadet, whiskyen aftappes fra.
      * @return Den oprettede Whisky.
      */
     public static Whisky opretWhisky(String whiskyId, String navn, int flaskeNr,
-                              String slutAlkoholProcent, LocalDate aftapningsDato, Fad fad) {
-        Whisky whisky = new Whisky(whiskyId, navn, flaskeNr, slutAlkoholProcent, aftapningsDato, fad);
+                              String slutAlkoholProcent, LocalDate aftapningsDato) {
+        Whisky whisky = new Whisky(whiskyId, navn, flaskeNr, slutAlkoholProcent, aftapningsDato);
         Storage.addWhisky(whisky);
         return whisky;
     }

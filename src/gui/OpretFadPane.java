@@ -1,14 +1,12 @@
 package gui;
 
 import application.controller.Controller;
+import application.models.*;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import application.models.Charring;
-import application.models.Fad;
-import application.models.FillNummer;
-import application.models.Påfyldning;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 
@@ -16,12 +14,14 @@ import java.util.ArrayList;
 public class OpretFadPane extends GridPane {
 
     private final TextField txtFadNr = new TextField();
-    private final TextField txtFadType = new TextField();
+    private final ComboBox<FadType> comboFadType = new ComboBox<>();
     private final TextField txtFadMateriale = new TextField();
     private final TextField txtKapacitet = new TextField();
     private final ComboBox<FillNummer> comboFillNr = new ComboBox<>();
     private final ComboBox<Charring> comboCharring = new ComboBox<>();
     private final ListView<Fad> lvFade = new ListView<>();
+    private final Label errorLabel = new Label();
+    private final Label infoLabel = new Label();
 
 
     public OpretFadPane() {
@@ -34,18 +34,24 @@ public class OpretFadPane extends GridPane {
         Label lblFadNr = new Label("Fad nummer");
         this.add(lblFadNr, 0, 1);
         this.add(this.txtFadNr, 1, 1);
+        txtFadNr.setPromptText("fx. 73");
 
+        // ComboBox for Fadtype
         Label lblFadType = new Label("Fad type");
         this.add(lblFadType, 0, 2);
-        this.add(this.txtFadType, 1, 2);
+        comboFadType.getItems().addAll(FadType.EX_OLOROSO, FadType.EX_BOURBON, FadType.EX_CRUZAN, FadType.EX_ISLAY);
+        comboFadType.setPromptText("Vælg Fadtype");
+        this.add(comboFadType, 1, 2);
 
         Label lblFadMaterial = new Label("Fad materiale");
         this.add(lblFadMaterial, 0, 3);
         this.add(this.txtFadMateriale, 1, 3);
+        txtFadMateriale.setPromptText("fx. Egetræ");
 
         Label lblKapacitet = new Label("Kapacitet");
         this.add(lblKapacitet, 0, 4);
         this.add(this.txtKapacitet, 1, 4);
+        txtKapacitet.setPromptText("fx. 100");
 
         //Combobox for Fill Nummer
         Label lblFillNr = new Label("Fill nummer");
@@ -80,23 +86,31 @@ public class OpretFadPane extends GridPane {
         Button btnOpdater = new Button("Opdatér");
         btnOpdater.setOnAction(event -> this.opdaterLister());
 
-        HBox buttonBox = new HBox(30);
+        HBox buttonBox = new HBox(45);
         this.add(buttonBox,0,9,3,1);
         buttonBox.getChildren().addAll(btnOpretFad, btnAnnuller, btnOpdater);
+
+        // InfoLabel til at informere User, hvad der er sket.
+        this.add(infoLabel, 0, 10, 4, 1);
+        infoLabel.setTextFill(Color.DODGERBLUE);
+
+        // ErrorLabel til at vise, hvad der er galt.
+        this.add(errorLabel, 0, 11, 4, 1);
+        errorLabel.setTextFill(Color.RED);
     }
 
     private void opretAction() {
-
         String fadNr = txtFadNr.getText();
-        String fadType = txtFadType.getText();
+        FadType selectedFadType = comboFadType.getValue();
         String fadMateriale = txtFadMateriale.getText();
         String kapacitet = txtKapacitet.getText();
         FillNummer selectedFillNr = comboFillNr.getValue();
         Charring selectedCharring = comboCharring.getValue();
 
-        if (fadNr.isEmpty() || fadType.isEmpty() || fadMateriale.isEmpty() ||
+        if (fadNr.isEmpty() || selectedFadType == null || fadMateriale.isEmpty() ||
                 kapacitet.isEmpty() || selectedCharring == null || selectedFillNr == null) {
             System.out.println("Udfyld venligst alle felter.");
+            errorLabel.setText("Udfyld venligst alle felter.");
             return;
         }
 
@@ -106,17 +120,20 @@ public class OpretFadPane extends GridPane {
             // Send en tom ArrayList, hvis der ikke er påfyldninger
             ArrayList<Påfyldning> påfyldninger = new ArrayList<>();
 
-            Controller.opretFad(fadNr,fadType,fadMateriale,kapacitetVol,selectedCharring,selectedFillNr,påfyldninger);
+            Controller.opretFad(fadNr,selectedFadType,fadMateriale,kapacitetVol,selectedCharring,selectedFillNr,påfyldninger);
+            lvFade.getItems().setAll(Controller.getAlleFade());
 
             // Udskriver data om opretning
+            infoLabel.setText("Fad oprettet!");
             System.out.println("Opretter fad:");
             System.out.println("Fad nummer: " + fadNr);
-            System.out.println("Fad type: " + fadType);
+            System.out.println("Fad type: " + selectedFadType);
             System.out.println("Fad materiale: " + fadMateriale);
             System.out.println("Kapacitet: " + kapacitetVol);
             System.out.println("Fill nummer: " + selectedFillNr);
             System.out.println("Charring: " + selectedCharring);
 
+            errorLabel.setText("");
             clearFields();
         } catch (NumberFormatException e) {
             System.out.println("Fejl: Kapacitet skal være et tal.");
@@ -130,7 +147,7 @@ public class OpretFadPane extends GridPane {
 
     private void clearFields() {
         txtFadNr.clear();
-        txtFadType.clear();
+        comboFadType.getSelectionModel().getSelectedItem();
         txtFadMateriale.clear();
         txtKapacitet.clear();
         comboFillNr.getSelectionModel().clearSelection();

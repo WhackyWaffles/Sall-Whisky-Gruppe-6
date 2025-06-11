@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Fad {
     private String fadNr;
-    private String fadtype;
+    private FadType fadtype;
     private String fadMateriale;
     private double kapacitet;
     private Charring charring;
@@ -21,7 +21,7 @@ public class Fad {
      * @param fillNummer {@code FillNummer} Hvor mange gange fadet har været brugt.
      * @param påfyldninger {@code ArrayList<Påfyldning>} Hvilke påfyldninger, der er hældt i Fadet, dvs. Fadets indhold. Hvis {@code null} oprettes et tomt fad.
      */
-    public Fad(String fadNr, String fadtype, String fadMateriale,
+    public Fad(String fadNr, FadType fadtype, String fadMateriale,
                double kapacitet, Charring charring, FillNummer fillNummer,
                ArrayList<Påfyldning> påfyldninger) {
         this.fadNr = fadNr;
@@ -56,9 +56,7 @@ public class Fad {
         return fadNr;
     }
 
-    public String getFadtype() {
-        return fadtype;
-    }
+    public FadType getFadtype() {return fadtype;}
 
     public String getFadMateriale() {
         return fadMateriale;

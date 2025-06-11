@@ -66,7 +66,7 @@ class ControllerTest {
     void testOpretFad() {
         // Arrange
         String fadNr = "F001";
-        String fadtype = "Sherry";
+        FadType fadtype = FadType.EX_OLOROSO;
         String fadMateriale = "Eg";
         double kapacitet = 200.0;
         Charring charring = Charring.MEDIUM_CHAR;
@@ -94,7 +94,7 @@ class ControllerTest {
     void testOpretFad_UgyldigtKapacitet() {
         // Skal kaste en exception, hvis kapacitet er negativ
         Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                Controller.opretFad("F002", "Bourbon", "Eg", -50, Charring.HEAVY_TOAST, FillNummer.FIRST_FILL, new ArrayList<>()));
+                Controller.opretFad("F002", FadType.EX_OLOROSO, "Eg", -50, Charring.HEAVY_TOAST, FillNummer.FIRST_FILL, new ArrayList<>()));
         assertEquals("Kapacitet kan ikke være negativ eller nul", exception.getMessage());
     }
 
@@ -102,15 +102,15 @@ class ControllerTest {
     void testOpretFad_NullFadNr() {
         // Skal kaste en exception, hvis fadNr er null
         Exception exception = assertThrows(IllegalArgumentException.class, () ->
-                Controller.opretFad(null, "Sherry", "Eg", 150, Charring.HEAVY_CHAR, FillNummer.SECOND_FILL, new ArrayList<>()));
+                Controller.opretFad(null, FadType.EX_BOURBON, "Eg", 150, Charring.HEAVY_CHAR, FillNummer.SECOND_FILL, new ArrayList<>()));
         assertEquals("Fadnummer kan ikke være null eller tomt", exception.getMessage());
     }
 
     @Test
     void testFindFad_ValidFadNr() {
         // Arrange
-        Fad fad1 = new Fad("F001", "Sherry", "Eg", 200.0, Charring.HEAVY_TOAST, FillNummer.FIRST_FILL, new ArrayList<>());
-        Fad fad2 = new Fad("F002", "Bourbon", "Eg", 180.0, Charring.LIGHT_TOAST, FillNummer.SECOND_FILL, new ArrayList<>());
+        Fad fad1 = new Fad("F001", FadType.EX_OLOROSO, "Eg", 200.0, Charring.HEAVY_TOAST, FillNummer.FIRST_FILL, new ArrayList<>());
+        Fad fad2 = new Fad("F002", FadType.EX_CRUZAN, "Eg", 180.0, Charring.LIGHT_TOAST, FillNummer.SECOND_FILL, new ArrayList<>());
 
         // Act
         Storage.addFad(fad1);
@@ -146,9 +146,9 @@ class ControllerTest {
     @Test
     void getAllDestillater() {
         // Arrange (tester også opretDestillat())
-        Destillat destillat1 = Controller.opretDestillat("testNr1", "55.0", 20.0,
+        Destillat destillat1 = Controller.opretDestillat("testNr1", 55.0, 20.0,
                 LocalDate.of(2024, 1, 1), Ristning.VIENNAMALT);
-        Destillat destillat2 = Controller.opretDestillat("testNr2", "55.0", 20.0,
+        Destillat destillat2 = Controller.opretDestillat("testNr2", 55.0, 20.0,
                 LocalDate.of(2024, 1, 1), Ristning.VIENNAMALT);
 
         // Act
@@ -171,8 +171,8 @@ class ControllerTest {
     void testOpretPåfyldning() {
         // Arrange - Opret testdata
         String idNr = "123";
-        Destillat destillat = new Destillat("TestDestillat", "72.0", 35, LocalDate.of(2023, 1, 1), Ristning.VIENNAMALT);
-        Fad fad = new Fad("456", "Ex-Sherry", "Egetræ", 200, Charring.MEDIUM_CHAR, FillNummer.FIRST_FILL, new ArrayList<>());
+        Destillat destillat = new Destillat("TestDestillat", 72.0, 35, LocalDate.of(2023, 1, 1), Ristning.VIENNAMALT);
+        Fad fad = new Fad("456", FadType.EX_BOURBON, "Egetræ", 200, Charring.MEDIUM_CHAR, FillNummer.FIRST_FILL, new ArrayList<>());
         double påfyldningLiter = 50.0;
         LocalDate påfyldningDato = LocalDate.now();
 
@@ -196,10 +196,10 @@ class ControllerTest {
         int flaskeNr = 500;
         String slutAlkoholProcent = "51";
         LocalDate aftapningsDato = LocalDate.now();
-        Fad fad = new Fad("457", "Ex-Bourbon", "Egetræ", 200, Charring.MEDIUM_CHAR, FillNummer.FIRST_FILL, new ArrayList<>());
+        Fad fad = new Fad("457", FadType.EX_CRUZAN, "Egetræ", 200, Charring.MEDIUM_CHAR, FillNummer.FIRST_FILL, new ArrayList<>());
 
         // Act
-        Whisky whisky = Controller.opretWhisky(whiskyId, navn, flaskeNr, slutAlkoholProcent, aftapningsDato, fad);
+        Whisky whisky = Controller.opretWhisky(whiskyId, navn, flaskeNr, slutAlkoholProcent, aftapningsDato);
 
         // Assert
         assertNotNull(whisky);
@@ -213,8 +213,7 @@ class ControllerTest {
     @Test
     void testFindWhiskyById() {
         // Arrange - Opret en test-whisky og tilføj den til storage
-        Whisky whisky1 = new Whisky("001", "Glød", 100, "51", LocalDate.now(),
-                new Fad("F001", "Sherry", "Eg", 200.0, Charring.HEAVY_TOAST, FillNummer.FIRST_FILL, new ArrayList<>()));
+        Whisky whisky1 = new Whisky("001", "Glød", 100, "51", LocalDate.now());
         Storage.addWhisky(whisky1);
 
 
@@ -258,8 +257,8 @@ class ControllerTest {
         Lager lager = new Lager("Test Lager", "Test Lokation", 2, 2, 2); // 2 reoler, 2 hylder, 2 pladser
 
         // Opret testfade
-        Fad fad1 = new Fad("001", "Ex-Bourbon", "Egetræ", 200, Charring.LIGHT_CHAR, FillNummer.SECOND_FILL, new ArrayList<>());
-        Fad fad2 = new Fad("002", "Ex-Sherry", "Egetræ", 250, Charring.MEDIUM_CHAR, FillNummer.FIRST_FILL, new ArrayList<>());
+        Fad fad1 = new Fad("001", FadType.EX_BOURBON, "Egetræ", 200, Charring.LIGHT_CHAR, FillNummer.SECOND_FILL, new ArrayList<>());
+        Fad fad2 = new Fad("002", FadType.EX_OLOROSO, "Egetræ", 250, Charring.MEDIUM_CHAR, FillNummer.FIRST_FILL, new ArrayList<>());
 
         // Placer fade på lager
         lager.setFad(fad1, 0, 0, 0);

@@ -8,6 +8,7 @@ import javafx.scene.layout.HBox;
 import application.models.Destillat;
 import application.models.Fad;
 import application.models.Påfyldning;
+import javafx.scene.paint.Color;
 
 import java.time.LocalDate;
 
@@ -19,6 +20,8 @@ public class OpretPåfyldningPane extends GridPane {
     private final TextField txtLiter = new TextField();
     private final DatePicker datePicker = new DatePicker();
     private final ListView<Påfyldning> lvPåfyldning = new ListView<>();
+    private final Label errorLabel = new Label();
+    private final Label infoLabel = new Label();
 
     public OpretPåfyldningPane() {
 
@@ -27,12 +30,11 @@ public class OpretPåfyldningPane extends GridPane {
         this.setVgap(10);
         this.setGridLinesVisible(false);
 
-        this.setMinSize(700,400);
-
         //Label og textfield
         Label lblIdNr = new Label("IdNr");
         this.add(lblIdNr, 0, 1);
         this.add(this.txtIdNr, 1, 1);
+        txtIdNr.setPromptText("fx. 105");
 
         Label lblDestillat = new Label("Spirit batch");
         this.add(lblDestillat, 0, 2);
@@ -45,6 +47,7 @@ public class OpretPåfyldningPane extends GridPane {
         Label lblLiter = new Label("Liter");
         this.add(lblLiter, 0, 4);
         this.add(this.txtLiter, 1, 4);
+        txtLiter.setPromptText("fx. 30.0");
 
         Label lblDato = new Label("Dato");
         this.add(lblDato, 0, 5);  //
@@ -78,9 +81,17 @@ public class OpretPåfyldningPane extends GridPane {
         Button btnOpdater = new Button("Opdatér");
         btnOpdater.setOnAction(event -> this.updaterLister());
 
-        HBox buttonBox = new HBox(30);
+        HBox buttonBox = new HBox(45);
         this.add(buttonBox,0,9,3,1);
         buttonBox.getChildren().addAll(btnOpretPåfyld, btnAnnuller, btnOpdater);
+
+        // InfoLabel til at informere User, hvad der er sket.
+        this.add(infoLabel,0,10,4,1);
+        infoLabel.setTextFill(Color.DODGERBLUE);
+
+        // ErrorLabel til at vise, hvad der er galt.
+        this.add(errorLabel, 0,11, 4, 1);
+        errorLabel.setTextFill(Color.RED);
     }
 
     private void opretPåfyldAction() {
@@ -93,34 +104,42 @@ public class OpretPåfyldningPane extends GridPane {
         if (idNr.isEmpty() || destillat == null || fad == null ||
                 påfyldningLiter.isEmpty()) {
             System.out.println("Udfyld venligst alle felter.");
+            errorLabel.setText("Fejl: Udfyld venligst alle felter!");
             return;
         }
         try {
-            if (!påfyldningLiter.matches("\\d+\\.\\d+")) {
-                System.out.println("Fejl: 'Liter' skal være et decimaltal (f.eks. 12.5).");
-                return;
-            }
-            double påfyldningLiterStr = Double.parseDouble(påfyldningLiter);
-            if (påfyldningLiterStr <= 0) {
+            double påfyldningVol = Double.parseDouble(påfyldningLiter);
+
+//            if (!påfyldningLiter.matches("\\d+\\.\\d+")) {
+//                System.out.println("Fejl: 'Liter' skal være et decimaltal (f.eks. 12.5).");
+//                return;
+//            }
+
+            if (påfyldningVol <= 0) {
                 System.out.println("Fejl: Liter skal være større end 0.");
                 return;
             }
 
             // Gemmer al data i storage
-            Controller.opretPåfyldning(idNr, destillat, fad, påfyldningLiterStr, valgtDato);
+            Controller.opretPåfyldning(idNr, destillat, fad, påfyldningVol, valgtDato);
 
             // Udskriv data
+            errorLabel.setText("");
+            infoLabel.setText("Påfyldning oprettet!");
             System.out.println("Opretter påfyldning:");
             System.out.println("IDnr: " + idNr);
             System.out.println("Destillat: " + destillat.getBatchNr());
             System.out.println("Fad: " + fad.getFadNr());
-            System.out.println("Antal liter: " + påfyldningLiter);
+            System.out.println("Antal liter: " + påfyldningVol);
             System.out.println("Dato: " + valgtDato);
 
             updaterLister();
             clearFields();
         } catch (NumberFormatException e) {
-            System.out.println("Fejl: 'Liter' skal være et korrekt decimaltal.");
+            errorLabel.setText("Fejl: 'Liter' skal være et korrekt decimaltal!");
+            System.out.println("Fejl: 'Liter' skal være et korrekt decimaltal!");
+        } catch (IllegalArgumentException e){
+            errorLabel.setText("Fejl: " + e.getMessage());
         }
     }
 

@@ -1,6 +1,7 @@
 package application.models;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Whisky {
 
@@ -9,15 +10,14 @@ public class Whisky {
     private int flaskeNr;
     private String slutAlkoholProcent;
     private LocalDate aftapningsDato;
-    private Fad fad;
+    private ArrayList<WhiskyLagretPåFad> lagerFade = new ArrayList<>();
 
-    public Whisky(String whiskyId, String navn, int flaskeNr, String slutAlkoholProcent, LocalDate aftapningsDato, Fad fad) {
+    public Whisky(String whiskyId, String navn, int flaskeNr, String slutAlkoholProcent, LocalDate aftapningsDato) {
         this.whiskyId = whiskyId;
         this.navn = navn;
         this.flaskeNr = flaskeNr;
         this.slutAlkoholProcent = slutAlkoholProcent;
         this.aftapningsDato = aftapningsDato;
-        this.fad = fad;
     }
 
     public String getWhiskyId() {
@@ -60,23 +60,30 @@ public class Whisky {
         this.aftapningsDato = aftapningsDato;
     }
 
-    public Fad getFad() {
-        return fad;
+    public ArrayList<WhiskyLagretPåFad> getLagerFade() {
+        return lagerFade;
     }
 
-    public void setFad(Fad fad) {
-        this.fad = fad;
+    public void addFad(Fad fad, int antalÅr) {
+        lagerFade.add(new WhiskyLagretPåFad(fad, antalÅr));
     }
 
     @Override
     public String toString() {
-        return
-                whiskyId + '\'' +
-                        '\''+ navn + '\'' +
-                        '\''+ flaskeNr +
-                        '\''+ slutAlkoholProcent +
-                        '\'' + aftapningsDato +
-                        "fad "+ '\'' + fad ;
-    }
+        StringBuilder sb = new StringBuilder();
+        sb.append(whiskyId).append(", ").append(" '").append(navn).append("', ")
+                .append(flaskeNr).append(" fl, ")
+                .append(slutAlkoholProcent).append("%, ")
+                .append(aftapningsDato);
 
+        if (!lagerFade.isEmpty()) {
+            sb.append(" | Fade:\n");
+            for (WhiskyLagretPåFad wlf : lagerFade) {
+                sb.append("  - ").append(wlf).append("\n");
+            }
+        } else {
+            sb.append(" | Ingen tilknyttede fade.");
+        }
+        return sb.toString();
+    }
 }

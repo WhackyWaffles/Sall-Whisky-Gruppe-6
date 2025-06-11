@@ -14,12 +14,13 @@ public class StartVindue extends Application {
 
         primaryStage.setTitle("Sall Whisky Lagerstyring");
         BorderPane pane = new BorderPane();
+
         this.initContent(pane);
 
         Scene scene = new Scene(pane);
         primaryStage.setScene(scene);
-        primaryStage.setHeight(700);
-        primaryStage.setWidth(550);
+        primaryStage.setMaxHeight(720);
+        primaryStage.setMaxWidth(550);
         primaryStage.show();
 
     }
@@ -36,8 +37,8 @@ public class StartVindue extends Application {
         Tab tabDestillering = new Tab("Opret Destillering");
         Tab tabFad = new Tab("Opret Fad");
         Tab tabPåfyldning = new Tab("Opret Påfyldning");
-        Tab tabWhisky = new Tab("Opret Whisky");
         Tab tabLager = new Tab("Opret lager");
+        Tab tabWhisky = new Tab("Opret Whisky");
 
 
         OpretDestilleringPane opretDestilleringPane = new OpretDestilleringPane();
@@ -46,16 +47,16 @@ public class StartVindue extends Application {
         tabFad.setContent(opretFadPane);
         OpretPåfyldningPane opretPåfyldningPane = new OpretPåfyldningPane();
         tabPåfyldning.setContent(opretPåfyldningPane);
-        OpretWhiskyPane opretWhiskyPane = new OpretWhiskyPane();
-        tabWhisky.setContent(opretWhiskyPane);
         OpretLagerPane opretLagerPane = new OpretLagerPane();
         tabLager.setContent(opretLagerPane);
+        OpretWhiskyPane opretWhiskyPane = new OpretWhiskyPane();
+        tabWhisky.setContent(opretWhiskyPane);
 
         tabPane.getTabs().add(tabDestillering);
         tabPane.getTabs().add(tabFad);
         tabPane.getTabs().add(tabPåfyldning);
-        tabPane.getTabs().add(tabWhisky);
         tabPane.getTabs().add(tabLager);
+        tabPane.getTabs().add(tabWhisky);
 
 
     }
